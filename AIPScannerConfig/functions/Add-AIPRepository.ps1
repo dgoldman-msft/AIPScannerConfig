@@ -9,9 +9,6 @@
     .PARAMETER Path
         Path to local file sahre
 
-    .PARAMETER CreateOnFileShare
-        Switch to indicate we are creating on a file share
-    
     .PARAMETER CreateShareOnSharePoint
         Switch to indicate we are creating on a SharePoint share
 
@@ -46,10 +43,6 @@
         [string]
         $Path,
 
-        [Parameter(Position = 1, ParameterSetName = 'FileShare', HelpMessage = 'Create repository on a file share')]
-        [switch]
-        $CreateOnFileShare,
-
         [Parameter(Position = 0, ParameterSetName = 'Create', HelpMessage = 'Create repository on SharePoint')]
         [switch]
         $CreateShareOnSharePoint,
@@ -59,10 +52,7 @@
         $FileShare,
 
         [switch]
-        $VerifyRepository,
-
-        [switch]
-        $EnableException
+        $VerifyRepository
     )
     
     begin {

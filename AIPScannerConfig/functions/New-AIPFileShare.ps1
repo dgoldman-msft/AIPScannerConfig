@@ -6,20 +6,11 @@
     .DESCRIPTION
         Create a file share for the AIP scanner
     
-    .PARAMETER ComputerName
-        Computer name where we will create the AIP file share
-    
     .PARAMETER FolderName
         Folder name of the AIP file share
     
     .PARAMETER ShareName
         Name of the shared folder
-
-    .PARAMETER Confirm
-        Parameter used to prompt for user confirmation
-
-    .PARAMETER WhatIf
-        Parameter used to validate a run without making changes
 
     .PARAMETER EnableException
         Depending on whether $EnableException is true or false it will do the following:
@@ -43,9 +34,6 @@
     [OutputType([System.Boolean])]
     param (
         [string]
-        $ComputerName = (Get-PSFConfigValue -Fullname AIPScannerConfig.ComputerName),
-
-        [string]
         $FolderName = (Get-PSFConfigValue -Fullname AIPScannerConfig.RootFolder),
 
         [string]
@@ -65,15 +53,18 @@
             Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message2' -StringValues $PathCheck
             
             If (-NOT (Test-Path -Path $PathCheck)) {
-                
-                $Folder = New-Item -Path $PathCheck -ItemType Directory -ErrorAction Stop
-                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message3' -StringValues $PathCheck
-                
+                if ($PSCmdlet.ShouldProcess($PathCheck)) {
+                    $Folder = New-Item -Path $PathCheck -ItemType Directory -ErrorAction Stop
+                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message3' -StringValues $PathCheck
+                } 
+
                 if ($Folder) {
                     Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message4' -StringValues $PathCheck
                     
                     if (-NOT ( Get-SmbShare -Name $ShareName )) {
-                        $NewShare = New-SMBShare –Name (Get-PSFConfigValue -FullName AIPScannerConfig.AIPShare) –Path $PathCheck -Description "AIP Shared Folder" -FullAccess "$env:COMPUTERNAME\AIPScanner"
+                        if ($PSCmdlet.ShouldProcess($PathCheck)) {
+                            $NewShare = New-SMBShare –Name (Get-PSFConfigValue -FullName AIPScannerConfig.AIPShare) –Path $PathCheck -Description "AIP Shared Folder" -FullAccess "$env:COMPUTERNAME\AIPScanner"
+                        }
 
                         # Apply folder permissions
                         if ($NewShare) {

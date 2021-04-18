@@ -3,7 +3,7 @@
 	RootModule = 'AIPScannerConfig.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.1.24'
+	ModuleVersion = '1.1.40'
 	
 	# ID used to uniquely identify this module
 	GUID = '3ddb8805-2f0c-4fe5-81ea-db8dc77e0452'
@@ -25,7 +25,9 @@
 	
 	# Modules that must be imported into the global environment prior to importing
 	# this module
-	RequiredModules = @()
+	RequiredModules = @(
+		@{ ModuleName='PSFramework'; ModuleVersion='1.6.197' }
+		)
 	
 	# Assemblies that must be loaded prior to importing this module
 	# RequiredAssemblies = @('bin\AIPScannerConfig.dll')
@@ -38,12 +40,13 @@
 	
 	# Functions to export from this module
 	FunctionsToExport = @(
-		'Start-PrerequisiteCheck'
+		'Add-AIPRepository'	
 		'New-AIPFileShare'
-		'New-AIPRepository'
 		'New-AIPScannerInstall'
 		'New-AIPSystemAccount'
 		'New-AzureTenantAccountAndApplication'
+		'Start-PrerequisiteCheck'
+		
 	)
 	
 	# Cmdlets to export from this module

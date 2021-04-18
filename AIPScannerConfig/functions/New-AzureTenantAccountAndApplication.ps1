@@ -1,4 +1,4 @@
-﻿function AzureTenantAccountAndApplication {
+﻿function New-AzureTenantAccountAndApplication {
     <#
         .SYNOPSIS
             Create Azure AIP items
@@ -18,12 +18,12 @@
             Parameter used to validate a run without making changes
 
         .EXAMPLE
-            PS C:\> AzureTenantAccountAndApplication
+            PS C:\> New-AzureTenantAccountAndApplication
 
             Start the process for creating the cloud applications and accounts
 
         .EXAMPLE
-            PS C:\> New-AzureTenantItems -EnabledException
+            PS C:\> New-AzureTenantAccountAndApplication -EnabledException
         
             Start the process for creating the cloud applications and accounts with EnabledException turned on
 

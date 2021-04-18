@@ -5,14 +5,19 @@
     
     .DESCRIPTION
         Checks to see if we are running PowerShell with Administrator credentials
-    
+    .
+    .EXAMPLE
+        None
+
+        None
+
     .NOTES
         Internal function
         Exists out if the interactive PowerShell session is not being run with administrative credentials
     #>
     
     [CmdletBinding()]
-    [OutputType([String])]
+    [OutputType([System.Boolean])]
     param ()
     
     begin {

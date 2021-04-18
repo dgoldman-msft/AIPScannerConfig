@@ -105,7 +105,7 @@
 - New: Added new dubgging information to the readm.me on dumping out a PSFSupportPackage in the event of module issues
 - Chg: Updated manifest version
 
-## 1.1.24 (2021-04-18)
+## 1.1.40 (2021-04-18)
 
 - Upd: Updated readme.me
 - Chg: Created new AzureDevOp's Pipeline package and renamed Test to AIPScannerConfig so pipeline will work correctly
@@ -154,3 +154,19 @@
 - Fix: Renamed Assert-ElevatedPermissions to Assert-ElevatedPermission in manifest file
 - Fix: Renamed Assert-ElevatedPermissions to Assert-ElevatedPermission in strings.ps1 - all occurrences
 - Fix: Renamed Tag 'AIP Scanner' to 'AIPScanner' as no spaces are allowed
+- Fix: Add-AIPRepository - The parameter 'CreateOnFileShare' has been declared but not used - removed
+- Fix: Add-AIPRepository - The parameter 'EnableException' has been declared but not used - removed
+- Fix: Add-AIPRepository - Function 'New-AIPRepository' has verb that could change system state. Therefore, the function has to support 'ShouldProcess'.
+- Fix: New-AIPFileShare - removed ComputerName parameter and documentation as no longer needed
+- Fix: New-AIPSystemAccount - changed [OutputType([String])] to [OutputType([System.Boolean])]
+- Fix: Assert-ElevatedPermission - changed [OutputType([String])] to [OutputType([System.Boolean])]
+- Fix: moduleimport.ps1 - Empty catch block is used. Please use Write-Error or throw statements in catch blocks. added catch { Write-Error $_.Exception.Message }
+- Fix: [internal\scripts\moduleimport.ps1] Should have no trailing space - line 6
+- Fix: Added .Example - None to Assert-ElevatedPermission
+- Fix: Added @{ ModuleName='PSFramework'; ModuleVersion='1.1.59' } to the required modules in the manifest
+- Fix: It Exports all functions in the public folder - fixed @('Add-AIPRerpository', 'AzureTenantAccountAndApplication').
+- Fix: Added example note in New-AIPSystemAccount
+- Fix: Added $PSCmdlet.ShouldProcess($PathCheck to New-AIPFolderShare
+- Fix: Removed CreateOnFileShare from New-AIPRepository
+- Fix: Removed Confirm and WhatIf parameters from New-AIPFileShare
+- Fix: Changed Add-AIPRerpository.ps1 to Add-AIPRepository.ps1

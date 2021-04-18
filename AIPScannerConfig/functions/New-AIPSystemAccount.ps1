@@ -22,6 +22,8 @@
 
     .EXAMPLE
         C:>\ New-AIPSystemAccount -AccountName AIPScanner
+
+        Executes the creation of the AIPSystem account
     
     .NOTES
         1. Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).
@@ -30,7 +32,7 @@
     #>
 
     [CmdletBinding(SupportsShouldProcess)]
-    [OutputType([String])]
+    [OutputType([System.Boolean])]
     param (
         [string]
         $AccountName = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName),
