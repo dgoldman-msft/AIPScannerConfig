@@ -105,7 +105,7 @@
 - New: Added new dubgging information to the readm.me on dumping out a PSFSupportPackage in the event of module issues
 - Chg: Updated manifest version
 
-## 1.1.44 (2021-04-18)
+## 1.1.46 (2021-04-18)
 
 - Upd: Updated readme.me
 - Chg: Created new AzureDevOp's Pipeline package and renamed Test to AIPScannerConfig so pipeline will work correctly
@@ -174,3 +174,5 @@
 - Fix: [internal\scripts\moduleimport.ps1] Should not use Write-Error - Removed try/catch
 - Fix: Added documentation Confirm and WhatIf back to New-AIPFileShare
 - Fix: Removed PSUseShouldProcessForStateChangingFunctions from Add-AIPRepository
+- Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
+- Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository

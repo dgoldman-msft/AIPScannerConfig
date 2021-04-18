@@ -12,6 +12,12 @@
     .PARAMETER CreateShareOnSharePoint
         Switch to indicate we are creating on a SharePoint share
 
+    .PARAMETER FileShare
+        File share used for the AIP Repository
+
+    .PARAMETER VerifyRepository
+        Switched use to force a search for repositories instead of creating one
+
     .PARAMETER EnableException
         Depending on whether $EnableException is true or false it will do the following:
             1. ($True) - Throw a bloody terminating error. Game over.
@@ -36,7 +42,7 @@
         None
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(PSUseShouldProcessForStateChangingFunctions = $true)]
     [OutputType([System.Boolean])]
     param (
         [Parameter(Position = 0, ParameterSetName = 'FileShare', HelpMessage = 'Path to file share')]
