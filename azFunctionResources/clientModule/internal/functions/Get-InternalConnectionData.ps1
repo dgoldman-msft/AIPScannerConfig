@@ -31,13 +31,13 @@
 	
 	process
 	{
-		try { $uri = '{0}{1}' -f (Get-PSFConfigValue -FullName 'Test.Client.Uri' -NotNull), $FunctionName }
+		try { $uri = '{0}{1}' -f (Get-PSFConfigValue -FullName 'AIPScannerConfig.Client.Uri' -NotNull), $FunctionName }
 		catch { $PSCmdlet.ThrowTerminatingError($_) }
 		$header = @{ }
 		
 		#region Authentication
-		$unprotectedToken = Get-PSFConfigValue -FullName 'Test.Client.UnprotectedToken'
-		$protectedToken = Get-PSFConfigValue -FullName 'Test.Client.ProtectedToken'
+		$unprotectedToken = Get-PSFConfigValue -FullName 'AIPScannerConfig.Client.UnprotectedToken'
+		$protectedToken = Get-PSFConfigValue -FullName 'AIPScannerConfig.Client.ProtectedToken'
 		
 		$authenticationDone = $false
 		if ($protectedToken -and -not $authenticationDone)

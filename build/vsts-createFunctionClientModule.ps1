@@ -89,11 +89,11 @@ foreach ($functionSourceFile in (Get-ChildItem -Path "$($publishRoot)\functions"
 	
 	#region Load Overrides
 	$override = @{ }
-	if (AIPScannerConfig-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).psd1")
+	if (Test-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).psd1")
 	{
 		$override = Import-PowerShellDataFile -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).psd1"
 	}
-	if (AIPScannerConfig-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).psd1")
+	if (Test-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).psd1")
 	{
 		$override = Import-PowerShellDataFile -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).psd1"
 	}
@@ -104,7 +104,7 @@ foreach ($functionSourceFile in (Get-ChildItem -Path "$($publishRoot)\functions"
 	}
 	
 	# If there is an definition override, use it and continue
-	if (AIPScannerConfig-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).ps1")
+	if (Test-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).ps1")
 	{
 		Write-PSFMessage -Level Host -Message "    Override function definition detected, using override"
 		Copy-Item -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).ps1" -Destination $functionFolder.FullName

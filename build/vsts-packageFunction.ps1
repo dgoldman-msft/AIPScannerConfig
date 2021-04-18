@@ -62,11 +62,11 @@ foreach ($functionSourceFile in (Get-ChildItem -Path "$($moduleRoot)\$moduleName
 	
 	#region Load Overrides
 	$override = @{ }
-	if (AIPScannerConfig-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).psd1")
+	if (Test-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).psd1")
 	{
 		$override = Import-PowerShellDataFile -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).psd1"
 	}
-	if (AIPScannerConfig-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).psd1")
+	if (Test-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).psd1")
 	{
 		$override = Import-PowerShellDataFile -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).psd1"
 	}
@@ -101,11 +101,11 @@ foreach ($functionSourceFile in (Get-ChildItem -Path "$($moduleRoot)\$moduleName
 	#endregion Create Function Configuration
 	
 	#region Override Function Configuration
-	if (AIPScannerConfig-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).json")
+	if (Test-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).json")
 	{
 		Copy-Item -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($functionSourceFile.BaseName).json" -Destination "$($functionFolder.FullName)\function.json" -Force
 	}
-	if (AIPScannerConfig-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).json")
+	if (Test-Path -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).json")
 	{
 		Copy-Item -Path "$($WorkingDirectory)\azFunctionResources\functionOverride\$($condensedName).json" -Destination "$($functionFolder.FullName)\function.json" -Force
 	}
