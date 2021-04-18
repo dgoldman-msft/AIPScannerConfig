@@ -105,7 +105,7 @@
 - New: Added new dubgging information to the readm.me on dumping out a PSFSupportPackage in the event of module issues
 - Chg: Updated manifest version
 
-## 1.1.00 (2021-04-18)
+## 1.1.01 (2021-04-18)
 
 - Upd: Updated readme.me
 - Chg: Created new AzureDevOp's Pipeline package and renamed Test to AIPScannerConfig so pipeline will work correctly
@@ -130,3 +130,4 @@
 - Chg: File 'New-AIPSystemAccount.ps1' uses ConvertTo-SecureString with plaintext. This will expose secure information. Encrypted standard strings should be used instead.
 - Chg: Removed Password and put it inline
 - Chg: New-AzureTenantItems renamed changed Output type from string to System.Boolean
+- Chg: Tested removing TLS12 check for windows system - can be set by user when setting up powershell

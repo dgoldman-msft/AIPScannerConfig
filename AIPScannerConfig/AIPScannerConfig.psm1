@@ -1,8 +1,4 @@
-﻿if ([Net.ServicePointManager]::SecurityProtocol -notcontains 'Tls12') {
-	[Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12 
-}
-
-$script:ModuleRoot = $PSScriptRoot
+﻿$script:ModuleRoot = $PSScriptRoot
 $script:ModuleVersion = (Import-PowerShellDataFile -Path "$($script:ModuleRoot)\AIPScannerConfig.psd1").ModuleVersion
 
 # Detect whether at some level dotsourcing was enforced
