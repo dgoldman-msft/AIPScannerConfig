@@ -12,9 +12,6 @@
     .PARAMETER FolderName
         Folder name of the AIP file share
     
-    .PARAMETER SharePath
-        Path to where the AIP folder share will be created
-
     .PARAMETER ShareName
         Name of the shared folder
 
@@ -30,7 +27,7 @@
             2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
     
     .EXAMPLE
-        PS C:\> New-AIPFileShare -ComputerName Server01 -FolderName c:\temp -ShareName YourShareName 
+        PS C:\> New-AIPFileShare -ComputerName Server01 -FolderName c:\temp -ShareName YourShareName
 
         Will create a new file folder and file share called YourShareName at c:\temp on Server01
     
@@ -49,7 +46,7 @@
         $ComputerName = (Get-PSFConfigValue -Fullname AIPScannerConfig.ComputerName),
 
         [string]
-        $Foldername = (Get-PSFConfigValue -Fullname AIPScannerConfig.RootFolder),
+        $FolderName = (Get-PSFConfigValue -Fullname AIPScannerConfig.RootFolder),
 
         [string]
         $ShareName = (Get-PSFConfigValue -Fullname AIPScannerConfig.AIPShare),
@@ -64,7 +61,7 @@
     
     process {
         try {
-            $PathCheck = Join-Path $Foldername -ChildPath $ShareName
+            $PathCheck = Join-Path $FolderName -ChildPath $ShareName
             Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message2' -StringValues $PathCheck
             
             If (-NOT (Test-Path -Path $PathCheck)) {
@@ -75,7 +72,7 @@
                 if ($Folder) {
                     Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message4' -StringValues $PathCheck
                     
-                    if (-NOT (Get-WmiObject -List -ComputerName $env:COMPUTERNAME | Where-Object -FilterScript { $_.Name -eq $ShareName })) {
+                    if (-NOT ( Get-SmbShare -Name $ShareName )) {
                         $NewShare = New-SMBShare –Name (Get-PSFConfigValue -FullName AIPScannerConfig.AIPShare) –Path $PathCheck -Description "AIP Shared Folder" -FullAccess "$env:COMPUTERNAME\AIPScanner"
 
                         # Apply folder permissions
@@ -123,6 +120,6 @@
     }
 
     end {
-        Write-PSFMessage -Level Host -Message 'New-AIPFileShare.Message14'
+        Write-PSFMessage -Level Host -String 'New-AIPFileShare.Message14'
     }
 }

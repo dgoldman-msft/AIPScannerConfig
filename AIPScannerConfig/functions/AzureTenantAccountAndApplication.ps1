@@ -1,4 +1,4 @@
-﻿function New-AzureTenantItems {
+﻿function AzureTenantAccountAndApplication {
     <#
         .SYNOPSIS
             Create Azure AIP items
@@ -14,12 +14,19 @@
         .PARAMETER Confirm
             Parameter used to prompt for user confirmation
 
-        .PARAMETER WhatIf 
+        .PARAMETER WhatIf
             Parameter used to validate a run without making changes
 
         .EXAMPLE
-            PS C:\> New-AzureTenantItems
+            PS C:\> AzureTenantAccountAndApplication
+
+            Start the process for creating the cloud applications and accounts
+
+        .EXAMPLE
+            PS C:\> New-AzureTenantItems -EnabledException
         
+            Start the process for creating the cloud applications and accounts with EnabledException turned on
+
         .NOTES
             Internal function
     #>

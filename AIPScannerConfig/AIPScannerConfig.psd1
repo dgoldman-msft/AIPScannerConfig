@@ -3,7 +3,7 @@
 	RootModule = 'AIPScannerConfig.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.1.01'
+	ModuleVersion = '1.1.24'
 	
 	# ID used to uniquely identify this module
 	GUID = '3ddb8805-2f0c-4fe5-81ea-db8dc77e0452'
@@ -43,6 +43,7 @@
 		'New-AIPRepository'
 		'New-AIPScannerInstall'
 		'New-AIPSystemAccount'
+		'New-AzureTenantAccountAndApplication'
 	)
 	
 	# Cmdlets to export from this module
@@ -67,7 +68,7 @@
 		PSData = @{
 			
 			# Tags applied to this module. These help with module discovery in online galleries.
-			Tags = @("SCC", "Security", "AIP", "AIP Scanner")
+			Tags = @("SCC", "Security", "AIP", "AIPScanner")
 			
 			# A URL to the license for this module.
 			LicenseUri = 'https://github.com/dgoldman-msft/AIPScannerConfig/blob/main/LICENSE'

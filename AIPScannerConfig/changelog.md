@@ -105,7 +105,7 @@
 - New: Added new dubgging information to the readm.me on dumping out a PSFSupportPackage in the event of module issues
 - Chg: Updated manifest version
 
-## 1.1.01 (2021-04-18)
+## 1.1.24 (2021-04-18)
 
 - Upd: Updated readme.me
 - Chg: Created new AzureDevOp's Pipeline package and renamed Test to AIPScannerConfig so pipeline will work correctly
@@ -131,3 +131,26 @@
 - Chg: Removed Password and put it inline
 - Chg: New-AzureTenantItems renamed changed Output type from string to System.Boolean
 - Chg: Tested removing TLS12 check for windows system - can be set by user when setting up powershell
+- Chg: Replaced Get-WmiObject with Get-SMBShare in New-AIPFileShare
+- Fix: [en-us\about_AIPScannerConfig.help.txt] Should have no trailing space - Line 84
+- Fix: [functions\New-AIPFileShare.ps1] Should have no trailing space - Line 33
+- Fix: [functions\New-AIPFileShare.ps1] Should not use Get-WmiObject - Line 78
+- Fix: New-AIPFileShare changed  Write-PSFMessage -Level Host -Message 'New-AIPFileShare.Message14' to Write-PSFMessage -Level Host -String 'New-AIPFileShare.Message14'
+- Fix: Fixed typo in configuration.ps1 - Renamed manidest to manifest
+- Fix: [functions\New-AIPSystemAccount.ps1] Should have no trailing space - Line 15 and 64
+- Fix: [functions\New-AzureTenantItems.ps1] Should have no trailing space - Line 17
+- Fix: [functions\Start-PrerequisiteCheck.ps1] Should have no trailing space - Line 122 and 123
+- Fix: [internal\functions\Assert-ElevatedPermissions.ps1] Should have no trailing space - Line 26
+- Fix: [internal\scripts\moduleimport.ps1] Should not use Write-Verbose
+- Fix: [internal\scripts\moduleimport.ps1] Should not use Write-Verbose - Removed
+- Fix: Removed .Example from Assert-ElevatedPermissions
+- Fix: New-AIPSystemAccount changed .Example New-AIPSystemAccounts to .Example New-AIPSystemAccount
+- Fix: Added Confirm and WhatIf parameters to documentation in New-AIPSystemAccount
+- Fix: Removed SharedFolderPath from New-AIPFileShare
+- Fix: Added PSUseShouldProcessForStateChangingFunctions to Add-AIPRepository
+- Fix: Renamed New-AzureTenantItems.ps1 to New-AzureTenantAccountAndApplication.ps1
+- Fix: Renamed New-AzureTenantItems to New-AzureTenantAccountAndApplication in manifest file
+- Fix: Renamed Assert-ElevatedPermissions.ps1 to Assert-ElevatedPermission.ps1
+- Fix: Renamed Assert-ElevatedPermissions to Assert-ElevatedPermission in manifest file
+- Fix: Renamed Assert-ElevatedPermissions to Assert-ElevatedPermission in strings.ps1 - all occurrences
+- Fix: Renamed Tag 'AIP Scanner' to 'AIPScanner' as no spaces are allowed

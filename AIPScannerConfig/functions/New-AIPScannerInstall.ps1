@@ -8,6 +8,12 @@
         
         .PARAMETER Cluster
             Name of the AIP Cluster we are targeting for data collection
+        
+        .PARAMETER Confirm
+            Parameter used to prompt for user confirmation
+
+        .PARAMETER WhatIf
+            Parameter used to validate a run without making changes
 
         .PARAMETER EnableException
             Depending on whether $EnableException is true or false it will do the following:
@@ -24,7 +30,7 @@
     #>
 
     [CmdletBinding(SupportsShouldProcess)]
-    [OutputType([String])]
+    [OutputType([System.String])]
     param (
         [string]
         $Cluster = "None",

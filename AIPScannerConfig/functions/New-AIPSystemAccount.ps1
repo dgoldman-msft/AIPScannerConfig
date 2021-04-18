@@ -12,7 +12,7 @@
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
 
-    .PARAMETER WhatIf 
+    .PARAMETER WhatIf
         Parameter used to validate a run without making changes
 
     .PARAMETER EnableException
@@ -21,7 +21,7 @@
             2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
 
     .EXAMPLE
-        C:>\ New-AIPSystemAccounts
+        C:>\ New-AIPSystemAccount -AccountName AIPScanner
     
     .NOTES
         1. Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).
@@ -61,7 +61,7 @@
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message5'
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message6'          
+                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message6'
             }
 
             $NTPrincipal = New-Object System.Security.Principal.NTAccount "$AccountName"

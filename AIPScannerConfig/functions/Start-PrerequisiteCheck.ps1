@@ -78,7 +78,7 @@
     }
     
     process {
-        if (-NOT (Assert-ElevatedPermissions)) { return }
+        if (-NOT (Assert-ElevatedPermission)) { return }
         $OriginalPreference = $ProgressPreference
         $ProgressPreference = "SilentlyContinue"
         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message2'
@@ -119,8 +119,8 @@
 
         try {
             Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message11'
-            if (Test-NetConnection -InformationLevel Quiet) { 
-                Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message12' 
+            if (Test-NetConnection -InformationLevel Quiet) {
+                Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message12'
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message13'
@@ -158,7 +158,7 @@
 
             if (Get-LocalUser -Name (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName) -ErrorAction SilentlyContinue) {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message19'
-                if (New-AzureTenantItems) {
+                if (New-AzureTenantAccountAndApplication) {
                     New-AIPFileShare
                     New-AIPScannerInstall
                 }

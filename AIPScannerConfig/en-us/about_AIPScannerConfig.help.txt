@@ -40,7 +40,7 @@ NOTES
 	NOTE:  The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel. Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM. However, if you have one big 1GB file it can take 3GB of RAM just for that file.
 
 	Internet connectivity necessary for Azure Information Protection
-	----------------------------------------------------------------        
+	----------------------------------------------------------------
 	NOTE: A SQL Server 2012+ local or remote instance (Any version from Express or better is supported)
 	Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)
 

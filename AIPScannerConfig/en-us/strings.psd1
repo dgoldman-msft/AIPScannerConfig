@@ -69,9 +69,9 @@
 	'Start-PrerequisiteCheck.Message22' = "Finished. If you installed SQL Server please reboot your system to finish component setup" # 
 
 	# ElevatedPermissions
-	'Assert-ElevatedPermissions.Message1' = "Checking if interactive PowerShell session is running with elevated permissions" # 
-	'Assert-ElevatedPermissions.Message2' = "Insufficient permissions to run this script. Open the PowerShell console as an administrator and run this script again. Exiting" # 
-	'Assert-ElevatedPermissions.Message3' = "Local PowerShell session is running as administrator. Continuning configuration" # 
+	'Assert-ElevatedPermission.Message1' = "Checking if interactive PowerShell session is running with elevated permissions" # 
+	'Assert-ElevatedPermission.Message2' = "Insufficient permissions to run this script. Open the PowerShell console as an administrator and run this script again. Exiting" # 
+	'Assert-ElevatedPermission.Message3' = "Local PowerShell session is running as administrator. Continuning configuration" # 
 
 	# AIPScannerInstall
 	'New-AIPScannerInstall.Message1' = "Checking for install of AzInfoProtection_UL.exe" # 
