@@ -105,8 +105,28 @@
 - New: Added new dubgging information to the readm.me on dumping out a PSFSupportPackage in the event of module issues
 - Chg: Updated manifest version
 
-## 1.0.80 (2021-04-18)
+## 1.1.00 (2021-04-18)
 
 - Upd: Updated readme.me
 - Chg: Created new AzureDevOp's Pipeline package and renamed Test to AIPScannerConfig so pipeline will work correctly
 - Chg: Updated manifest version
+- Chg: Added [OutputType([String])] to all files per PSScriptAnalyzer
+- Chg: Add-AIPRepository.ps1 - Added $EnabledException and Added parameters to documentation
+- Chg: New-AIPFileShare.ps1 - Added parameters to documentation
+- Chg: New-AIPScannerInstall - Replaced Get-WMIObject with Get-CimInstance
+- Chg: Start-PrerequisitesCheck.ps1 - Replaced all instances of Get-WMIObject with Get-CimInstance
+- Chg: Added .PARAMETER WhatIf and Confirm to all files that ShouldSupportProcessing
+- Chg: Removed Write-Warning from Manifest file
+- Chg: [internal\scripts\moduleimport.ps1] Should have UTF8 encoding with Byte Order Mark
+- Chg: [internal\scripts\moduleimport.ps1] Should have no trailing space
+- Chg: [functions\Start-PrerequisiteCheck.ps1] Should have no trailing space - Expected $null or empty, but got @(42, 112, 117, 118).
+- Chg: [internal\functions\Assert-ElevatedPermissions.ps1] Should have no trailing space - Expected $null or empty, but got @(42, 112, 117, 118).
+- Chg: [functions\New-AzureTenantItems.ps1] Should have no trailing space - Expected $null or empty, but got @(50, 51, 52, 53, 54, 55, 64, 73, 75, 76, ...).
+- Chg: [functions\New-AIPSystemAccount.ps1] Should have no trailing space - Expected $null or empty, but got @(55, 58, 106, 107, 114, 127).
+- Chg: [functions\New-AIPFileShare.ps1] Should have no trailing space - Expected $null or empty, but got @(24, 56, 88, 93, 98, 102, 103, 109, 114).
+- Chg: [functions\Add-AIPRerpository.ps1] Should have no trailing space - Expected $null or empty, but got 56.
+- Chg: [en-us\about_AIPScannerConfig.help.txt] Should have no trailing space - Expected 0, but got 2.
+- Chg: Function 'New-AIPScannerInstall' has verb that could change system state. Therefore, the function has to support 'ShouldProcess'.
+- Chg: File 'New-AIPSystemAccount.ps1' uses ConvertTo-SecureString with plaintext. This will expose secure information. Encrypted standard strings should be used instead.
+- Chg: Removed Password and put it inline
+- Chg: New-AzureTenantItems renamed changed Output type from string to System.Boolean

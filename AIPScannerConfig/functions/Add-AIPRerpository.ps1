@@ -6,6 +6,20 @@
     .DESCRIPTION
         This method will add an AIP repository
     
+    .PARAMETER Path
+        Path to local file sahre
+
+    .PARAMETER CreateOnFileShare
+        Switch to indicate we are creating on a file share
+    
+    .PARAMETER CreateShareOnSharePoint
+        Switch to indicate we are creating on a SharePoint share
+
+    .PARAMETER EnableException
+        Depending on whether $EnableException is true or false it will do the following:
+            1. ($True) - Throw a bloody terminating error. Game over.
+            2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
+    
     .EXAMPLE
         PS C:\> Add-AIPRepository -Path \\fileserver\documents
 
@@ -26,6 +40,7 @@
     #>
 
     [CmdletBinding()]
+    [OutputType([System.Boolean])]
     param (
         [Parameter(Position = 0, ParameterSetName = 'FileShare', HelpMessage = 'Path to file share')]
         [string]
@@ -44,7 +59,10 @@
         $FileShare,
 
         [switch]
-        $VerifyRepository
+        $VerifyRepository,
+
+        [switch]
+        $EnableException
     )
     
     begin {
@@ -53,7 +71,7 @@
     
     process {
         if ($VerifyRepository) {
-            Get-AIPScannerRepository 
+            Get-AIPScannerRepository
         }
         else {
             Write-PSFMessage -Level Host -String 'Add-AIPRerpository.Message2'
@@ -72,7 +90,6 @@
                 Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message4'
                 return
             }
-            
         }
         elseif ($Path -and $FileShare) {
             try {

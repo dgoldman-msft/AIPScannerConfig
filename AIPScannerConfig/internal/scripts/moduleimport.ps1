@@ -1,5 +1,5 @@
-$Moduledependencies = @("PSFramework", "SqlServer", "AzureADPreview")
-        
+﻿$Moduledependencies = @("PSFramework", "SqlServer", "AzureADPreview")
+
 foreach ($Module in $Moduledependencies) {
 	if (Get-Module -ListAvailable -Name $module) {
 		Write-Verbose "Module: $Module found! Importing module"
@@ -17,7 +17,7 @@ foreach ($Module in $Moduledependencies) {
 			if (-NOT (Import-Module -Name $Module -Force -ErrorAction SilentlyContinue -PassThru)) { throw }
 		}
 		catch {
-			Write-Warning -Message "Module error: $Module | $_.Exception.Message" 
+			Write-Warning -Message "Module error: $Module | $_.Exception.Message"
 		}
 	}
 }

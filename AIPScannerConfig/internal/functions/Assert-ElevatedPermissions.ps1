@@ -7,7 +7,7 @@
         Checks to see if we are running PowerShell with Administrator credentials
     
     .EXAMPLE
-        PS C:\> Assert-ElevatedPermissions    
+        PS C:\> Assert-ElevatedPermissions
 
     .NOTES
         Internal function
@@ -15,6 +15,7 @@
     #>
     
     [CmdletBinding()]
+    [OutputType([String])]
     param ()
     
     begin {

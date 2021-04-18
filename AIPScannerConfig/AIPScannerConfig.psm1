@@ -1,11 +1,7 @@
-﻿try{
-	if ([Net.ServicePointManager]::SecurityProtocol -notcontains 'Tls12') {
-		[Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12 
-	}
+﻿if ([Net.ServicePointManager]::SecurityProtocol -notcontains 'Tls12') {
+	[Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12 
 }
-catch{
-	Write-Warning -Message $_.Exception.Message
-}	
+
 $script:ModuleRoot = $PSScriptRoot
 $script:ModuleVersion = (Import-PowerShellDataFile -Path "$($script:ModuleRoot)\AIPScannerConfig.psd1").ModuleVersion
 

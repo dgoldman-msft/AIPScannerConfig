@@ -23,7 +23,8 @@
             Internal function
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
+    [OutputType([String])]
     param (
         [string]
         $Cluster = "None",
@@ -38,7 +39,7 @@
     
     process {
         try {
-            $InstalledProduct = Get-WMIObject -Query "SELECT * FROM Win32_Product" | Where-Object Name -eq 'Microsoft Azure Information Protection'
+            $InstalledProduct =  Get-CimInstance win32_product | Where-Object Name -eq 'Microsoft Azure Information Protection'
 
             if (-NOT ($InstalledProduct)) {
                 # Download the scanner

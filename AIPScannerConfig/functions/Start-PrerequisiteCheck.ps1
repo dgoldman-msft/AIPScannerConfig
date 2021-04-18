@@ -12,11 +12,17 @@
     .PARAMETER SqlRemote
         Switch to check for remote SQL instnaces
 
+    .PARAMETER Confirm
+        Parameter used to prompt for user confirmation
+
+    .PARAMETER WhatIf
+        Parameter used to validate a run without making changes
+
     .PARAMETER EnableException
         Depending on whether $EnableException is true or false it will do the following:
             1. ($True) - Throw a bloody terminating error. Game over.
             2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
-        
+    
     .EXAMPLE
         PS C:\> Start-PrerequisiteCheck -ComputerName Machine01 -Verbose
 
@@ -39,7 +45,7 @@
         NOTE:  The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel. Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM. However, if you have one big 1GB file it can take 3GB of RAM just for that file.
 
         Internet connectivity necessary for Azure Information Protection
-        ----------------------------------------------------------------        
+        ----------------------------------------------------------------
         NOTE: A SQL Server 2012+ local or remote instance (Any version from Express or better is supported)
         Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)
 
@@ -76,7 +82,7 @@
         $OriginalPreference = $ProgressPreference
         $ProgressPreference = "SilentlyContinue"
         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message2'
-        $ServerVersion = Get-WmiObject Win32_OperatingSystem | Select-Object -ExpandProperty Caption
+        $ServerVersion = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty Caption
 
         if (($ServerVersion -match "Microsoft Windows Server 2012 R2")`
                 -or ($ServerVersion -like "Microsoft Windows Server 2016*")`
@@ -101,15 +107,14 @@
         }
 
         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message8'
-        $ComputerSystem = Get-WmiObject -class "Win32_ComputerSystem"
+        $ComputerSystem = Get-CimInstance -Class "Win32_ComputerSystem"
         $Memory = [math]::Ceiling($ComputerSystem.TotalPhysicalMemory / 1024 / 1024 / 1024)
-
         if ( $Memory -lt 4 ) {
             Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message9'
             return
         }
         else {
-            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message10' -StringValues $Memory 
+            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message10' -StringValues $Memory
         }
 
         try {

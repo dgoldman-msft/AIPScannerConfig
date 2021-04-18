@@ -9,6 +9,12 @@
     .PARAMETER AccountName
         This is the account name for the AIP Scanner account. The default is "AIPScanner"
     
+    .PARAMETER Confirm
+        Parameter used to prompt for user confirmation
+
+    .PARAMETER WhatIf 
+        Parameter used to validate a run without making changes
+
     .PARAMETER EnableException
         Depending on whether $EnableException is true or false it will do the following:
             1. ($True) - Throw a bloody terminating error. Game over.
@@ -24,6 +30,7 @@
     #>
 
     [CmdletBinding(SupportsShouldProcess)]
+    [OutputType([String])]
     param (
         [string]
         $AccountName = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName),
@@ -40,8 +47,7 @@
         try {
             Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message2'
             Add-Type -AssemblyName System.Web
-            $Password = [System.Web.Security.Membership]::GeneratePassword(16, 2)
-            $User = New-LocalUser $AccountName -Password (ConvertTo-SecureString $Password -AsPlainText -Force) -FullName "AIP Scanner Account"`
+            $User = New-LocalUser $AccountName -Password ([System.Web.Security.Membership]::GeneratePassword(16, 2)) -FullName "AIP Scanner Account"`
                     -Description "System account for the AIP Scanner." -PasswordNeverExpires -AccountNeverExpires -ErrorAction SilentlyContinue
             if($User){
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message3' -StringValues $AccountName
@@ -52,7 +58,7 @@
 
             Add-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction Stop
             if (Get-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction SilentlyContinue) {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message5'          
+                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message5'
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message6'          
@@ -103,16 +109,15 @@ signature="`$CHICAGO`$"
 Revision=1
 [Privilege Rights]
 SeInteractiveLogonRight = $($currentSetting)
-"@  
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message11'              
+"@
+                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message11'
                 $NewPolicyFile | Set-Content -Path "$ENV:TEMP\NewPolicyFile.inf" -Encoding Unicode -Force
                 try {
                     $CmdArguments = "/configure /db secedit.sdb /cfg ""$ENV:TEMP\NewPolicyFile.txt"" /areas USER_RIGHTS"
                     Start-Process secedit -ArgumentList $CmdArguments
                 }
                 catch {
-                    Stop-PSFFunction -String 'New-AIPSystemAccount.Message12' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_ 
-
+                    Stop-PSFFunction -String 'New-AIPSystemAccount.Message12' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                 }
             }
             else {
@@ -124,6 +129,6 @@ SeInteractiveLogonRight = $($currentSetting)
         }
     }
     end {
-        Write-PSFMessage -Level Host -String 'New-AIPSystemAccount.Message15'  
+        Write-PSFMessage -Level Host -String 'New-AIPSystemAccount.Message15'
     }
 }
