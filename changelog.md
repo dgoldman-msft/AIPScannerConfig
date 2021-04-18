@@ -98,9 +98,14 @@
 - Chg: Update on New-PSFLicense -Manufacturer changed to 'Dave Goldman'
 - Chg: Upated the readme.me
 
-## 1.0.76 (2021-04-17)
+## 1.0.77 (2021-04-17)
 
 - Fix: Made change to add += TLS1.2 to the array and not overwrite it with
 - New: Added code to display warning if TLS12 isn't added to the [Net.ServicePointManager]::SecurityProtocol object
 - New: Added new dubgging information to the readm.me on dumping out a PSFSupportPackage in the event of module issues
+- Chg: Updated manifest version
+
+## 1.0.79 (2021-04-18)
+
+- Upd: Updated readme.me
 - Chg: Updated manifest version

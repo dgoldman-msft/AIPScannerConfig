@@ -19,6 +19,8 @@
 
  This module will install of the prerequisite modules and import them on import of the AIPScannerConfig module.
 
+<b><span style="color:red">NOTE:</b></span> All functions can be ran independently to install FileShare, SystemAccount, AzureItems (Cloud Accounts, Azure Applications, etc.)
+
 The prerequisite checks for the following:
 
 > 1. Running PowerShell as an Administrator
@@ -37,6 +39,7 @@ For more information on the logging subsystem please refer to: 'https://psframew
 > To get verbose output logging information run: `Get-PSFMessage`
 
 ## Support Help
+
 For any module issues that might involve deeper troubleshooting you can create a diagnostic debug package.
 > Run `New-PSFSupportPackage`
 
