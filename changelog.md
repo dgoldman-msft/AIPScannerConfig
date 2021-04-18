@@ -105,7 +105,8 @@
 - New: Added new dubgging information to the readm.me on dumping out a PSFSupportPackage in the event of module issues
 - Chg: Updated manifest version
 
-## 1.0.79 (2021-04-18)
+## 1.0.80 (2021-04-18)
 
 - Upd: Updated readme.me
+- Chg: Created new AzureDevOp's Pipeline package and renamed Test to AIPScannerConfig so pipeline will work correctly
 - Chg: Updated manifest version
