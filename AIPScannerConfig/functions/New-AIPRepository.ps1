@@ -18,17 +18,17 @@
             2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
 
     .EXAMPLE
-        PS C:\> Add-AIPRepository -Path \\fileserver\documents
+        PS C:\> New-AIPRepository -Path \\fileserver\documents
 
         This will create a repository on a local fileshare or server
 
     .EXAMPLE
-        PS C:\> Add-AIPRepository -CreateShareOnSharePoint
+        PS C:\> New-AIPRepository -CreateShareOnSharePoint
 
         This will create a repository on a SharePoint server
 
     .EXAMPLE
-        PS C:\> Add-AIPRepository -VerifyRepository
+        PS C:\> New-AIPRepository -VerifyRepository
 
         This will verify the AIP repositories
 

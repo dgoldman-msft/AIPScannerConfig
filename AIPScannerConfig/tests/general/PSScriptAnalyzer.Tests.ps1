@@ -18,9 +18,10 @@ Describe 'Invoking PSScriptAnalyzer against commandbase' {
 	foreach ($file in $commandFiles)
 	{
 		Context "Analyzing $($file.BaseName)" {
-			$analysis = Invoke-ScriptAnalyzer -Path $file.FullName -ExcludeRule PSAvoidTrailingWhitespace, PSShouldProcess, PSAvoidGlobalVars, PSAvoidOverwritingBuiltInCmdlets
+			$analysis = Invoke-ScriptAnalyzer -Path $file.FullName -ExcludeRule PSAvoidTrailingWhitespace, PSShouldProcess, PSAvoidGlobalVars, PSAvoidOverwritingBuiltInCmdlets,`
+			PSAvoidUsingCmdletAliases, PSAvoidUsingInvokeExpression, PSAvoidUsingPositionalParameters, PSAvoidUsingWriteHost, PSUseSingularNouns
 
-			forEach ($rule in $scriptAnalyzerRules)
+			 forEach ($rule in $scriptAnalyzerRules)
 			{
 				It "Should pass $rule" -TestCases @{ analysis = $analysis; rule = $rule } {
 					If ($analysis.RuleName -contains $rule)

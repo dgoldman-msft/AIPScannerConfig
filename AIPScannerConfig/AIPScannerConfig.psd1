@@ -40,13 +40,12 @@
 
 	# Functions to export from this module
 	FunctionsToExport = @(
-		'Add-AIPRepository'
+		'New-AIPRepository'
 		'New-AIPFileShare'
 		'New-AIPScannerInstall'
 		'New-AIPSystemAccount'
 		'New-AzureTenantAccountAndApplication'
 		'Start-PrerequisiteCheck'
-
 	)
 
 	# Cmdlets to export from this module
