@@ -2,10 +2,10 @@
     <#
     .SYNOPSIS
         Add an AIP repository
-    
+
     .DESCRIPTION
         This method will add an AIP repository
-    
+
     .PARAMETER Path
         Path to local file sahre
 
@@ -16,7 +16,7 @@
         Depending on whether $EnableException is true or false it will do the following:
             1. ($True) - Throw a bloody terminating error. Game over.
             2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
-    
+
     .EXAMPLE
         PS C:\> Add-AIPRepository -Path \\fileserver\documents
 
@@ -24,19 +24,19 @@
 
     .EXAMPLE
         PS C:\> Add-AIPRepository -CreateShareOnSharePoint
-        
+
         This will create a repository on a SharePoint server
 
     .EXAMPLE
         PS C:\> Add-AIPRepository -VerifyRepository
 
         This will verify the AIP repositories
-    
+
     .NOTES
         None
     #>
 
-    [CmdletBinding(PSUseShouldProcessForStateChangingFunctions = $true)]
+    [CmdletBinding()]
     [OutputType([System.Boolean])]
     param (
         [Parameter(Position = 0, ParameterSetName = 'FileShare', HelpMessage = 'Path to file share')]
@@ -54,11 +54,11 @@
         [switch]
         $VerifyRepository
     )
-    
+
     begin {
         Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message1'
     }
-    
+
     process {
         if ($VerifyRepository) {
             Get-AIPScannerRepository
@@ -96,7 +96,7 @@
             return
         }
     }
-    
+
     end {
         Write-PSFMessage -Level Host -String 'Add-AIPRerpository.Message8'
     }
