@@ -1,4 +1,4 @@
-function Assert-IEEnhancedSC {
+﻿function Assert-IEEnhancedSC {
     <#
     .SYNOPSIS
         Check the state of IE Enhanced Security Configuration
