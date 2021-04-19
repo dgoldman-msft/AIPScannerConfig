@@ -177,8 +177,9 @@
 - Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
 - Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository
 
-## 1.1.49 (2021-04-19)
+## 1.1.50 (2021-04-19)
 
 - Fix: Removed -PassThru from moduleimport.ps1
 - Fix: Removed Throw statements from moduleimport.ps1
+- Fix: Removes scopes from install-module and import-module
 - Upd: Updated module version
