@@ -176,3 +176,8 @@
 - Fix: Removed PSUseShouldProcessForStateChangingFunctions from Add-AIPRepository
 - Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
 - Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository
+
+## 1.1.48 (2021-04-19)
+
+- Fix: Removed -PassThru from moduleimport.ps1
+- Upd: Updated module version
