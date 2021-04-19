@@ -46,7 +46,8 @@
     }
 
     process {
-        try {
+
+        Invoke-PSFProtectedCommand -Action New-LocalUser -Target $env:COMPUTERNAME -ScriptBlock{
             Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message2'
             $user = New-LocalUser $AccountName -Password (New-Password -AsSecureString) -FullName "AIP Scanner Account"`
                 -Description "System account for the AIP Scanner." -PasswordNeverExpires -AccountNeverExpires -ErrorAction SilentlyContinue
@@ -56,20 +57,26 @@
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message4'
             }
+        }
 
-            Invoke-PSFProtectedCommand -Action Add-LocalGroupMember -ScriptBlock {
-                Add-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction Stop
-            }
+        if (Test-PSFFunctionInterrupt) { return }
 
-            if (Test-PSFFunctionInterrupt) { return }
+        Invoke-PSFProtectedCommand -Action Add-LocalGroupMember -Target $env:COMPUTERNAME -ScriptBlock {
+            Add-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction Stop
+        }
 
+        if (Test-PSFFunctionInterrupt) { return }
+
+        Invoke-PSFProtectedCommand -Action Get-LocalGroupMember -Target $env:COMPUTERNAME -ScriptBlock {
             if (Get-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction SilentlyContinue) {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message5'
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message6'
             }
+        }
 
+        try {
             $ntPrincipal = New-Object System.Security.Principal.NTAccount "$AccountName"
             $sid = $ntPrincipal.Translate([System.Security.Principal.SecurityIdentifier])
             $sidString = $sid.Value.ToString()
