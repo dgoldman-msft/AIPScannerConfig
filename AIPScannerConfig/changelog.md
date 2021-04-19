@@ -177,7 +177,7 @@
 - Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
 - Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository
 
-## 1.1.55 (2021-04-19)
+## 1.1.56 (2021-04-19)
 
 - Fix: Removed -PassThru from moduleimport.ps1
 - Fix: Removed Throw statements from moduleimport.ps1
@@ -188,3 +188,4 @@
 - Upd: Fixed paramter and attribute definitions to make them eaiser to follow for debugging purposes in all files
 - Upd: Adde SQlserver and AzureADPreview to the required modules list in the manifest
 - Upd: Added individual try catches in New-AzureTenantAccountAndApplication for each operation
+- Upd: Saved New-Password with UTF8 encoding with Byte Order Mark

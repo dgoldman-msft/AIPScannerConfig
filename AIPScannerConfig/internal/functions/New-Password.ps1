@@ -1,4 +1,4 @@
-function New-Password
+﻿function New-Password
 {
 	<#
 		.SYNOPSIS
