@@ -1,4 +1,3 @@
-﻿
 <#
 	.SYNOPSIS
 		Build script that generates a client module for REST API endpoints of a Azure PowerShell Functions project.
