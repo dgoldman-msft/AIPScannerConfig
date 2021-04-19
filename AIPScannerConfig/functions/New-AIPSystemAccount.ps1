@@ -2,13 +2,13 @@
     <#
     .SYNOPSIS
         Create local AIP Scanner Accounts
-    
+
     .DESCRIPTION
         This method will create the necessary AIP scanner accounts.
-    
+
     .PARAMETER AccountName
         This is the account name for the AIP Scanner account. The default is "AIPScanner"
-    
+
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
 
@@ -24,7 +24,7 @@
         C:>\ New-AIPSystemAccount -AccountName AIPScanner
 
         Executes the creation of the AIPSystem account
-    
+
     .NOTES
         1. Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).
         2. Service account requires Read permissions to each repository for discovery and Read/Write permissions for classification/protection.
@@ -40,18 +40,18 @@
         [switch]
         $EnableException
     )
-    
+
     begin {
         Write-PSFMessage -Level Host -String 'New-AIPSystemAccount.Message1'
     }
-    
+
     process {
         try {
             Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message2'
             Add-Type -AssemblyName System.Web
             $User = New-LocalUser $AccountName -Password ([System.Web.Security.Membership]::GeneratePassword(16, 2)) -FullName "AIP Scanner Account"`
-                    -Description "System account for the AIP Scanner." -PasswordNeverExpires -AccountNeverExpires -ErrorAction SilentlyContinue
-            if($User){
+                -Description "System account for the AIP Scanner." -PasswordNeverExpires -AccountNeverExpires -ErrorAction SilentlyContinue
+            if ($User) {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message3' -StringValues $AccountName
             }
             else {

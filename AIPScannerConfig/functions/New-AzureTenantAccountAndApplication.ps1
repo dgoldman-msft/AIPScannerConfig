@@ -2,10 +2,10 @@
     <#
         .SYNOPSIS
             Create Azure AIP items
-        
+
         .DESCRIPTION
             This method will create all of the necessary Azure components needed for the AIP scanner to function
-        
+
         .PARAMETER EnableException
             Depending on whether $EnableException is true or false it will do the following:
                 1. ($True) - Throw a bloody terminating error. Game over.
@@ -24,7 +24,7 @@
 
         .EXAMPLE
             PS C:\> New-AzureTenantAccountAndApplication -EnabledException
-        
+
             Start the process for creating the cloud applications and accounts with EnabledException turned on
 
         .NOTES
@@ -36,16 +36,16 @@
         [switch]
         $EnableException
     )
-    
+
     begin {
         Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message1'
     }
-    
+
     process {
         try {
             try {
-                if($TenantInfo = Connect-AzureAD -AccountId (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount) -ErrorAction Stop){
-                $Domain = $TenantInfo.TenantDomain
+                if ($TenantInfo = Connect-AzureAD -AccountId (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount) -ErrorAction Stop) {
+                    $Domain = $TenantInfo.TenantDomain
                 }
                 else {
                     Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message2'
@@ -80,14 +80,14 @@
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message8'
                 $WebApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'"
             }
-            
+
             if (-NOT (Get-AzureADServicePrincipal -All $true | Where-object DisplayName -eq "AIPOnBehalfOf")) {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message9'
                 New-AzureADServicePrincipal -DisplayName AIPOnBehalfOf -AppId $WebApp.AppId
                 $WebAppKey = New-Guid
                 $Date = Get-Date
                 New-AzureADApplicationPasswordCredential -ObjectId $WebApp.ObjectID -startDate $Date -endDate $Date.AddYears(1) -Value $WebAppKey.Guid -CustomKeyIdentifier "AIPClient"
-    
+
                 $AIPServicePrincipal = Get-AzureADServicePrincipal -All $true | Where-Object { $_.DisplayName -eq 'AIPOnBehalfOf' }
                 $AIPPermissions = $AIPServicePrincipal | Select-Object -Expand Oauth2Permissions
                 $Scope = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList $AIPPermissions.Id, "Scope"
@@ -114,7 +114,7 @@
             return $false
         }
     }
-    
+
     end {
         Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message14' -StringValues $completed
     }
