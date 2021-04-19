@@ -43,67 +43,85 @@
 
     process {
         try {
-            try {
-                if ($TenantInfo = Connect-AzureAD -AccountId (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount) -ErrorAction Stop) {
-                    $Domain = $TenantInfo.TenantDomain
-                }
-                else {
-                    Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message2'
-                    return $false
-                }
+            if ($tenantInfo = Connect-AzureAD -AccountId (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount) -ErrorAction Stop) {
+                $domain = $tenantInfo.TenantDomain
             }
-            catch {
-                Stop-PSFFunction -String 'New-AzureTenantItems.Message3' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            else {
+                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message2'
                 return $false
             }
+        }
+        catch {
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message3' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            return $false
+        }
 
+        try {
             Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message4'
-            if (-NOT (Get-AzureADUser | Where-Object UserPrincipalName -eq "AIPScannerCloud@$Domain")) {
+            if (-NOT (Get-AzureADUser | Where-Object UserPrincipalName -eq "AIPScannerCloud@$domain")) {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message5'
-                $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
-                $PasswordProfile.ForceChangePasswordNextLogin = $false
-                $Password = Read-Host -assecurestring "Please enter password for cloud service account"
-                $Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
-                $PasswordProfile.Password = $Password
-                New-AzureADUser -AccountEnabled $True -DisplayName "AIP Scanner Cloud Service" -PasswordProfile $PasswordProfile -MailNickName "AIPScannerCloud" -UserPrincipalName "AIPScannerCloud@$Domain"
+                $passwordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
+                $passwordProfile.ForceChangePasswordNextLogin = $false
+                $password = Read-Host -assecurestring "Please enter password for cloud service account"
+                $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))
+                $passwordProfile.Password = $password
+                New-AzureADUser -AccountEnabled $True -DisplayName "AIP Scanner Cloud Service" -PasswordProfile $passwordProfile -MailNickName "AIPScannerCloud" -UserPrincipalName "AIPScannerCloud@$Domain"
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message6'
             }
-            
+        }
+        catch {
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            return $false
+        }
+
+        try {
             if (-NOT(Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'")) {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message7'
                 New-AzureADApplication -DisplayName AIPOnBehalfOf -ReplyUrls http://localhost -ErrorAction Stop
-                $WebApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'"
+                $webApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'"
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message8'
-                $WebApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'"
+                $webApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'"
             }
+        }
+        catch {
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            return $false
+        }
 
+        try {
             if (-NOT (Get-AzureADServicePrincipal -All $true | Where-object DisplayName -eq "AIPOnBehalfOf")) {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message9'
-                New-AzureADServicePrincipal -DisplayName AIPOnBehalfOf -AppId $WebApp.AppId
-                $WebAppKey = New-Guid
-                $Date = Get-Date
-                New-AzureADApplicationPasswordCredential -ObjectId $WebApp.ObjectID -startDate $Date -endDate $Date.AddYears(1) -Value $WebAppKey.Guid -CustomKeyIdentifier "AIPClient"
+                New-AzureADServicePrincipal -DisplayName AIPOnBehalfOf -AppId $webApp.AppId
+                $webAppKey = New-Guid
+                $date = Get-Date
+                New-AzureADApplicationPasswordCredential -ObjectId $webApp.ObjectID -startDate $date -endDate $date.AddYears(1) -Value $webAppKey.Guid -CustomKeyIdentifier "AIPClient"
 
-                $AIPServicePrincipal = Get-AzureADServicePrincipal -All $true | Where-Object { $_.DisplayName -eq 'AIPOnBehalfOf' }
-                $AIPPermissions = $AIPServicePrincipal | Select-Object -Expand Oauth2Permissions
-                $Scope = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList $AIPPermissions.Id, "Scope"
-                $Access = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
-                $Access.ResourceAppId = $WebApp.AppId
-                $Access.ResourceAccess = $Scope
+                $aipServicePrincipal = Get-AzureADServicePrincipal -All $true | Where-Object { $_.DisplayName -eq 'AIPOnBehalfOf' }
+                $aipPermissions = $aipServicePrincipal | Select-Object -Expand Oauth2Permissions
+                $scope = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList $aipPermissions.Id, "Scope"
+                $access = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
+                $access.ResourceAppId = $webApp.AppId
+                $access.ResourceAccess = $scope
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message10'
             }
+        }
+        catch {
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            return $false
+        }
 
+        try {
             if (-NOT(Get-AzureADApplication -Filter "DisplayName eq 'AIPClient'")) {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message11'
                 New-AzureADApplication -DisplayName AIPClient -ReplyURLs http://localhost -RequiredResourceAccess $Access -PublicClient $true
-                $NativeApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPClient'"
-                New-AzureADServicePrincipal -AppId $NativeApp.AppId
+                $nativeApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPClient'"
+                New-AzureADServicePrincipal -AppId $nativeApp.AppId
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message12'
@@ -114,7 +132,6 @@
             return $false
         }
     }
-
     end {
         Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message14' -StringValues $completed
     }

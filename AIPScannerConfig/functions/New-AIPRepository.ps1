@@ -78,9 +78,9 @@
                 #$Cred = Get-Credential
                 #$Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($Cred.Username, $Cred.Password)
                 Connect-MsolService
-                $SpLocation = (Get-MsolDomain | Where-Object { $_.isInitial }).Name
-                Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message3' -StringValues "http://$SpLocation/documents/"
-                Add-AIPScannerRepository -Path "http://$SpLocation/documents/"
+                \$spLocation = (Get-MsolDomain | Where-Object { $_.isInitial }).Name
+                Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message3' -StringValues "http://\$spLocation/documents/"
+                Add-AIPScannerRepository -Path "http://\$spLocation/documents/"
             }
             catch {
                 Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message4'

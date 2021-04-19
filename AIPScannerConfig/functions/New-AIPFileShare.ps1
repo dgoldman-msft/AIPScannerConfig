@@ -40,7 +40,7 @@
     [OutputType([System.Boolean])]
     param (
         [string]
-        $FolderName = (Get-PSFConfigValue -Fullname AIPScannerConfig.RootFolder),
+        $folderName = (Get-PSFConfigValue -Fullname AIPScannerConfig.RootFolder),
 
         [string]
         $ShareName = (Get-PSFConfigValue -Fullname AIPScannerConfig.AIPShare),
@@ -55,58 +55,58 @@
 
     process {
         try {
-            $PathCheck = Join-Path $FolderName -ChildPath $ShareName
-            Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message2' -StringValues $PathCheck
+            $pathCheck = Join-Path $folderName -ChildPath $ShareName
+            Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message2' -StringValues $pathCheck
 
-            If (-NOT (Test-Path -Path $PathCheck)) {
-                if ($PSCmdlet.ShouldProcess($PathCheck)) {
-                    $Folder = New-Item -Path $PathCheck -ItemType Directory -ErrorAction Stop
-                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message3' -StringValues $PathCheck
+            If (-NOT (Test-Path -Path $pathCheck)) {
+                if ($PSCmdlet.ShouldProcess($pathCheck)) {
+                    $folder = New-Item -Path $pathCheck -ItemType Directory -ErrorAction Stop
+                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message3' -StringValues $pathCheck
                 }
 
-                if ($Folder) {
-                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message4' -StringValues $PathCheck
+                if ($folder) {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message4' -StringValues $pathCheck
 
                     if (-NOT ( Get-SmbShare -Name $ShareName )) {
-                        if ($PSCmdlet.ShouldProcess($PathCheck)) {
-                            $NewShare = New-SMBShare –Name (Get-PSFConfigValue -FullName AIPScannerConfig.AIPShare) –Path $PathCheck -Description "AIP Shared Folder" -FullAccess "$env:COMPUTERNAME\AIPScanner"
+                        if ($PSCmdlet.ShouldProcess($pathCheck)) {
+                            $newShare = New-SMBShare –Name (Get-PSFConfigValue -FullName AIPScannerConfig.AIPShare) –Path $pathCheck -Description "AIP Shared Folder" -FullAccess "$env:COMPUTERNAME\AIPScanner"
                         }
 
                         # Apply folder permissions
-                        if ($NewShare) {
+                        if ($newShare) {
                             Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message5' -StringValues (Get-PSFConfigValue -FullName AIPScannerConfig.AIPShare)
-                            $Account = (Get-PSFConfigValue -FullName 'AIPScannerConfig.ScannerAccountName')
-                            $Acl = (Get-Item $PathCheck).GetAccessControl('Access')
+                            $account = (Get-PSFConfigValue -FullName 'AIPScannerConfig.ScannerAccountName')
+                            $acl = (Get-Item $pathCheck).GetAccessControl('Access')
 
-                            if (($Acl.Access | Where-Object { ($_.IdentityReference.Value.Contains($Account.ToUpperInvariant()) -or $_.IdentityReference.Value.Contains($Account)) -and $_.FileSystemRights -eq [System.Security.AccessControl.FileSystemRights]::FullControl }).Count -eq 1) {
-                                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message6' -StringValues $PathCheck
+                            if (($acl.Access | Where-Object { ($_.IdentityReference.Value.Contains($account.ToUpperInvariant()) -or $_.IdentityReference.Value.Contains($account)) -and $_.FileSystemRights -eq [System.Security.AccessControl.FileSystemRights]::FullControl }).Count -eq 1) {
+                                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message6' -StringValues $pathCheck
                                 return
                             }
                             else {
-                                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message7'ringValues $PathCheck, (Get-PSFConfigValue -FullName AIPScannerConfig.ScannerAccount)
-                                $AccessControlRule = New-Object System.Security.AccessControl.FileSystemAccessRule((Get-PSFConfigValue -FullName AIPScannerConfig.ScannerAccountName), "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
-                                $Acl.SetAccessRule($AccessControlRule)
-                                Set-Acl $PathCheck $Acl
-                                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message8' -StringValues $PathCheck
+                                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message7'ringValues $pathCheck, (Get-PSFConfigValue -FullName AIPScannerConfig.ScannerAccount)
+                                $accessControlRule = New-Object System.Security.AccessControl.FileSystemAccessRule((Get-PSFConfigValue -FullName AIPScannerConfig.ScannerAccountName), "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+                                $acl.SetAccessRule($accessControlRule)
+                                Set-Acl $pathCheck $acl
+                                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message8' -StringValues $pathCheck
                             }
                         }
                         else {
-                            Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message9' -StringValues $PathCheck
+                            Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message9' -StringValues $pathCheck
                             return
                         }
                     }
                     else {
-                        Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message10' -StringValues $PathCheck
+                        Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message10' -StringValues $pathCheck
                         return
                     }
                 }
                 else {
-                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message11' -StringValues $PathCheck
+                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message11' -StringValues $pathCheck
                     return
                 }
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message12' -StringValues $PathCheck
+                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message12' -StringValues $pathCheck
                 return
             }
         }
