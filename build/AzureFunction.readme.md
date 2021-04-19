@@ -1,4 +1,4 @@
-﻿# Setting up the release pipeline:
+# Setting up the release pipeline:
 
 ## Preliminary
 

@@ -1,4 +1,3 @@
-﻿
 <#
 	.SYNOPSIS
 		Packages an Azure Functions project, ready to release.
