@@ -27,10 +27,9 @@
     }
 
     process {
-
-        Invoke-PSFProtectedCommand -Action Get-LocalGroupMember -Target $env:COMPUTERNAME -ScriptBlock {
-            if ( ( Get-ItemProperty -Path $adminKey -Name "IsInstalled" -ErrorAction SilentlyContinue).IsInstalled ) {
-                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message2'
+        Invoke-PSFProtectedCommand -Action Get-ItemProperty -Target $env:COMPUTERNAME -ScriptBlock {
+            if ( $regKey = Get-ItemProperty -Path $adminKey -Name "IsInstalled" -ErrorAction SilentlyContinue ) {
+                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message2' -StringValues $regKey.IsInstalled
             }
             else {
                 Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message3'
@@ -39,9 +38,9 @@
 
         if (Test-PSFFunctionInterrupt) { return }
 
-        Invoke-PSFProtectedCommand -Action Get-LocalGroupMember -Target $env:COMPUTERNAME -ScriptBlock {
-            if ( ( Get-ItemProperty -Path $userKey -Name "IsInstalled" -ErrorAction SilentlyContinue).IsInstalled ) {
-                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message4'
+        Invoke-PSFProtectedCommand -Action Get-ItemProperty -Target $env:COMPUTERNAME -ScriptBlock {
+            if ( $regKey = Get-ItemProperty -Path $userKey -Name "IsInstalled" -ErrorAction SilentlyContinue ) {
+                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message4' -StringValues $regKey.IsInstalled
             }
             else {
                 Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message5'

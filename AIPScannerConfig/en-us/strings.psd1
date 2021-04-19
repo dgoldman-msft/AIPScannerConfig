@@ -105,8 +105,8 @@
 	# IESEC
 	'Assert-IEEnhancedSC.Message1' = "Starting IE Enhanced Security Configuration check" #
 	'Assert-IEEnhancedSC.Message2' = "Checking IE Enhanced Security for Administrators: Enabled {0}. This will cause issues when trying to connect to O365 portals." #
-	'Assert-IEEnhancedSC.Message3' = "Checking IE Enhanced Security for Administrators: Disable {0}" #
+	'Assert-IEEnhancedSC.Message3' = "Checking IE Enhanced Security for Administrators: Disable" #
 	'Assert-IEEnhancedSC.Message4' = "Checking IE Enhanced Security for Users: Enabled {0}. This will cause issues when trying to connect to O365 portals." #
-	'Assert-IEEnhancedSC.Message5' = "Checking IE Enhanced Security for Users: Disabled {0}" #
+	'Assert-IEEnhancedSC.Message5' = "Checking IE Enhanced Security for Users: Disabled" #
 	'Assert-IEEnhancedSC.Message6' = "Finished IE Enhanced Security Configuration check" #
 }
