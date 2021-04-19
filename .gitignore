@@ -1,0 +1,22 @@
+﻿
+# ignore the settings folder and files for VSCode and PSS
+.vscode/*
+*.psproj
+*TempPoint*
+
+# Ignore staging info from Visual Studio
+library/AIPScannerConfig/.vs/*
+library/AIPScannerConfig/AIPScannerConfig/bin/*
+library/AIPScannerConfig/AIPScannerConfig/obj/*
+
+# ignore PowerShell Studio MetaData
+AIPScannerConfig/AIPScannerConfig.psproj
+AIPScannerConfig/AIPScannerConfig.psproj.bak
+AIPScannerConfig/AIPScannerConfig.psprojs
+AIPScannerConfig/AIPScannerConfig.psproj
+
+# ignore the TestResults
+TestResults/*
+
+# ignore the publishing Directory
+publish/*
