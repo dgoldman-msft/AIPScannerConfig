@@ -79,6 +79,7 @@
 
     process {
         if (-NOT (Assert-ElevatedPermission)) { return }
+        Assert-IEEnhancedSC
         $OriginalPreference = $ProgressPreference
         $ProgressPreference = "SilentlyContinue"
         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message2'
@@ -96,7 +97,7 @@
         }
 
         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message5'
-        $WindowsFeature = Get-WindowsFeature | Where-Object Name -eq "NFS-Client" > Out-Null
+        $WindowsFeature = Get-WindowsFeature | Where-Object Name -eq "NFS-Client"
 
         if (-NOT ($WindowsFeature.Installed)) {
             Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message6'

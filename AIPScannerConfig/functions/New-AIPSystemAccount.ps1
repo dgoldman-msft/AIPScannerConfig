@@ -68,13 +68,15 @@
         if (Test-PSFFunctionInterrupt) { return }
 
         Invoke-PSFProtectedCommand -Action Get-LocalGroupMember -Target $env:COMPUTERNAME -ScriptBlock {
-            if (Get-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction SilentlyContinue) {
+            if (Get-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction Stop) {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message5'
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message6'
             }
         }
+
+        if (Test-PSFFunctionInterrupt) { return }
 
         try {
             $ntPrincipal = New-Object System.Security.Principal.NTAccount "$AccountName"

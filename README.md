@@ -22,13 +22,14 @@
 The prerequisite checks for the following:
 
 > 1. Running PowerShell as an Administrator
-> 2. Checks operating system level
-> 3. Check for Windows Feature NFS-Client
-> 4. Checks system memory
-> 5. Checks for an active network connection
-> 6. Checks for a local SQL instance (default) or a remote SQL instance
-> 7. Check to see if the AIPScanner account exists
-> 8. Checks for existing AIP Folder and Folder Share
+> 2. Checks to see if IE Enhanced Security Configuration is enabled or disabled
+> 3. Checks operating system level
+> 4. Check for Windows Feature NFS-Client
+> 5. Checks system memory
+> 6. Checks for an active network connection
+> 7. Checks for a local SQL instance (default) or a remote SQL instance
+> 8. Check to see if the AIPScanner account exists
+> 9. Checks for existing AIP Folder and Folder Share
 
 ## Error logging
 
@@ -37,6 +38,7 @@ For more information on the logging subsystem please refer to: 'https://psframew
 > To get verbose output logging information run: `Get-PSFMessage`
 
 ## Support Help
+
 For any module issues that might involve deeper troubleshooting you can create a diagnostic debug package.
 > Run `New-PSFSupportPackage`
 

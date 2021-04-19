@@ -177,16 +177,19 @@
 - Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
 - Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository
 
-## 1.1.57 (2021-04-19)
+## 1.1.60 (2021-04-19)
 
+- New: Borrowed New-Password from ADMF with Fred Weinmann's permissions
+- New: Implemented Invoke-PSFProtectedCommand in New-AIPSystemAccount
+- New: New function Assert-IEEnhancedSC for checking Enhanced Security Configuration
+- New: Added 6 new strings for Assert-IEEnhancedSC.Message1 in strings.ps1
 - Fix: Removed -PassThru from moduleimport.ps1
 - Fix: Removed Throw statements from moduleimport.ps1
 - Fix: Removes scopes from install-module and import-module
+- Fix: Fix secure password code to pass PSScriptAnalyzer tests
 - Upd: Updated module version
-- Upd: Fix secure password code to pass PSScriptAnalyzer tests
-- New: Borrowed New-Password from ADMF with Fred Weinmann's permissions
 - Upd: Fixed paramter and attribute definitions to make them eaiser to follow for debugging purposes in all files
 - Upd: Adde SQlserver and AzureADPreview to the required modules list in the manifest
 - Upd: Added individual try catches in New-AzureTenantAccountAndApplication for each operation
 - Upd: Saved New-Password with UTF8 encoding with Byte Order Mark
-- New: Implemented Invoke-PSFProtectedCommand in New-AIPSystemAccount
+- Upd: Updated readme.me with new IE Enhanced Security Configuration check
