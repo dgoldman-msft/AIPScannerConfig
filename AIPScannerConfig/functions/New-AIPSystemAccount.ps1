@@ -48,8 +48,10 @@
     process {
         try {
             Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message2'
-            Add-Type -AssemblyName System.Web
-            $User = New-LocalUser $AccountName -Password ([System.Web.Security.Membership]::GeneratePassword(16, 2)) -FullName "AIP Scanner Account"`
+            $Password = [SecureString]::new()
+            -join ( [Char[]]'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' | Get-Random -Count 16 | ForEach-Object { $Password.AppendChar($_)}  )
+            $configCredential = New-Object PSCredential ($AccountName, $Password)
+            $User = New-LocalUser $AccountName -Password $configCredential.Password -FullName "AIP Scanner Account"`
                 -Description "System account for the AIP Scanner." -PasswordNeverExpires -AccountNeverExpires -ErrorAction SilentlyContinue
             if ($User) {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message3' -StringValues $AccountName
