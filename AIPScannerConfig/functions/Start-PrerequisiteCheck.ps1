@@ -89,7 +89,7 @@
                 -or ($ServerVersion -like "Microsoft Windows Server 2016*")`
                 -or ($ServerVersion -like "Microsoft Windows Server 2019*")`
                 -or ($ServerVersion -like "Microsoft Windows Server 2022*")) {
-            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message3' -StringValues $ServerVersion
+            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message3'
         }
         else {
             Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message4'
@@ -159,8 +159,8 @@
 
             if (Get-LocalUser -Name (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName) -ErrorAction SilentlyContinue) {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message19'
+                New-AIPFileShare
                 if (New-AzureTenantAccountAndApplication) {
-                    New-AIPFileShare
                     New-AIPScannerInstall
                 }
                 else {

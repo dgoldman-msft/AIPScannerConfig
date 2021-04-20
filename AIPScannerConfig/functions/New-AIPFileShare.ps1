@@ -65,7 +65,6 @@
         try {
             If (Test-Path -Path $pathCheck) {
                 Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message4' -StringValues $pathCheck
-                return
             }
             else {
                 if (New-Item -Path $pathCheck -ItemType Directory -ErrorAction Stop ) {
@@ -119,6 +118,6 @@
     }
 
     end {
-        Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message18' -StringValues $pathCheck
+        Write-PSFMessage -Level Host -String 'New-AIPFileShare.Message18' -StringValues $pathCheck
     }
 }

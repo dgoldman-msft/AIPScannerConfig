@@ -62,7 +62,7 @@
     )
 
     begin {
-        Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message1'
+        Write-PSFMessage -Level Host -String 'Add-AIPRerpository.Message1'
     }
 
     process {
@@ -70,7 +70,7 @@
             Get-AIPScannerRepository
         }
         else {
-            Write-PSFMessage -Level Host -String 'Add-AIPRerpository.Message2'
+            Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message2'
         }
 
         if ($CreateShareOnSharePoint) {

@@ -39,6 +39,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message1'
+        $aipClient = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName)
     }
 
     process {
@@ -72,67 +73,90 @@
             }
         }
         catch {
-            Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message7' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
 
         try {
             if (-NOT(Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'")) {
-                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message7'
+                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message8'
                 New-AzureADApplication -DisplayName AIPOnBehalfOf -ReplyUrls http://localhost -ErrorAction Stop
                 $webApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'"
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message8'
+                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message9'
                 $webApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPOnBehalfOf'"
             }
         }
         catch {
-            Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message10' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
 
         try {
+            Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message10' -StringValues "AIPOnBehalfOf"
             if (-NOT (Get-AzureADServicePrincipal -All $true | Where-object DisplayName -eq "AIPOnBehalfOf")) {
-                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message9'
+                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message11'
                 New-AzureADServicePrincipal -DisplayName AIPOnBehalfOf -AppId $webApp.AppId
                 $webAppKey = New-Guid
                 $date = Get-Date
-                New-AzureADApplicationPasswordCredential -ObjectId $webApp.ObjectID -startDate $date -endDate $date.AddYears(1) -Value $webAppKey.Guid -CustomKeyIdentifier "AIPClient"
 
-                $aipServicePrincipal = Get-AzureADServicePrincipal -All $true | Where-Object { $_.DisplayName -eq 'AIPOnBehalfOf' }
-                $aipPermissions = $aipServicePrincipal | Select-Object -Expand Oauth2Permissions
-                $scope = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList $aipPermissions.Id, "Scope"
-                $access = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
-                $access.ResourceAppId = $webApp.AppId
-                $access.ResourceAccess = $scope
+                try {
+                    Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message12'
+                    New-AzureADApplicationPasswordCredential -ObjectId $webApp.ObjectID -startDate $date -endDate $date.AddYears(1) -Value $webAppKey.Guid -CustomKeyIdentifier "AIPClient"
+                    $aipServicePrincipal = Get-AzureADServicePrincipal -All $true | Where-Object { $_.DisplayName -eq 'AIPOnBehalfOf' }
+                    $aipPermissions = $aipServicePrincipal | Select-Object -Expand Oauth2Permissions
+                    $scope = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList $aipPermissions.Id, "Scope"
+                    $access = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
+                    $access.ResourceAppId = $webApp.AppId
+                    $access.ResourceAccess = $scope
+                }
+                catch {
+                    Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+                    return $false
+                }
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message10'
+                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message14'
             }
         }
         catch {
-            Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
 
         try {
+            Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message16' -StringValues $aipClient
             if (-NOT(Get-AzureADApplication -Filter "DisplayName eq 'AIPClient'")) {
-                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message11'
-                New-AzureADApplication -DisplayName AIPClient -ReplyURLs http://localhost -RequiredResourceAccess $Access -PublicClient $true
-                $nativeApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPClient'"
-                New-AzureADServicePrincipal -AppId $nativeApp.AppId
+                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message17' -StringValues $aipClient
+
+                try {
+                    New-AzureADApplication -DisplayName AIPClient -ReplyURLs http://localhost -RequiredResourceAccess $Access -PublicClient $true
+                    $nativeApp = Get-AzureADApplication -Filter "DisplayName eq 'AIPClient'"
+                    Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message18' -StringValues $aipClient
+                }
+                catch {
+                    Stop-PSFFunction -String 'New-AzureTenantItems.Message19' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+                    return $false
+                }
+
+                try {
+                    New-AzureADServicePrincipal -AppId $nativeApp.AppId
+                }
+                catch {
+
+                }
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message12'
+                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message19' -StringValues $aipClient
             }
         }
         catch {
-            Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AzureTenantItems.Message20' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
     }
     end {
-        Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message14' -StringValues $completed
+        Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message21'
     }
 }

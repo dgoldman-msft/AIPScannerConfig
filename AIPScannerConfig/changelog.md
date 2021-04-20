@@ -203,3 +203,18 @@
 - Upd: Updated code with try\catches in New New-AIPSystemAccount to pinpoint exact failures
 - Upd: Optimization and re-write of New-AIPFolderShare
 - Upd: New strings for New-AIPFolderShare in string.ps1
+
+## 1.1.82 (2021-04-20)
+
+- New: New-Password - Added begin \ end block with new strings
+- Chg: New-AIPFileShare - Write-PSFMessage -Level Verbose to -Level Host in begin \ end blocks
+- Chg: Add-AIPRerpository - Write-PSFMessage -Level Verbose to -Level Host begin \ end blocks
+- Upd: Updated module version
+- Chg: New-AIPFolderShare - removed return so we don't bailout if local folder already exists
+- Chg: Fixed typo in 'New-AIPFileShare.Message7' - share fixed to shared
+- Chg: Changed 'New-AzureTenantItems.Message3' from = "Failure" to "Connect-AzureAD Failure"
+- Chg: Changed 'New-AzureTenantItems.Message13' from = "Failure" to "Get-AzureADUser Failure"
+- Chg: Changed 'New-AzureTenantItems.Message13' to 'New-AzureTenantItems.Message7'
+- Chg: Created new string structure for New-AzureTenantItems
+- Chg: Rearranged New-AIPFileShare to run before New-AzureTenantAccountAndApplication
+- Chg: Optimized New-AzureTenantAccountAndApplication.ps1

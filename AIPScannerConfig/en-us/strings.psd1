@@ -18,17 +18,17 @@
 	'New-AIPFileShare.Message4'          = "Folder: {0} already exists!" #
 	'New-AIPFileShare.Message5'          = "Folder: {0} created" #
 	'New-AIPFileShare.Message6'          = "Folder failure: {0} not created" #
-	'New-AIPFileShare.Message7'          = "Checking to see if share folder: {0} already exists" #
-	'New-AIPFileShare.Message8'         = "Shared folder: {0} already exists" #
+	'New-AIPFileShare.Message7'          = "Checking to see if shared folder: {0} already exists" #
+	'New-AIPFileShare.Message8'          = "Shared folder: {0} already exists" #
 	'New-AIPFileShare.Message9'          = "Folder Share: {0} created" #
-	'New-AIPFileShare.Message10'          = "Checking folder permissions on folder: {0}" #
-	'New-AIPFileShare.Message11'          = "Permissions already exists on folder: {0}" #
+	'New-AIPFileShare.Message10'         = "Checking folder permissions on folder: {0}" #
+	'New-AIPFileShare.Message11'         = "Permissions already exists on folder: {0}" #
 	'New-AIPFileShare.Message12'         = "Shared Folder: {0} not created" #
-	'New-AIPFileShare.Message13'          = "SMB Share failure!" #
-	'New-AIPFileShare.Message14'          = "Attempting to add permissions to folder: {0}" #
-	'New-AIPFileShare.Message15'          = "Permissions added successful to folder: {0}" #
-	'New-AIPFileShare.Message16'          = "Adding permissions to folder: {0} failed!" #
-	'New-AIPFileShare.Message17'          = "Set-Acl failure!" #
+	'New-AIPFileShare.Message13'         = "SMB Share failure!" #
+	'New-AIPFileShare.Message14'         = "Attempting to add permissions to folder: {0}" #
+	'New-AIPFileShare.Message15'         = "Permissions added successful to folder: {0}" #
+	'New-AIPFileShare.Message16'         = "Adding permissions to folder: {0} failed!" #
+	'New-AIPFileShare.Message17'         = "Set-Acl failure!" #
 	'New-AIPFileShare.Message18'         = "AIP scanner file share creation completed" #
 
 	# AIPSystemAccount
@@ -105,16 +105,23 @@
 	# AzureTenantItems
 	'New-AzureTenantItems.Message1'      = "Attemping to connect to Azure tenant" #
 	'New-AzureTenantItems.Message2'      = "Unable to connect to Azure tenant" #
-	'New-AzureTenantItems.Message3'      = "Failure" #
+	'New-AzureTenantItems.Message3'      = "Connect-AzureAD Failure" #
 	'New-AzureTenantItems.Message4'      = "Checking for cloud service account" #
 	'New-AzureTenantItems.Message5'      = "Attemping to generate password for cloud service account" #
 	'New-AzureTenantItems.Message6'      = "Cloud service account already exists" #
-	'New-AzureTenantItems.Message7'      = "Attemping to create Azure Appllication in tenant: AIPOnBehalfOf" #
-	'New-AzureTenantItems.Message8'      = "Azure Appllication AIPOnBehalfOf already exists" #
-	'New-AzureTenantItems.Message9'      = "Attemping to create Azure Service Principal in tenant" #
-	'New-AzureTenantItems.Message10'     = "Azure Service Principal already exists in the tenant" #
-	'New-AzureTenantItems.Message11'     = "Attemping to create Azure Appllication in tenant: AIPClient" #
-	'New-AzureTenantItems.Message12'     = "AIP Azure AD applications already exists in the tenant" #
-	'New-AzureTenantItems.Message13'     = "Failure" #
-	'New-AzureTenantItems.Message14'     = "AIP Azure tenant items completed. {0}" #
+	'New-AzureTenantItems.Message7'      = "Get-AzureADUser Failure" #
+	'New-AzureTenantItems.Message8'      = "Attemping to create Azure Appllication in tenant: AIPOnBehalfOf" #
+	'New-AzureTenantItems.Message9'      = "Azure Appllication AIPOnBehalfOf already exists" #
+	'New-AzureTenantItems.Message10'     = "Check to see if Azure Service Principal {0} already exists" #
+	'New-AzureTenantItems.Message11'     = "Service Principal not found! Attemping to create Azure Service Principal in tenant" #
+	'New-AzureTenantItems.Message12' 	 = "Attempting to create a password credential for Azure Application"
+	'New-AzureTenantItems.Message13'     = "New-AzureADApplicationPasswordCredential Failure" #
+	'New-AzureTenantItems.Message14'     = "AIP Azure AD Service Principal exists in the tenant" #
+	'New-AzureTenantItems.Message15'     = "AzureADServicePrincipal Failure" #
+	'New-AzureTenantItems.Message16'     = "Looking for Azure AD Application: {0}" #
+	'New-AzureTenantItems.Message17'     = "Azure AD Application: {0} not found! Creating Azure AD Application" #
+	'New-AzureTenantItems.Message18'     = "Azure AD Application: {0} created!" #
+	'New-AzureTenantItems.Message19'     = "Azure AD Application: {0} already exists in the tenant" #
+	'New-AzureTenantItems.Message20'     = "New-AzureADApplication Failure" #
+	'New-AzureTenantItems.Message21'     = "AIP Azure tenant item creation process completed." #
 }
