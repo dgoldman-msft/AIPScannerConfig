@@ -78,7 +78,7 @@
 	# ElevatedPermissions
 	'Assert-ElevatedPermission.Message1' = "Checking if interactive PowerShell session is running with elevated permissions" #
 	'Assert-ElevatedPermission.Message2' = "Insufficient permissions to run this script. Open the PowerShell console as an administrator and run this script again. Exiting" #
-	'Assert-ElevatedPermission.Message3' = "Local PowerShell session is running as administrator. Continuning configuration" #
+	'Assert-ElevatedPermission.Message3' = "Local PowerShell session is running as administrator. Continuing configuration" #
 
 	# IESEC
 	'Assert-IEEnhancedSC.Message1'       = "Starting IE Enhanced Security Configuration check" #
@@ -103,17 +103,17 @@
 	'New-AIPScannerInstall.Message11'    = "Download of AzInfoProtection_UL.exe completed." #
 
 	# AzureTenantItems
-	'New-AzureTenantItems.Message1'      = "Attemping to connect to Azure tenant" #
+	'New-AzureTenantItems.Message1'      = "Attempting to connect to Azure tenant" #
 	'New-AzureTenantItems.Message2'      = "Unable to connect to Azure tenant" #
 	'New-AzureTenantItems.Message3'      = "Connect-AzureAD Failure" #
 	'New-AzureTenantItems.Message4'      = "Checking for cloud service account" #
-	'New-AzureTenantItems.Message5'      = "Attemping to generate password for cloud service account" #
+	'New-AzureTenantItems.Message5'      = "Attempting to generate password for cloud service account" #
 	'New-AzureTenantItems.Message6'      = "Cloud service account already exists" #
 	'New-AzureTenantItems.Message7'      = "Get-AzureADUser Failure" #
-	'New-AzureTenantItems.Message8'      = "Attemping to create Azure Appllication in tenant: AIPOnBehalfOf" #
-	'New-AzureTenantItems.Message9'      = "Azure Appllication AIPOnBehalfOf already exists" #
+	'New-AzureTenantItems.Message8'      = "Attempting to create Azure Application in tenant: AIPOnBehalfOf" #
+	'New-AzureTenantItems.Message9'      = "Azure Application AIPOnBehalfOf already exists" #
 	'New-AzureTenantItems.Message10'     = "Check to see if Azure Service Principal {0} already exists" #
-	'New-AzureTenantItems.Message11'     = "Service Principal not found! Attemping to create Azure Service Principal in tenant" #
+	'New-AzureTenantItems.Message11'     = "Service Principal not found! Attempting to create Azure Service Principal in tenant" #
 	'New-AzureTenantItems.Message12' 	 = "Attempting to create a password credential for Azure Application"
 	'New-AzureTenantItems.Message13'     = "New-AzureADApplicationPasswordCredential Failure" #
 	'New-AzureTenantItems.Message14'     = "AIP Azure AD Service Principal exists in the tenant" #
