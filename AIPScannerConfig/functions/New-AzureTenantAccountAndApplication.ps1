@@ -40,17 +40,19 @@
     begin {
         Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message1'
         $aipClient = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName)
+        $adminAccount = (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount)
     }
 
     process {
         try {
-            if ($tenantInfo = Connect-AzureAD -AccountId (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount) -ErrorAction Stop) {
-                $domain = $tenantInfo.TenantDomain
+            if ( $adminAccount -eq "admin@yourtenant.onmicrosoft.com" ) {
+                $tenantInfo = Connect-AzureAD -ErrorAction Stop
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message2'
-                return $false
+                $tenantInfo = Connect-AzureAD -AccountId $adminAccount -ErrorAction Stop
             }
+            $domain = $tenantInfo.TenantDomain
+            Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message2' -StringValues $domain
         }
         catch {
             Stop-PSFFunction -String 'New-AzureTenantItems.Message3' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
