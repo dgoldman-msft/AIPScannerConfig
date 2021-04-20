@@ -98,16 +98,17 @@
 	'New-AIPScannerInstall.Message6'     = "Importing: {0} was successful" #
 	'New-AIPScannerInstall.Message7'     = "Importing: {0} failed" #
 	'New-AIPScannerInstall.Message8'     = "Installing the AIP Scanner" #
-	'New-AIPScannerInstall.Message9'     = "Setting up the AIP Scanner" #
-	'New-AIPScannerInstall.Message10'    = "AIP Scanner installation successful" #
-	'New-AIPScannerInstall.Message11'    = "AIP Scanner installation failed!" #
-	'New-AIPScannerInstall.Message12'    = "Set-AIPScanner failure!" #
-	'New-AIPScannerInstall.Message13'    = "Checking service state of the AIPScanner service" #
-	'New-AIPScannerInstall.Message14'    = "Service state is stopped! Starting service" #
-	'New-AIPScannerInstall.Message15'    = "Service state is started!" #
-	'New-AIPScannerInstall.Message16'    = "Start-Service / Get-Service failure!" #
-	'New-AIPScannerInstall.Message17'    = "Get-CimInstance failure!" #
-	'New-AIPScannerInstall.Message18'	 = "Download of AzInfoProtection_UL.exe completed." #
+	'New-AIPScannerInstall.Message9'     = "Install-AIPScanner failure!" #
+	'New-AIPScannerInstall.Message10'    = "Setting up the AIP Scanner" #
+	'New-AIPScannerInstall.Message11'    = "AIP Scanner installation successful" #
+	'New-AIPScannerInstall.Message12'    = "AIP Scanner installation failed!" #
+	'New-AIPScannerInstall.Message13'    = "Set-AIPScanner failure!" #
+	'New-AIPScannerInstall.Message14'    = "Checking service state of the AIPScanner service" #
+	'New-AIPScannerInstall.Message15'    = "Service state is stopped! Starting service" #
+	'New-AIPScannerInstall.Message16'    = "Service state is started!" #
+	'New-AIPScannerInstall.Message17'    = "Start-Service / Get-Service failure!" #
+	'New-AIPScannerInstall.Message18'    = "Get-CimInstance failure!" #
+	'New-AIPScannerInstall.Message19'    = "Installation of AzInfoProtection_UL.exe completed." #
 
 	# AzureTenantItems
 	'New-AzureTenantItems.Message1'      = "Attempting to connect to Azure tenant" #
