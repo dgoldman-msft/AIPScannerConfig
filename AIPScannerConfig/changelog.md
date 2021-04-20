@@ -204,8 +204,9 @@
 - Upd: Optimization and re-write of New-AIPFolderShare
 - Upd: New strings for New-AIPFolderShare in string.ps1
 
-## 1.1.82 (2021-04-20)
+## 1.1.83 (2021-04-20)
 
+- Fix: Testing localization strings for New-AIPFileShare.Message17
 - New: New-Password - Added begin \ end block with new strings
 - Chg: New-AIPFileShare - Write-PSFMessage -Level Verbose to -Level Host in begin \ end blocks
 - Chg: Add-AIPRerpository - Write-PSFMessage -Level Verbose to -Level Host begin \ end blocks

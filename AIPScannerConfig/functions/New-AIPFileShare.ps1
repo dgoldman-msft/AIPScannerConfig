@@ -113,7 +113,7 @@
 
         }
         catch {
-            Stop-PSFFunction -String 'New-AIPFileShare.Message18' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AIPFileShare.Message17' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }
 
