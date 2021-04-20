@@ -112,7 +112,7 @@
 
 	# AzureTenantItems
 	'New-AzureTenantItems.Message1'      = "Attempting to connect to Azure tenant" #
-	'New-AzureTenantItems.Message2'      = "Unable to connect to Azure tenant" #
+	'New-AzureTenantItems.Message2'      = "Connected to Azure tenant: {0}" #
 	'New-AzureTenantItems.Message3'      = "Connect-AzureAD Failure" #
 	'New-AzureTenantItems.Message4'      = "Checking for cloud service account" #
 	'New-AzureTenantItems.Message5'      = "Attempting to generate password for cloud service account" #

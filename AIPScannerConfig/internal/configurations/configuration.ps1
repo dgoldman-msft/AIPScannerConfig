@@ -26,4 +26,4 @@ Set-PSFConfig -Module 'AIPScannerConfig' -Name 'RootFolder' -Value "c:\" -Initia
 
 # Azure Information Protection Module Manifest
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ScannerModule' -Value "C:\Program Files (x86)\Microsoft Azure Information Protection\Powershell\AzureInformationProtection" -Initialize -Validation 'string' -Description "AIP protection module manifest file."
-Set-PSFConfig -Module 'AIPScannerConfig' -Name 'CloudAdminAccount' -Value "admin@M365x119893.onmicrosoft.com" -Initialize -Validation 'string' -Description "Azure AD admin account"
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'CloudAdminAccount' -Value "admin@yourtenant.onmicrosoft.com" -Initialize -Validation 'string' -Description "Azure AD admin account"
