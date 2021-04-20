@@ -204,11 +204,13 @@
 - Upd: Optimization and re-write of New-AIPFolderShare
 - Upd: New strings for New-AIPFolderShare in string.ps1
 
-## 1.1.84 (2021-04-20)
+## 1.1.89 (2021-04-20)
 
 - Fix: Testing localization strings for New-AIPFileShare.Message17
 - Fix: Fixed spelling errors in strings.psd1
 - New: New-Password - Added begin \ end block with new strings
+- New: Adding check for AIPScanner service start \ stop
+- New: Created 7 new AIPScannerInstall strings in strings.psd1
 - Chg: New-AIPFileShare - Write-PSFMessage -Level Verbose to -Level Host in begin \ end blocks
 - Chg: Add-AIPRerpository - Write-PSFMessage -Level Verbose to -Level Host begin \ end blocks
 - Chg: New-AIPFolderShare - removed return so we don't bailout if local folder already exists
@@ -220,3 +222,6 @@
 - Chg: Rearranged New-AIPFileShare to run before New-AzureTenantAccountAndApplication
 - Chg: Optimized New-AzureTenantAccountAndApplication.ps1
 - Upd: Updated module version
+- Fix: PSScriptAnalyzer error - New-AIPScannerInstall renamed 'New-AIPScannerInstall.Message12 to .Message18'
+- New: Added new try \ catch for Install-AIPScanner
+- New: Added new sting for Install-AIPScanner failure in strings.psd1

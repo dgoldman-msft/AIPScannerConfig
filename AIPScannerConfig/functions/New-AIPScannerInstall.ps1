@@ -72,24 +72,55 @@
                     Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message7' -StringValues $aipScannerModule.Name
                     throw "Module import failed!"
                 }
+            }
 
+            try {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message8'
                 Install-AIPScanner -SqlServerInstance "$env:ComputerName\SQLExpress" -ErrorAction Stop
 
                 if ($Cluster -eq "None") {
                     $Cluster = Read-Host "Please enter your Azure AIP Cluster Name"
                 }
-
-                Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message9'
-                Set-AIPScanner -SqlServerInstance "$env:COMPUTERNAME\SQLEXPRESS" -Cluster $Cluster -ErrorAction Stop
             }
+            catch {
+                Stop-PSFFunction -String 'New-AIPScannerInstall.Message9' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            }
+
+            try {
+                Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message10'
+                if (Set-AIPScanner -SqlServerInstance "$env:COMPUTERNAME\SQLEXPRESS" -Cluster $Cluster -ErrorAction Stop) {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message11'
+                }
+                else {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message12'
+                }
+            }
+            catch {
+                Stop-PSFFunction -String 'New-AIPScannerInstall.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            }
+
+            try {
+                Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message14'
+                $service = Get-Service | Where-Object Name -eq 'AIPScanner'
+                if($service.Status -eq 'Stopped'){
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message15'
+                    Start-Service -Name AIPScanner -ErrorAction Stop
+                }
+                else {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message16'
+                }
+            }
+            catch {
+                Stop-PSFFunction -String 'New-AIPScannerInstall.Message17' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            }
+
         }
         catch {
-            Stop-PSFFunction -String 'New-AIPScannerInstall.Message10' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AIPScannerInstall.Message18' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }
 
     end {
-        Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message11'
+        Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message19'
     }
 }
