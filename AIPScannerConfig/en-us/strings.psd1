@@ -107,7 +107,7 @@
 	'New-AIPScannerInstall.Message15'    = "Service state is started!" #
 	'New-AIPScannerInstall.Message16'    = "Start-Service / Get-Service failure!" #
 	'New-AIPScannerInstall.Message17'    = "Get-CimInstance failure!" #
-	'New-AIPScannerInstall.Message18'    = "Download of AzInfoProtection_UL.exe completed." #
+	'New-AIPScannerInstall.Message18'	 = "Download of AzInfoProtection_UL.exe completed." #
 
 	# AzureTenantItems
 	'New-AzureTenantItems.Message1'      = "Attempting to connect to Azure tenant" #
