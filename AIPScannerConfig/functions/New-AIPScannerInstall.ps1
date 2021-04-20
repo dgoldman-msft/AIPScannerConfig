@@ -116,6 +116,6 @@
     }
 
     end {
-        Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message12'
+        Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message18'
     }
 }

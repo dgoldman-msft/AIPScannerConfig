@@ -204,7 +204,7 @@
 - Upd: Optimization and re-write of New-AIPFolderShare
 - Upd: New strings for New-AIPFolderShare in string.ps1
 
-## 1.1.84 (2021-04-20)
+## 1.1.87 (2021-04-20)
 
 - Fix: Testing localization strings for New-AIPFileShare.Message17
 - Fix: Fixed spelling errors in strings.psd1
@@ -222,3 +222,4 @@
 - Chg: Rearranged New-AIPFileShare to run before New-AzureTenantAccountAndApplication
 - Chg: Optimized New-AzureTenantAccountAndApplication.ps1
 - Upd: Updated module version
+- Fix: PSScriptAnalyzer error - New-AIPScannerInstall renamed 'New-AIPScannerInstall.Message12 to .Message18'
