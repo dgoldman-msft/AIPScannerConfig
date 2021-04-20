@@ -177,7 +177,7 @@
 - Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
 - Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository
 
-## 1.1.63 (2021-04-19)
+## 1.1.68 (2021-04-19)
 
 - New: Borrowed New-Password from ADMF with Fred Weinmann's permissions
 - New: Implemented Invoke-PSFProtectedCommand in New-AIPSystemAccount
@@ -190,9 +190,14 @@
 - Fix: Asset-IEEhancedSC - Fixed Invoke-PSFProtectedCommand -Action Get-ItemProperty
 - Fix: Asset-IEEhancedSC - Added $regKey value for if statements
 - Fix: strings.ps1 - Fixed Asset-IEEhancedSC.Message2 and Asset-IEEhancedSC.Message4 (removed formatted value)
+- Fix: Removed Invoke-PSFProtectedCommand from Assert-IEEnhancedSC to fix formatting for Regkey enabled / disabled
+- Fix: Added new Assert-IEEnhancedSC strings in strings.ps1
+- Fix: Changed SilentlyContinue to Stop for New-LocalUser
 - Upd: Updated module version
 - Upd: Fixed paramter and attribute definitions to make them eaiser to follow for debugging purposes in all files
 - Upd: Adde SQlserver and AzureADPreview to the required modules list in the manifest
 - Upd: Added individual try catches in New-AzureTenantAccountAndApplication for each operation
 - Upd: Saved New-Password with UTF8 encoding with Byte Order Mark
 - Upd: Updated readme.me with new IE Enhanced Security Configuration check
+- Upd: New New-AIPSystemAccount.Message strings added to strings.ps1
+- Upd: Updated code with try\catches in New New-AIPSystemAccount to pinpoint exact failures
