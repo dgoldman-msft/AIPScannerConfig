@@ -13,19 +13,23 @@
 
 	# AIPFileshare
 	'New-AIPFileShare.Message1'          = "Creating default AIP scanner folder and file share" #
-	'New-AIPFileShare.Message2'          = "Checking to see if folder {0} exists" #
-	'New-AIPFileShare.Message3'          = "Folder {0} created" #
-	'New-AIPFileShare.Message4'          = "Checking if {0} is already shared" #
-	'New-AIPFileShare.Message5'          = "Applying folder permissions to {0}" #
-	'New-AIPFileShare.Message6'          = "Permissions already exists on {0}" #
-	'New-AIPFileShare.Message7'          = "{0} already has the full permissions to account {1}" #
-	'New-AIPFileShare.Message8'          = "Permissions added to folder {0}" #
-	'New-AIPFileShare.Message9'          = "Share {0} not created" #
-	'New-AIPFileShare.Message10'         = "Shared folder: {0} already exists" #
-	'New-AIPFileShare.Message11'         = "Folder {0} not created" #
-	'New-AIPFileShare.Message12'         = "Folder: {0} already exists" #
-	'New-AIPFileShare.Message13'         = "Failure" #
-	'New-AIPFileShare.Message14'         = "AIP scanner file share creation completed" #
+	'New-AIPFileShare.Message2'          = "Checking to see if folder: {0} exists" #
+	'New-AIPFileShare.Message3'          = "Path failure!" #
+	'New-AIPFileShare.Message4'          = "Folder: {0} already exists!" #
+	'New-AIPFileShare.Message5'          = "Folder: {0} created" #
+	'New-AIPFileShare.Message6'          = "Folder failure: {0} not created" #
+	'New-AIPFileShare.Message7'          = "Checking to see if share folder: {0} already exists" #
+	'New-AIPFileShare.Message8'         = "Shared folder: {0} already exists" #
+	'New-AIPFileShare.Message9'          = "Folder Share: {0} created" #
+	'New-AIPFileShare.Message10'          = "Checking folder permissions on folder: {0}" #
+	'New-AIPFileShare.Message11'          = "Permissions already exists on folder: {0}" #
+	'New-AIPFileShare.Message12'         = "Shared Folder: {0} not created" #
+	'New-AIPFileShare.Message13'          = "SMB Share failure!" #
+	'New-AIPFileShare.Message14'          = "Attempting to add permissions to folder: {0}" #
+	'New-AIPFileShare.Message15'          = "Permissions added successful to folder: {0}" #
+	'New-AIPFileShare.Message16'          = "Adding permissions to folder: {0} failed!" #
+	'New-AIPFileShare.Message17'          = "Set-Acl failure!" #
+	'New-AIPFileShare.Message18'         = "AIP scanner file share creation completed" #
 
 	# AIPSystemAccount
 	'New-AIPSystemAccount.Message1'      = "Creating default AIP scanner system account" #

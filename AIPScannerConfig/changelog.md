@@ -177,7 +177,7 @@
 - Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
 - Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository
 
-## 1.1.68 (2021-04-19)
+## 1.1.70 (2021-04-19)
 
 - New: Borrowed New-Password from ADMF with Fred Weinmann's permissions
 - New: Implemented Invoke-PSFProtectedCommand in New-AIPSystemAccount
@@ -201,3 +201,5 @@
 - Upd: Updated readme.me with new IE Enhanced Security Configuration check
 - Upd: New New-AIPSystemAccount.Message strings added to strings.ps1
 - Upd: Updated code with try\catches in New New-AIPSystemAccount to pinpoint exact failures
+- Upd: Optimization and re-write of New-AIPFolderShare
+- Upd: New strings for New-AIPFolderShare in string.ps1
