@@ -61,7 +61,7 @@
 	'Start-PrerequisiteCheck.Message7'   = "Windows Feature NFS-Client installed" #
 	'Start-PrerequisiteCheck.Message8'   = "Checking server memory" #
 	'Start-PrerequisiteCheck.Message9'   = "You need a minimum of 4gb of ram to run this. Exiting" #
-	'Start-PrerequisiteCheck.Message10'  = "Memmory found: {0} GB" #
+	'Start-PrerequisiteCheck.Message10'  = "Memory found: {0} GB" #
 	'Start-PrerequisiteCheck.Message11'  = "Checking network connection" #
 	'Start-PrerequisiteCheck.Message12'  = "Network connection: Good" #
 	'Start-PrerequisiteCheck.Message13'  = "No network connection found. Exiting" #
@@ -91,16 +91,23 @@
 
 	# AIPScannerInstall
 	'New-AIPScannerInstall.Message1'     = "Checking for install of AzInfoProtection_UL.exe" #
-	'New-AIPScannerInstall.Message2'     = "Attemping to download AzInfoProtection_UL.exe" #
+	'New-AIPScannerInstall.Message2'     = "Attempting to download AzInfoProtection_UL.exe" #
 	'New-AIPScannerInstall.Message3'     = "Download of AzInfoProtection_UL.exe completed." #
 	'New-AIPScannerInstall.Message4'     = "Installing AzInfoProtection_UL.exe" #
 	'New-AIPScannerInstall.Message5'     = "Software found installed. Locating AzInformationProtection PowerShell Module for import" #
-	'New-AIPScannerInstall.Message6'     = "Importing {0} was successful" #
-	'New-AIPScannerInstall.Message7'     = "Importing {0} failed" #
+	'New-AIPScannerInstall.Message6'     = "Importing: {0} was successful" #
+	'New-AIPScannerInstall.Message7'     = "Importing: {0} failed" #
 	'New-AIPScannerInstall.Message8'     = "Installing the AIP Scanner" #
 	'New-AIPScannerInstall.Message9'     = "Setting up the AIP Scanner" #
-	'New-AIPScannerInstall.Message10'    = "Failure" #
-	'New-AIPScannerInstall.Message11'    = "Download of AzInfoProtection_UL.exe completed." #
+	'New-AIPScannerInstall.Message10'    = "AIP Scanner installation successful" #
+	'New-AIPScannerInstall.Message11'    = "AIP Scanner installation failed!" #
+	'New-AIPScannerInstall.Message12'    = "Set-AIPScanner failure!" #
+	'New-AIPScannerInstall.Message13'    = "Checking service state of the AIPScanner service" #
+	'New-AIPScannerInstall.Message14'    = "Service state is stopped! Starting service" #
+	'New-AIPScannerInstall.Message15'    = "Service state is started!" #
+	'New-AIPScannerInstall.Message16'    = "Start-Service / Get-Service failure!" #
+	'New-AIPScannerInstall.Message17'    = "Get-CimInstance failure!" #
+	'New-AIPScannerInstall.Message18'    = "Download of AzInfoProtection_UL.exe completed." #
 
 	# AzureTenantItems
 	'New-AzureTenantItems.Message1'      = "Attempting to connect to Azure tenant" #
@@ -114,7 +121,7 @@
 	'New-AzureTenantItems.Message9'      = "Azure Application AIPOnBehalfOf already exists" #
 	'New-AzureTenantItems.Message10'     = "Check to see if Azure Service Principal {0} already exists" #
 	'New-AzureTenantItems.Message11'     = "Service Principal not found! Attempting to create Azure Service Principal in tenant" #
-	'New-AzureTenantItems.Message12' 	 = "Attempting to create a password credential for Azure Application"
+	'New-AzureTenantItems.Message12'     = "Attempting to create a password credential for Azure Application"
 	'New-AzureTenantItems.Message13'     = "New-AzureADApplicationPasswordCredential Failure" #
 	'New-AzureTenantItems.Message14'     = "AIP Azure AD Service Principal exists in the tenant" #
 	'New-AzureTenantItems.Message15'     = "AzureADServicePrincipal Failure" #

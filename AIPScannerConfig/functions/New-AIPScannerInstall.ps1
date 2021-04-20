@@ -79,17 +79,43 @@
                 if ($Cluster -eq "None") {
                     $Cluster = Read-Host "Please enter your Azure AIP Cluster Name"
                 }
-
-                Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message9'
-                Set-AIPScanner -SqlServerInstance "$env:COMPUTERNAME\SQLEXPRESS" -Cluster $Cluster -ErrorAction Stop
             }
+
+            try {
+                Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message9'
+                if (Set-AIPScanner -SqlServerInstance "$env:COMPUTERNAME\SQLEXPRESS" -Cluster $Cluster -ErrorAction Stop) {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message10'
+                }
+                else {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message11'
+                }
+            }
+            catch {
+                Stop-PSFFunction -String 'New-AIPScannerInstall.Message12' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            }
+
+            try {
+                Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message13'
+                $service = Get-Service | Where-Object Name -eq 'AIPScanner'
+                if($service.Status -eq 'Stopped'){
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message14'
+                    Start-Service -Name AIPScanner -ErrorAction Stop
+                }
+                else {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message15'
+                }
+            }
+            catch {
+                Stop-PSFFunction -String 'New-AIPScannerInstall.Message16' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            }
+
         }
         catch {
-            Stop-PSFFunction -String 'New-AIPScannerInstall.Message10' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AIPScannerInstall.Message17' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }
 
     end {
-        Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message11'
+        Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message12'
     }
 }

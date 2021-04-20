@@ -209,6 +209,8 @@
 - Fix: Testing localization strings for New-AIPFileShare.Message17
 - Fix: Fixed spelling errors in strings.psd1
 - New: New-Password - Added begin \ end block with new strings
+- New: Adding check for AIPScanner service start \ stop
+- New: Created 7 new AIPScannerInstall strings in strings.psd1
 - Chg: New-AIPFileShare - Write-PSFMessage -Level Verbose to -Level Host in begin \ end blocks
 - Chg: Add-AIPRerpository - Write-PSFMessage -Level Verbose to -Level Host begin \ end blocks
 - Chg: New-AIPFolderShare - removed return so we don't bailout if local folder already exists
