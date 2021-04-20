@@ -131,5 +131,5 @@
 	'New-AzureTenantItems.Message18'     = "Azure AD Application: {0} created!" #
 	'New-AzureTenantItems.Message19'     = "Azure AD Application: {0} already exists in the tenant" #
 	'New-AzureTenantItems.Message20'     = "New-AzureADApplication Failure" #
-	'New-AzureTenantItems.Message21'     = "AIP Azure tenant item creation process completed." #
+	'New-AzureTenantItems.Message21'     = "AIP Azure tenant item creation process completed. At this point you will need to manuall start your AIP scans. For more information see this article: 'https://docs.microsoft.com/en-us/powershell/module/azureinformationprotection/set-aipscannerconfiguration?view=azureipps' " #
 }
