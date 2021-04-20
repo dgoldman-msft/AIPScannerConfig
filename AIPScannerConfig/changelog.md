@@ -166,7 +166,7 @@
 - Fix: Added @{ ModuleName='PSFramework'; ModuleVersion='1.1.59' } to the required modules in the manifest
 - Fix: It Exports all functions in the public folder - fixed @('Add-AIPRerpository', 'AzureTenantAccountAndApplication').
 - Fix: Added example note in New-AIPSystemAccount
-- Fix: Added $PSCmdlet.ShouldProcess($PathCheck to New-AIPFolderShare
+- Fix: Added $PSCmdlet.ShouldProcess($PathCheck to New-AIPFolderShare)
 - Fix: Removed CreateOnFileShare from New-AIPRepository
 - Fix: Removed Confirm and WhatIf parameters from New-AIPFileShare
 - Fix: Changed Add-AIPRerpository.ps1 to Add-AIPRepository.ps1
@@ -177,9 +177,46 @@
 - Fix: Added parameters for FileShare and VerifyRepository in New-AIPRepository
 - Fix: Re-added PSUseShouldProcessForStateChangingFunctions in New-AIPRepository
 
-## 1.1.50 (2021-04-19)
+## 1.1.70 (2021-04-19)
 
+- New: Borrowed New-Password from ADMF with Fred Weinmann's permissions
+- New: Implemented Invoke-PSFProtectedCommand in New-AIPSystemAccount
+- New: New function Assert-IEEnhancedSC for checking Enhanced Security Configuration
+- New: Added 6 new strings for Assert-IEEnhancedSC.Message1 in strings.psd1
 - Fix: Removed -PassThru from moduleimport.ps1
 - Fix: Removed Throw statements from moduleimport.ps1
 - Fix: Removes scopes from install-module and import-module
+- Fix: Fix secure password code to pass PSScriptAnalyzer tests
+- Fix: Asset-IEEhancedSC - Fixed Invoke-PSFProtectedCommand -Action Get-ItemProperty
+- Fix: Asset-IEEhancedSC - Added $regKey value for if statements
+- Fix: strings.psd1 - Fixed Asset-IEEhancedSC.Message2 and Asset-IEEhancedSC.Message4 (removed formatted value)
+- Fix: Removed Invoke-PSFProtectedCommand from Assert-IEEnhancedSC to fix formatting for Regkey enabled / disabled
+- Fix: Added new Assert-IEEnhancedSC strings in strings.ps1
+- Fix: Changed SilentlyContinue to Stop for New-LocalUser
+- Upd: Updated module version
+- Upd: Fixed paramter and attribute definitions to make them eaiser to follow for debugging purposes in all files
+- Upd: Adde SQlserver and AzureADPreview to the required modules list in the manifest
+- Upd: Added individual try catches in New-AzureTenantAccountAndApplication for each operation
+- Upd: Saved New-Password with UTF8 encoding with Byte Order Mark
+- Upd: Updated readme.me with new IE Enhanced Security Configuration check
+- Upd: New New-AIPSystemAccount.Message strings added to strings.ps1
+- Upd: Updated code with try\catches in New New-AIPSystemAccount to pinpoint exact failures
+- Upd: Optimization and re-write of New-AIPFolderShare
+- Upd: New strings for New-AIPFolderShare in string.ps1
+
+## 1.1.84 (2021-04-20)
+
+- Fix: Testing localization strings for New-AIPFileShare.Message17
+- Fix: Fixed spelling errors in strings.psd1
+- New: New-Password - Added begin \ end block with new strings
+- Chg: New-AIPFileShare - Write-PSFMessage -Level Verbose to -Level Host in begin \ end blocks
+- Chg: Add-AIPRerpository - Write-PSFMessage -Level Verbose to -Level Host begin \ end blocks
+- Chg: New-AIPFolderShare - removed return so we don't bailout if local folder already exists
+- Chg: Fixed typo in 'New-AIPFileShare.Message7' - share fixed to shared
+- Chg: Changed 'New-AzureTenantItems.Message3' from = "Failure" to "Connect-AzureAD Failure"
+- Chg: Changed 'New-AzureTenantItems.Message13' from = "Failure" to "Get-AzureADUser Failure"
+- Chg: Changed 'New-AzureTenantItems.Message13' to 'New-AzureTenantItems.Message7'
+- Chg: Created new string structure for New-AzureTenantItems
+- Chg: Rearranged New-AIPFileShare to run before New-AzureTenantAccountAndApplication
+- Chg: Optimized New-AzureTenantAccountAndApplication.ps1
 - Upd: Updated module version

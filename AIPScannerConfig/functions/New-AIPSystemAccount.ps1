@@ -46,66 +46,64 @@
     }
 
     process {
+
         try {
             Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message2'
-            $Password = [SecureString]::new()
-            -join ( [Char[]]'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' | Get-Random -Count 16 | ForEach-Object { $Password.AppendChar($_)}  )
-            $configCredential = New-Object PSCredential ($AccountName, $Password)
-            $User = New-LocalUser $AccountName -Password $configCredential.Password -FullName "AIP Scanner Account"`
-                -Description "System account for the AIP Scanner." -PasswordNeverExpires -AccountNeverExpires -ErrorAction SilentlyContinue
-            if ($User) {
+            if (New-LocalUser $AccountName -Password (New-Password -AsSecureString) -FullName "AIP Scanner Account"`
+                    -Description "System account for the AIP Scanner." -PasswordNeverExpires -AccountNeverExpires -ErrorAction Stop ) {
                 Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message3' -StringValues $AccountName
             }
-            else {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message4'
-            }
+        }
+        catch {
+            Stop-PSFFunction -String 'New-AIPSystemAccount.Message4' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+        }
 
+        try {
             Add-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction Stop
-            if (Get-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction SilentlyContinue) {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message5'
-            }
-            else {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message6'
-            }
+            Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message5'
+        }
+        catch {
+            Stop-PSFFunction -String 'New-AIPSystemAccount.Message6' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+        }
 
-            $NTPrincipal = New-Object System.Security.Principal.NTAccount "$AccountName"
-            $Sid = $NTPrincipal.Translate([System.Security.Principal.SecurityIdentifier])
-            $SidString = $Sid.Value.ToString()
+        try {
+            Get-LocalGroupMember -Group “Administrators” -Member $AccountName -ErrorAction Stop
+            Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message7' -StringValues $AccountName
+        }
+        catch {
+            Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message8' -StringValues $AccountName
+        }
 
-            if ( [string]::IsNullOrEmpty($SidString) ) {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message7' -StringValues $AccountName
-                return $false
-            }
+        try {
+            $ntPrincipal = New-Object System.Security.Principal.NTAccount "$AccountName"
+            $sid = $ntPrincipal.Translate([System.Security.Principal.SecurityIdentifier])
+            $sidString = $sid.Value.ToString()
+            Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message9' -StringValues $AccountName
 
             # Query server to check User rights and export them to a temp file
-            Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message8'
-            $CmdArguments = "/export /cfg $env:TEMP\UserRights.txt"
-            Start-Process secedit -ArgumentList $CmdArguments
+            Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message10' -StringValues "$env:TEMP\UserRights.txt"
+            $cmdArguments = "/export /cfg $env:TEMP\UserRights.txt"
+            Start-Process secedit -ArgumentList $cmdArguments -ErrorAction Stop
 
             # Get the policy
-            $Policy = Get-Content "$env:TEMP\UserRights.txt"
+            Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message11' -StringValues "$env:TEMP\UserRights.txt"
+            $policy = Get-Content "$env:TEMP\UserRights.txt"
 
             # Remove all entries until we find SeInteractiveLogonRight
-            foreach ($ScRight in $Policy) {
-                if ( $ScRight -like "SeInteractiveLogonRight*") {
-                    $x = $ScRight.split("=", [System.StringSplitOptions]::RemoveEmptyEntries)
+            foreach ($scRight in $policy) {
+                if ( $scRight -like "SeInteractiveLogonRight*") {
+                    $x = $scRight.split("=", [System.StringSplitOptions]::RemoveEmptyEntries)
                     $currentSetting = $x[1].Trim()
                 }
             }
 
             # Get the SID for the AIPScanner account
-            if ( $currentSetting -notlike "*$($SidString)*" ) {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message9' -StringValues $AccountName
+            if ( $currentSetting -notlike "*$($sidString)*" ) {
+                if ( [string]::IsNullOrEmpty($currentSetting) ) { $currentSetting = "*$($sidString)" }
+                else { $currentSetting = "*$($sidString),$($currentSetting)" }
 
-                if ( [string]::IsNullOrEmpty($currentSetting) ) {
-                    $currentSetting = "*$($SidString)"
-                }
-                else {
-                    $currentSetting = "*$($SidString),$($currentSetting)"
-                }
-
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message10' -StringValues $currentSetting
-                $NewPolicyFile = @"
+                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message12' -StringValues $currentSetting
+                $newPolicyFile = @"
 [Unicode]
 Unicode=yes
 [Version]
@@ -114,25 +112,26 @@ Revision=1
 [Privilege Rights]
 SeInteractiveLogonRight = $($currentSetting)
 "@
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message11'
-                $NewPolicyFile | Set-Content -Path "$ENV:TEMP\NewPolicyFile.inf" -Encoding Unicode -Force
+                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message13'
+                $newPolicyFile | Set-Content -Path "$ENV:TEMP\NewPolicyFile.inf" -Encoding Unicode -Force
                 try {
                     $CmdArguments = "/configure /db secedit.sdb /cfg ""$ENV:TEMP\NewPolicyFile.txt"" /areas USER_RIGHTS"
-                    Start-Process secedit -ArgumentList $CmdArguments
+                    Start-Process secedit -ArgumentList $cmdArguments -ErrorAction Stop
+                    Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message14' -StringValues $AccountName
                 }
                 catch {
-                    Stop-PSFFunction -String 'New-AIPSystemAccount.Message12' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+                    Stop-PSFFunction -String 'New-AIPSystemAccount.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                 }
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message13' -StringValues $AccountName
+                Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message16' -StringValues $AccountName
             }
         }
         catch {
-            Stop-PSFFunction -String 'New-AIPSystemAccount.Message14' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-AIPSystemAccount.Message17' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }
     end {
-        Write-PSFMessage -Level Host -String 'New-AIPSystemAccount.Message15'
+        Write-PSFMessage -Level Host -String 'New-AIPSystemAccount.Message18'
     }
 }

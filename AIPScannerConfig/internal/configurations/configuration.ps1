@@ -17,6 +17,7 @@ Set-PSFConfig -Module 'AIPScannerConfig' -Name 'Import.IndividualFiles' -Value $
 # AIP Scanner items
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'AIPShare' -Value "AIPScannerShare" -Initialize -Validation 'string' -Description "AIP Scanner share name."
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ScannerAccountName' -Value "AIPScanner" -Initialize -Validation 'string' -Description "AIP Scanner account name."
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ScannerClientAccountName' -Value "AIPClient" -Initialize -Validation 'string' -Description "AIP Scanner client account name."
 
 # AIP Folder locations
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ComputerName' -Value "$env:COMPUTERNAME" -Initialize -Validation 'string' -Description "Local system name."

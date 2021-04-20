@@ -45,11 +45,11 @@
 
     process {
         try {
-            $InstalledProduct =  Get-CimInstance win32_product | Where-Object Name -eq 'Microsoft Azure Information Protection'
+            $installedProduct =  Get-CimInstance win32_product | Where-Object Name -eq 'Microsoft Azure Information Protection'
 
-            if (-NOT ($InstalledProduct)) {
+            if (-NOT ($installedProduct)) {
                 # Download the scanner
-                Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message2'
+                Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message2'
                 $url = "https://download.microsoft.com/download/4/9/1/491251F7-46BA-46EC-B2B5-099155DD3C27/AzInfoProtection_UL_2.11.57_PublicPreview.exe"
                 $outpath = "$env:TEMP\AzInfoProtection_UL_2.11.57_PublicPreview.exe"
                 Invoke-WebRequest -Uri $url -OutFile $outpath
@@ -62,14 +62,14 @@
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message5'
-                $AIPScannerModule = (Get-PSFConfigValue -FullName AIPScannerConfig.ScannerModule)
-                $Imported = Import-Module -Name $AIPScannerModule -PassThru -ErrorAction Stop
+                $aipScannerModule = (Get-PSFConfigValue -FullName AIPScannerConfig.ScannerModule)
+                $imported = Import-Module -Name $aipScannerModule -PassThru -ErrorAction Stop
 
-                if ($Imported) {
-                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message6' -StringValues $AIPScannerModule.Name
+                if ($imported) {
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message6' -StringValues $aipScannerModule.Name
                 }
                 else {
-                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message7' -StringValues $AIPScannerModule.Name
+                    Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message7' -StringValues $aipScannerModule.Name
                     throw "Module import failed!"
                 }
 
