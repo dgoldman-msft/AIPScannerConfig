@@ -27,30 +27,23 @@
     }
 
     process {
-        Invoke-PSFProtectedCommand -Action Get-ItemProperty -Target $env:COMPUTERNAME -ScriptBlock {
-            if ( $regKey = Get-ItemProperty -Path $adminKey -Name "IsInstalled" -ErrorAction SilentlyContinue ) {
-                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message2' -StringValues $regKey.IsInstalled
-            }
-            else {
-                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message3'
-            }
+        try {
+            $adminRegKey = Get-ItemProperty -Path $adminKey -Name "IsInstalled" -ErrorAction SilentlyContinue
+
+            if ($adminRegKey.IsInstalled) { Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message2' -StringValues $adminRegKey.IsInstalled }
+            else { Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message3' }
+
+            $userRegKey = Get-ItemProperty -Path $userKey -Name "IsInstalled" -ErrorAction SilentlyContinue
+
+            if ($userRegKey.IsInstalled ) { Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message4' -StringValues $userRegKey.IsInstalled }
+            else { Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message5' }
         }
-
-        if (Test-PSFFunctionInterrupt) { return }
-
-        Invoke-PSFProtectedCommand -Action Get-ItemProperty -Target $env:COMPUTERNAME -ScriptBlock {
-            if ( $regKey = Get-ItemProperty -Path $userKey -Name "IsInstalled" -ErrorAction SilentlyContinue ) {
-                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message4' -StringValues $regKey.IsInstalled
-            }
-            else {
-                Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message5'
-            }
+        catch {
+            Stop-PSFFunction -String 'Assert-IEEnhancedSC.Message6' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
-
-        if (Test-PSFFunctionInterrupt) { return }
     }
 
     end {
-        Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message6'
+        Write-PSFMessage -Level Host -String 'Assert-IEEnhancedSC.Message7'
     }
 }
