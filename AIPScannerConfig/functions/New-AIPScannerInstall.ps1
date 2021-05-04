@@ -50,15 +50,15 @@
             if (-NOT ($installedProduct)) {
                 # Download the scanner
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message2'
-                $url = "https://download.microsoft.com/download/4/9/1/491251F7-46BA-46EC-B2B5-099155DD3C27/AzInfoProtection_UL_2.11.57_PublicPreview.exe"
-                $outpath = "$env:TEMP\AzInfoProtection_UL_2.11.57_PublicPreview.exe"
+                $url = "https://download.microsoft.com/download/4/9/1/491251F7-46BA-46EC-B2B5-099155DD3C27/AzInfoProtection_UL.exe"
+                $outpath = "$env:TEMP\AzInfoProtection_UL.exe"
                 Invoke-WebRequest -Uri $url -OutFile $outpath
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message3'
 
                 # Install the scanner
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message4'
                 $cmdArguements = '/install /passive /norestart /log AipScannerInstallLog.txt'
-                Start-Process -Filepath "$env:TEMP\AzInfoProtection_UL_2.11.57_PublicPreview.exe" -ArgumentList $cmdArguements
+                Start-Process -Filepath "$env:TEMP\AzInfoProtection_UL.exe" -ArgumentList $cmdArguements
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message5'

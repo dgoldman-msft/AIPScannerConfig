@@ -228,3 +228,12 @@
 - Chg: Optimized New-AzureTenantAccountAndApplication.ps1
 - Upd: Updated module version
 - Upd: Changed 'New-AzureTenantItems.Message2' in string.psd1
+
+## 1.1.97 (2021-5-4)
+
+- Chg: Updated manifest version
+- Chg: Changed 'Start-PrerequisiteCheck.Message20' to reflect install of account instead of user doing it
+- Fix: Fixed download url to release now that public preview 2.11.57 has been deprecated
+- Fix: Fixed code to now create account and move on to next steps
+- New: Added new string 'Start-PrerequisiteCheck.Message17A'
+- New: Added additional check for user defined and local default sql instance

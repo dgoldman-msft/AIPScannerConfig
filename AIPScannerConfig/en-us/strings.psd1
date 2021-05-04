@@ -69,9 +69,10 @@
 	'Start-PrerequisiteCheck.Message15'  = "SQL instance found: {0}" #
 	'Start-PrerequisiteCheck.Message16'  = "No remote SQL server instance found. Exiting" #
 	'Start-PrerequisiteCheck.Message17'  = "SQL instance found: {0}" #
-	'Start-PrerequisiteCheck.Message18'  = "No local SQL server instance found. Please make sure that a version of SQL is installed locally 'https://www.microsoft.com/en-us/sql-server/sql-server-downloads'" #
+	'Start-PrerequisiteCheck.Message17A' = "No user defined SQL server instance found." #
+	'Start-PrerequisiteCheck.Message18'  = "No local or user defined SQL server instance found. Please make sure that a version of SQL is installed locally 'https://www.microsoft.com/en-us/sql-server/sql-server-downloads'" #
 	'Start-PrerequisiteCheck.Message19'  = "AIP Scanner account found!" #
-	'Start-PrerequisiteCheck.Message20'  = "AIP Scanner account not found. You must run New-AIPSystemAccount before you can start the AIP scanner component install" #
+	'Start-PrerequisiteCheck.Message20'  = "AIP Scanner account not found. Creating new local AIPScanner account" #
 	'Start-PrerequisiteCheck.Message21'  = "Failure" #
 	'Start-PrerequisiteCheck.Message22'  = "Finished. If you installed SQL Server please reboot your system to finish component setup" #
 

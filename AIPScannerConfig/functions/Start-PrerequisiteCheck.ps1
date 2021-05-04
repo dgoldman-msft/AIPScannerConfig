@@ -12,6 +12,9 @@
     .PARAMETER SqlRemote
         Switch to check for remote SQL instnaces
 
+    .PARAMETER SqlRemote
+        User specified SQL Instance
+
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
 
@@ -68,6 +71,9 @@
 
         [switch]
         $SqlRemote,
+
+        [string]
+        $UserDefinedSqlInstance,
 
         [switch]
         $EnableException
@@ -132,7 +138,7 @@
 
             if ($SqlRemote) {
                 foreach ($ServerInstance in $ComputerName) {
-                    if (Get-SqlInstance -ServerInstance $ServerInstance -ErrorAction Stop) {
+                    if (Get-SqlInstance -ServerInstance $ServerInstance -ErrorAction Continue) {
                         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message15' -StringValues $ServerInstance
                         $Instancefound = $true
                     }
@@ -147,7 +153,17 @@
                 }
             }
             else {
-                # Check local instance
+                # Check local user defined instance
+                if ($UserDefinedSqlInstance) {
+                    if (Get-SqlInstance -ServerInstance $UserDefinedSqlInstance -ErrorAction Continue) {
+                        Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message17' -StringValues $UserDefinedSqlInstance
+                    }
+                    else {
+                        Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message17A'
+                    }
+                }
+
+                # Check local default defined instance
                 if (Get-SqlInstance -ServerInstance ("$env:COMPUTERNAME\SQLEXPRESS") -ErrorAction Continue) {
                     Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message17' -StringValues "$env:COMPUTERNAME\SQLEXPRESS"
                 }
@@ -159,16 +175,18 @@
 
             if (Get-LocalUser -Name (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName) -ErrorAction SilentlyContinue) {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message19'
-                New-AIPFileShare
-                if (New-AzureTenantAccountAndApplication) {
-                    New-AIPScannerInstall
-                }
-                else {
-                    return
-                }
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message20'
+                New-AIPSystemAccount
+            }
+
+            New-AIPFileShare
+            if (New-AzureTenantAccountAndApplication) {
+                New-AIPScannerInstall
+            }
+            else {
+                return
             }
 
             # Restore original preferences
