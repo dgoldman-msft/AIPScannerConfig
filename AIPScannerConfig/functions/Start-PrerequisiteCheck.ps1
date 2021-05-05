@@ -140,7 +140,7 @@
 
             if ($SqlRemote) {
                 foreach ($ServerInstance in $ComputerName) {
-                    if (Get-SqlInstance -ServerInstance $ServerInstance -ErrorAction Continue) {
+                    if (Get-SqlInstance -ServerInstance $ServerInstance -ErrorAction SilentlyContinue) {
                         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message15' -StringValues $ServerInstance
                         $Instancefound = $true
                     }

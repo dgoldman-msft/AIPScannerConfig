@@ -253,3 +253,8 @@
 - Chg: Moved progress bar suppression code to where the test starts
 - Chg: Updated 'Start-PrerequisiteCheck.Message18'
 - Chg: Updated non verbose logging to show a bit more logging in non verbose mode
+
+## 1.2.16 (2021-5-5)
+
+- Change: Start-PrerequisiteCheck.ps1 changed continue to SilentlyContinue
+- Chg: Updated manifest version
