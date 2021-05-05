@@ -5,7 +5,7 @@ foreach ($Module in $Moduledependencies) {
 			Import-Module -Name $Module -Force -ErrorAction SilentlyContinue
 	}
 	else {
-			Install-Module -Name $Module -Force -AllowClobber -ErrorAction SilentlyContinue
+			Install-Module -Name $Module -AllowClobber -Force -ErrorAction SilentlyContinue
 			Import-Module -Name $Module -Force -ErrorAction SilentlyContinue
 	}
 }

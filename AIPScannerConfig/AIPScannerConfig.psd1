@@ -3,7 +3,7 @@
 	RootModule        = 'AIPScannerConfig.psm1'
 
 	# Version number of this module.
-	ModuleVersion     = '1.1.92'
+	ModuleVersion     = '1.2.14'
 
 	# ID used to uniquely identify this module
 	GUID              = '3ddb8805-2f0c-4fe5-81ea-db8dc77e0452'
@@ -42,6 +42,7 @@
 
 	# Functions to export from this module
 	FunctionsToExport = @(
+		'Add-AccountToSQLRole'
 		'New-AIPRepository'
 		'New-AIPFileShare'
 		'New-AIPScannerInstall'

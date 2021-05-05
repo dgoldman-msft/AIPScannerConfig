@@ -12,6 +12,9 @@
     .PARAMETER SqlRemote
         Switch to check for remote SQL instnaces
 
+    .PARAMETER UserDefinedSqlInstance
+        User specified SQL Instance
+
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
 
@@ -69,6 +72,9 @@
         [switch]
         $SqlRemote,
 
+        [string]
+        $UserDefinedSqlInstance,
+
         [switch]
         $EnableException
     )
@@ -80,8 +86,6 @@
     process {
         if (-NOT (Assert-ElevatedPermission)) { return }
         Assert-IEEnhancedSC
-        $OriginalPreference = $ProgressPreference
-        $ProgressPreference = "SilentlyContinue"
         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message2'
         $ServerVersion = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty Caption
 
@@ -89,10 +93,10 @@
                 -or ($ServerVersion -like "Microsoft Windows Server 2016*")`
                 -or ($ServerVersion -like "Microsoft Windows Server 2019*")`
                 -or ($ServerVersion -like "Microsoft Windows Server 2022*")) {
-            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message3'
+            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message3' -StringValues $ServerVersion
         }
         else {
-            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message4'
+            Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message4'
             return
         }
 
@@ -120,19 +124,23 @@
 
         try {
             Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message11'
-            if (Test-NetConnection -InformationLevel Quiet) {
+            $OriginalPreference = $ProgressPreference
+            $ProgressPreference = "SilentlyContinue"
+            if (Test-NetConnection -ComputerName 'outlook.office365.com' -InformationLevel Quiet) {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message12'
             }
             else {
-                Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message13'
+                Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message13'
                 return
             }
+            # Restore original preferences
+            $ProgressPreference = $OriginalPreference
 
             Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message14'
 
             if ($SqlRemote) {
                 foreach ($ServerInstance in $ComputerName) {
-                    if (Get-SqlInstance -ServerInstance $ServerInstance -ErrorAction Stop) {
+                    if (Get-SqlInstance -ServerInstance $ServerInstance -ErrorAction Continue) {
                         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message15' -StringValues $ServerInstance
                         $Instancefound = $true
                     }
@@ -142,37 +150,47 @@
                 }
 
                 if (-NOT ($Instancefound)) {
-                    Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message16'
+                    Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message16'
                     return
                 }
             }
             else {
-                # Check local instance
-                if (Get-SqlInstance -ServerInstance ("$env:COMPUTERNAME\SQLEXPRESS") -ErrorAction Continue) {
+                # Check local user defined instance
+                if ($UserDefinedSqlInstance) {
+                    if (Get-SqlInstance -ServerInstance $UserDefinedSqlInstance -ErrorAction SilentlyContinue) {
+                        Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message17' -StringValues $UserDefinedSqlInstance
+                    }
+                    else {
+                        Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message17A'
+                    }
+                }
+
+                # Check local default defined instance
+                if (Get-SqlInstance -ServerInstance "$env:COMPUTERNAME\SQLEXPRESS" -ErrorAction SilentlyContinue) {
                     Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message17' -StringValues "$env:COMPUTERNAME\SQLEXPRESS"
                 }
                 else {
-                    Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message18'
+                    Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message18'
                     return
                 }
             }
 
             if (Get-LocalUser -Name (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName) -ErrorAction SilentlyContinue) {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message19'
-                New-AIPFileShare
-                if (New-AzureTenantAccountAndApplication) {
-                    New-AIPScannerInstall
-                }
-                else {
-                    return
-                }
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message20'
+                New-AIPSystemAccount
+                Add-AccountToSQLRole
             }
 
-            # Restore original preferences
-            $ProgressPreference = $OriginalPreference
+            New-AIPFileShare
+            if (New-AzureTenantAccountAndApplication) {
+                New-AIPScannerInstall
+            }
+            else {
+                return
+            }
         }
         catch {
             Stop-PSFFunction -String 'Start-PrerequisiteCheck.Message21' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_

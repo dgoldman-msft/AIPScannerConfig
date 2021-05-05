@@ -9,15 +9,15 @@
 ## To get started with this module
 
 > 1. Open PowerShell as an Administrator
-> 2. Run Import-Module -Name AIPScannerConfig
-> 3. Run `New-AIPSystemAcount` to create the AIPScanner system account
-> 4. Change the randomly gererated password on the AIPScanner account
-> 5. Log out of Windows and back in as the AIPScanner account
-> 6. Run `Start-PrerequisitesCheck`
+> 2. Run Install-Module -Name AIPScannerConfig - NOTE: If you have any SQL errors run Install-Module -Name AIPScannerConfig -AllowClobber
+> 3. Run Import-Module -Name AIPScannerConfig
+> 4. Run `Start-PrerequisitesCheck -Verbose`
+> 5. Once it finished running verify that the AIPScanner account has been created and added to the local Administrators group.
+> 6. Before you switch from the Administrator account you will need to change the randomly gererated password on the AIPScanner account.
+> 7. Log out of Windows as the Administrator account and log back in as the AIPScanner account.
+> 8. Run `Start-PrerequisitesCheck -Verbose`. This will verify that everything is working under the AIPScanner account and check for missing items that might need to be created due to previous errors.
 
-`Start-PrerequisitesCheck` is designed to check for all of the prerequisites needed to install the AIP Scanner on server.
-
- This module will install of the prerequisite modules and import them on import of the AIPScannerConfig module.
+<b><span style="color:red"> NOTE:</b></span> `Start-PrerequisitesCheck` is designed to check for all of the prerequisites needed to install the AIP Scanner on server. If any items are not found this module will install everything necessary.
 
 The prerequisite checks for the following:
 

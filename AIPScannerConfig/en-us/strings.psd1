@@ -69,9 +69,10 @@
 	'Start-PrerequisiteCheck.Message15'  = "SQL instance found: {0}" #
 	'Start-PrerequisiteCheck.Message16'  = "No remote SQL server instance found. Exiting" #
 	'Start-PrerequisiteCheck.Message17'  = "SQL instance found: {0}" #
-	'Start-PrerequisiteCheck.Message18'  = "No local SQL server instance found. Please make sure that a version of SQL is installed locally 'https://www.microsoft.com/en-us/sql-server/sql-server-downloads'" #
+	'Start-PrerequisiteCheck.Message17A' = "No user defined SQL server instance found." #
+	'Start-PrerequisiteCheck.Message18'  = "Please make sure that a version of SQL is installed locally 'https://www.microsoft.com/en-us/sql-server/sql-server-downloads'" #
 	'Start-PrerequisiteCheck.Message19'  = "AIP Scanner account found!" #
-	'Start-PrerequisiteCheck.Message20'  = "AIP Scanner account not found. You must run New-AIPSystemAccount before you can start the AIP scanner component install" #
+	'Start-PrerequisiteCheck.Message20'  = "AIP Scanner account not found. Creating new local AIPScanner account" #
 	'Start-PrerequisiteCheck.Message21'  = "Failure" #
 	'Start-PrerequisiteCheck.Message22'  = "Finished. If you installed SQL Server please reboot your system to finish component setup" #
 
@@ -132,4 +133,14 @@
 	'New-AzureTenantItems.Message19'     = "Azure AD Application: {0} already exists in the tenant" #
 	'New-AzureTenantItems.Message20'     = "New-AzureADApplication Failure" #
 	'New-AzureTenantItems.Message21'     = "AIP Azure tenant item creation process completed. At this point you will need to manuall start your AIP scans. For more information see this article: 'https://docs.microsoft.com/en-us/powershell/module/azureinformationprotection/set-aipscannerconfiguration?view=azureipps' " #
+
+	# SQL Rights
+	'Add-AccountToSQLRole.Message1'      = "Attempting to add AIP Scanner account to SQL dbcreator role" #
+	'Add-AccountToSQLRole.Message2'      = "Reflecting Microsoft.SqlServer.SMO." #
+	'Add-AccountToSQLRole.Message3'      = "Creating new SQL Login for the AIPScanner account" #
+	'Add-AccountToSQLRole.Message4'      = "AIPScanner account added to dbcreator role" #
+	'Add-AccountToSQLRole.Message5'      = "Failure" #
+	'Add-AccountToSQLRole.Message6'      = "SQL role modification completed." #
+
+
 }
