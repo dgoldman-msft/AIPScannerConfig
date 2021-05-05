@@ -229,12 +229,23 @@
 - Upd: Updated module version
 - Upd: Changed 'New-AzureTenantItems.Message2' in string.psd1
 
-## 1.1.98 (2021-5-4)
+## 1.2.10 (2021-5-4)
 
 - Fix: Fixed download url to release now that public preview 2.11.57 has been deprecated
 - Fix: Fixed code to now create account and move on to next steps
+- Fix: Added parameter for ServerVersion output
+- New: Add wait for start-process on AIPScanner binary install
+- New: Add wait for start-process on Start-Process for UserRight assignment export
+- New: Add code to add the APIScanner account to the dbcreator Role
+- New: Added Add-AccountToSQLRole internal function
+- New: Added 6 new strings to the string table for Start-AccountToSQLRole.Message
+- New: Added new string 'Start-PrerequisiteCheck.Message17A'
+- New: Added additional check for user defined and local default sql instance
 - Chg: Updated manifest version
 - Chg: Updated help file
 - Chg: Changed 'Start-PrerequisiteCheck.Message20' to reflect install of account instead of user doing it
-- New: Added new string 'Start-PrerequisiteCheck.Message17A'
-- New: Added additional check for user defined and local default sql instance
+- Chg: Continue statements to SilentlyContinue
+- Chg: .PARAMETER SqlRemote to UserDefinedSqlInstance
+- Chg: Moved progress bar suppression code to where the test starts
+- Chg: Updated 'Start-PrerequisiteCheck.Message18'
+- Chg: Updated non verbose logging to show a bit more logging in non verbose mode

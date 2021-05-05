@@ -58,7 +58,7 @@
                 # Install the scanner
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message4'
                 $cmdArguements = '/install /passive /norestart /log AipScannerInstallLog.txt'
-                Start-Process -Filepath "$env:TEMP\AzInfoProtection_UL.exe" -ArgumentList $cmdArguements
+                Start-Process -Filepath "$env:TEMP\AzInfoProtection_UL.exe" -ArgumentList $cmdArguements -Wait
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message5'

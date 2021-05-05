@@ -79,7 +79,7 @@
         try {
             Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message7' -StringValues $pathCheck
             if (Get-SmbShare -Name $ShareName -ErrorAction SilentlyContinue) {
-                Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message8' -StringValues $pathCheck
+                Write-PSFMessage -Level Host -String 'New-AIPFileShare.Message8' -StringValues $pathCheck
                 return
             }
             else {
@@ -90,12 +90,12 @@
 
                     Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message10' -StringValues (Get-PSFConfigValue -FullName AIPScannerConfig.AIPShare)
                     if (($acl.Access | Where-Object { ($_.IdentityReference.Value.Contains($account.ToUpperInvariant()) -or $_.IdentityReference.Value.Contains($account)) -and $_.FileSystemRights -eq [System.Security.AccessControl.FileSystemRights]::FullControl }).Count -eq 1) {
-                        Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message11' -StringValues $pathCheck
+                        Write-PSFMessage -Level Host -String 'New-AIPFileShare.Message11' -StringValues $pathCheck
                         return
                     }
                 }
                 else {
-                    Write-PSFMessage -Level Verbose -String 'New-AIPFileShare.Message12' -StringValues $pathCheck
+                    Write-PSFMessage -Level Host -String 'New-AIPFileShare.Message12' -StringValues $pathCheck
                     return
                 }
             }

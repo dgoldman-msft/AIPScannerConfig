@@ -83,7 +83,7 @@
             # Query server to check User rights and export them to a temp file
             Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message10' -StringValues "$env:TEMP\UserRights.txt"
             $cmdArguments = "/export /cfg $env:TEMP\UserRights.txt"
-            Start-Process secedit -ArgumentList $cmdArguments -ErrorAction Stop
+            Start-Process secedit -ArgumentList $cmdArguments -ErrorAction Stop -Wait
 
             # Get the policy
             Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message11' -StringValues "$env:TEMP\UserRights.txt"
@@ -116,7 +116,7 @@ SeInteractiveLogonRight = $($currentSetting)
                 $newPolicyFile | Set-Content -Path "$ENV:TEMP\NewPolicyFile.inf" -Encoding Unicode -Force
                 try {
                     $CmdArguments = "/configure /db secedit.sdb /cfg ""$ENV:TEMP\NewPolicyFile.txt"" /areas USER_RIGHTS"
-                    Start-Process secedit -ArgumentList $cmdArguments -ErrorAction Stop
+                    Start-Process secedit -ArgumentList $cmdArguments -ErrorAction Stop -Wait
                     Write-PSFMessage -Level Verbose -String 'New-AIPSystemAccount.Message14' -StringValues $AccountName
                 }
                 catch {
