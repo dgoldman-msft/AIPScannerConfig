@@ -1,4 +1,4 @@
-function Add-AccountToSQLRole {
+﻿function Add-AccountToSQLRole {
     <#
     .SYNOPSIS
         Add APIScanner to SQL Role
@@ -6,8 +6,13 @@ function Add-AccountToSQLRole {
     .DESCRIPTION
         This method will add the AIP Scanner account to the SQL dbcreator role
 
+    .PARAMETER EnableException
+        Depending on whether $EnableException is true or false it will do the following:
+            1. ($True) - Throw a bloody terminating error. Game over.
+            2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
+
     .EXAMPLE
-        PS C:\> Start-PrerequisiteCheck -EnableException
+        PS C:\> Add-AccountToSQLRole -EnableException
 
     .NOTES
         None
@@ -35,8 +40,6 @@ function Add-AccountToSQLRole {
             $login.AddToRole("dbcreator")
             $login.Alter()
             Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message4'
-
-
         }
         catch {
             Stop-PSFFunction -String 'Add-AccountToSQLRole.Message5' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
