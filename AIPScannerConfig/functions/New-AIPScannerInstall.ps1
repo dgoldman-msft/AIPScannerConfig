@@ -45,7 +45,7 @@
 
     process {
         try {
-            $installedProduct =  Get-CimInstance win32_product | Where-Object Name -eq 'Microsoft Azure Information Protection'
+            $installedProduct = Get-CimInstance win32_product | Where-Object Name -eq 'Microsoft Azure Information Protection'
 
             if (-NOT ($installedProduct)) {
                 # Download the scanner
@@ -62,6 +62,9 @@
             }
             else {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message5'
+            }
+
+            try {
                 $aipScannerModule = (Get-PSFConfigValue -FullName AIPScannerConfig.ScannerModule)
                 $imported = Import-Module -Name $aipScannerModule -PassThru -ErrorAction Stop
 
@@ -72,9 +75,7 @@
                     Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message7' -StringValues $aipScannerModule.Name
                     throw "Module import failed!"
                 }
-            }
 
-            try {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message8'
                 Install-AIPScanner -SqlServerInstance "$env:ComputerName\SQLExpress" -ErrorAction Stop
 
@@ -102,7 +103,7 @@
             try {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message14'
                 $service = Get-Service | Where-Object Name -eq 'AIPScanner'
-                if($service.Status -eq 'Stopped'){
+                if ($service.Status -eq 'Stopped') {
                     Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message15'
                     Start-Service -Name AIPScanner -ErrorAction Stop
                 }

@@ -229,14 +229,15 @@
 - Upd: Updated module version
 - Upd: Changed 'New-AzureTenantItems.Message2' in string.psd1
 
-## 1.2.13 (2021-5-4)
+## 1.2.14 (2021-5-4)
 
 - Fix: Fixed download url to release now that public preview 2.11.57 has been deprecated
 - Fix: Fixed code to now create account and move on to next steps
 - Fix: Added parameter for ServerVersion output
 - Fix: Add-AccountToSQLRole.ps1 Should have UTF8 encoding with Byte Order Mark
 - Fix: Added information for .PARAMETER EnableException
-- Fix: Fixed example
+- Fix: Fixed example in Add-AccountToSQlRole
+- Fix: Changed code where we install the scanner and import the module so we wait and no longer fail
 - New: Add wait for start-process on AIPScanner binary install
 - New: Add wait for start-process on Start-Process for UserRight assignment export
 - New: Add code to add the APIScanner account to the dbcreator Role
