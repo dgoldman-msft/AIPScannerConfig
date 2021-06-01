@@ -146,7 +146,8 @@
                     New-AzureADServicePrincipal -AppId $nativeApp.AppId
                 }
                 catch {
-
+                    Stop-PSFFunction -String 'New-AzureTenantItems.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+                    return $false
                 }
             }
             else {
