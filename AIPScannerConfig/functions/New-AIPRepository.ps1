@@ -42,8 +42,8 @@
         None
     #>
 
-    [CmdletBinding(PSUseShouldProcessForStateChangingFunctions = $true)]
-    [OutputType([System.Boolean])]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
+    [OutputType([System.Object])]
     param (
         [Parameter(Position = 0, ParameterSetName = 'FileShare', HelpMessage = 'Path to file share')]
         [string]
@@ -53,7 +53,7 @@
         [switch]
         $CreateShareOnSharePoint,
 
-        [Parameter(Position = 2, ParameterSetName = 'FileShare', HelpMessage = 'Create repository on a file share')]
+        [Parameter(Position = 1, ParameterSetName = 'FileShare', HelpMessage = 'Create repository on a file share')]
         [switch]
         $FileShare,
 
@@ -75,8 +75,6 @@
 
         if ($CreateShareOnSharePoint) {
             try {
-                #$Cred = Get-Credential
-                #$Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($Cred.Username, $Cred.Password)
                 Connect-MsolService
                 \$spLocation = (Get-MsolDomain | Where-Object { $_.isInitial }).Name
                 Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message3' -StringValues "http://\$spLocation/documents/"
