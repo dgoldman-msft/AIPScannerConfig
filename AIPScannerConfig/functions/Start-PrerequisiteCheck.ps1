@@ -15,6 +15,9 @@
     .PARAMETER UserDefinedSqlInstance
         User specified SQL Instance
 
+    .PARAMETER SkipNetworktest
+        Skips the network test - used for lab testing
+
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
 
@@ -76,6 +79,9 @@
         $UserDefinedSqlInstance,
 
         [switch]
+        $SkipNetworkTest,
+
+        [switch]
         $EnableException
     )
 
@@ -123,19 +129,22 @@
         }
 
         try {
-            Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message11'
-            $OriginalPreference = $ProgressPreference
-            $ProgressPreference = "SilentlyContinue"
-            if (Test-NetConnection -ComputerName 'outlook.office365.com' -InformationLevel Quiet) {
-                Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message12'
+            if ($SkipNetworkTest) { continue } else {
+                Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message11'
+                $OriginalPreference = $ProgressPreference
+                $ProgressPreference = "SilentlyContinue"
+            
+                if (Test-NetConnection -ComputerName (Get-PSFConfigValue -Fullname AIPScannerConfig.NetConnection) -InformationLevel Quiet) {
+                    Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message12'
+                }
+                else {
+                    Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message13'
+                    return
+                }
+                # Restore original preferences
+                $ProgressPreference = $OriginalPreference
             }
-            else {
-                Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message13'
-                return
-            }
-            # Restore original preferences
-            $ProgressPreference = $OriginalPreference
-
+            
             Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message14'
 
             if ($SqlRemote) {

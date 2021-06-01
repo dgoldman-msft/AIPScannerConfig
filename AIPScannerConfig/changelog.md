@@ -261,7 +261,7 @@
 
 ## 1.2.19 (2021-7-1)
 
-- Chg: 'New-AIPScannerInstall.Message19' to include message to run Set-AIPAuthentication to generate azure ad token for cloud scanner access
-- Chg: Updated version in Updated change.log
-- Chg: Removed PSUseShouldProcessForStateChangingFunctions from New-AIPRepository.ps1 to fix help file issue
+- Chg: Added switch for SkipNetworkTest for lab testing
+- Chg: Added configuration string to remove hardcoded computer name for Test-NetConnetion
+- Fixed empty try / catch in New-AzureTenantAccountAndApplication
 - Chg: Updated manifest version to 1.2.19
