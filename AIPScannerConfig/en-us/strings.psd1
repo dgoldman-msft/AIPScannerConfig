@@ -109,7 +109,7 @@
 	'New-AIPScannerInstall.Message16'    = "Service state is started!" #
 	'New-AIPScannerInstall.Message17'    = "Start-Service / Get-Service failure!" #
 	'New-AIPScannerInstall.Message18'    = "Get-CimInstance failure!" #
-	'New-AIPScannerInstall.Message19'    = "Installation of AzInfoProtection_UL.exe completed." #
+	'New-AIPScannerInstall.Message19'    = "Installation of AzInfoProtection_UL.exe completed. Please make sure you run Set-AIPAuthentication to generate an Azure AD token for cloud scanner access" #
 
 	# AzureTenantItems
 	'New-AzureTenantItems.Message1'      = "Attempting to connect to Azure tenant" #

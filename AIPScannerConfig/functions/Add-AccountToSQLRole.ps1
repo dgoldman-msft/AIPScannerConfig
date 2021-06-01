@@ -17,14 +17,18 @@
     .EXAMPLE
         PS C:\> Add-AccountToSQLRole -UserDefinedSqlInstance "Server01\DatabaseName"
 
+        User specified Sql instance
+
     .EXAMPLE
         PS C:\> Add-AccountToSQLRole -EnableException
+
+        Enable full debugging error logging
 
     .NOTES
         None
     #>
 
-    [CmdletBinding(SupportsShouldProcess)]
+    [CmdletBinding(PSUseShouldProcessForStateChangingFunctions = $true)]
     param (
         [string]
         $UserDefinedSqlInstance,
