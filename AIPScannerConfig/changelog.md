@@ -258,3 +258,10 @@
 
 - Change: Start-PrerequisiteCheck.ps1 changed continue to SilentlyContinue
 - Chg: Updated manifest version
+
+## 1.2.19 (2021-7-1)
+
+- Chg: 'New-AIPScannerInstall.Message19' to include message to run Set-AIPAuthentication to generate azure ad token for cloud scanner access
+- Chg: Updated version in Updated change.log
+- Chg: Removed PSUseShouldProcessForStateChangingFunctions from New-AIPRepository.ps1 to fix help file issue
+- Chg: Updated manifest version to 1.2.19

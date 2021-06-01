@@ -20,6 +20,8 @@
     .EXAMPLE
         PS C:\> Add-AccountToSQLRole -EnableException
 
+        Enable full debugging error logging
+
     .NOTES
         None
     #>

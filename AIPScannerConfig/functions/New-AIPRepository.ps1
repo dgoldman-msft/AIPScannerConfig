@@ -42,7 +42,7 @@
         None
     #>
 
-    [CmdletBinding(PSUseShouldProcessForStateChangingFunctions = $true)]
+    [CmdletBinding()]
     [OutputType([System.Boolean])]
     param (
         [Parameter(Position = 0, ParameterSetName = 'FileShare', HelpMessage = 'Path to file share')]
