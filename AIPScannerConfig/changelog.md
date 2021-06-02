@@ -272,11 +272,14 @@
 - Chg: New-AIPSystemAccount - Changed output type from bool to string
 - Chg: Updated manifest version
 
-## 1.2.32 (2021-7-2)
+## 1.2.35 (2021-7-2)
 
 - Fix: Removed trailing spaces in Get-AIPAuthToken.ps1 on @(77, 97, 106)
 - Fix: Version number in changelog.md
 - Fix: Should have UTF8 encoding with Byte Order Mark
+- Fix: Fixed Typo from (Get-PSFConfigValue -FullName AIPScannerConfig.TenanID) to (Get-PSFConfigValue -FullName AIPScannerConfig.TenantID)
 - Upd: Updated 3 strings in the strings.psd1
 - Upd: Version number in manifest
 - Chg: Removed [OutputType([System.Object])]
+- Chg: Reduced Get-Credential from two lines to 1 line
+- Chg: Changed authentication account from cloud account to local machine account as this is the delegated account that will be used OnBehalfOf
