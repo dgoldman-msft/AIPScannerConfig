@@ -27,6 +27,10 @@ Set-PSFConfig -Module 'AIPScannerConfig' -Name 'RootFolder' -Value "c:\" -Initia
 # Azure Information Protection Module Manifest
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ScannerModule' -Value "C:\Program Files (x86)\Microsoft Azure Information Protection\Powershell\AzureInformationProtection" -Initialize -Validation 'string' -Description "AIP protection module manifest file."
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'CloudAdminAccount' -Value "admin@yourtenant.onmicrosoft.com" -Initialize -Validation 'string' -Description "Azure AD admin account"
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'AppId' -Value "Empty" -Initialize -Validation 'string' -Description "Azure AIP Application Id"
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'AppSecret' -Value "Empty" -Initialize -Validation 'string' -Description "Azure AIP Application Secret key"
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'TenantID' -Value "Empty" -Initialize -Validation 'string' -Description "Azure AD Tenant Id"
 
 # Network tests
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'NetConnection' -Value "outlook.office365.com" -Initialize -Validation 'string' -Description "Address to use for network test"
+
