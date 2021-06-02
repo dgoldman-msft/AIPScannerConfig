@@ -3,7 +3,7 @@
 	RootModule        = 'AIPScannerConfig.psm1'
 
 	# Version number of this module.
-	ModuleVersion     = '1.2.32'
+	ModuleVersion     = '1.2.35'
 
 	# ID used to uniquely identify this module
 	GUID              = '3ddb8805-2f0c-4fe5-81ea-db8dc77e0452'

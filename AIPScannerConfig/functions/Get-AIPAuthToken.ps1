@@ -79,10 +79,10 @@
 
         try {
             if ($UnifiedLabelingClient) {
+                $creds = Get-Credential "$env:ComputerName\AIPScanner" -Message "Please enter credentials for your AIPScanner account"
                 # Check to see if we passed in an AppId and Secret key
                 if ($AppId -and $AppSecret -and $TenantId) {
                     Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message4'
-                    $creds = Get-Credential "AIPScannerCloud@$domain" -Message "Please enter credentials for your AIPScannerCloud account"
                     Set-AIPAuthentication -AppId $AppId -AppSecret $AppSecret -DelegatedUser "AIPScannerCloud@$domain" -TenantId $TenantId -OnBehalfOf $creds
                 }
                 else {
@@ -93,8 +93,7 @@
                     }
                     else {
                         Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message6'
-                        $creds = Get-Credential "AIPScannerCloud@$domain" -Message "Please enter credentials for your AIPScannerCloud account"
-                        Set-AIPAuthentication -AppId (Get-PSFConfigValue -FullName AIPScannerConfig.AppId) -AppSecret (Get-PSFConfigValue -FullName AIPScannerConfig.AppSecret) -DelegatedUser "AIPScannerCloud@$domain" -TenantId (Get-PSFConfigValue -FullName AIPScannerConfig.TenanID) -OnBehalfOf $creds
+                        Set-AIPAuthentication -AppId (Get-PSFConfigValue -FullName AIPScannerConfig.AppId) -AppSecret (Get-PSFConfigValue -FullName AIPScannerConfig.AppSecret) -DelegatedUser "AIPScannerCloud@$domain" -TenantId (Get-PSFConfigValue -FullName AIPScannerConfig.TenantID) -OnBehalfOf $creds
                     }
                 }
             }
