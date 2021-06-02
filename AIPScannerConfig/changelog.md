@@ -272,8 +272,11 @@
 - Chg: New-AIPSystemAccount - Changed output type from bool to string
 - Chg: Updated manifest version
 
-## 1.2.29 (2021-7-1)
+## 1.2.32 (2021-7-2)
 
-- Fix: Version number
+- Fix: Removed trailing spaces in Get-AIPAuthToken.ps1 on @(77, 97, 106)
+- Fix: Version number in changelog.md
+- Fix: Should have UTF8 encoding with Byte Order Mark
 - Upd: Updated 3 strings in the strings.psd1
 - Upd: Version number in manifest
+- Chg: Removed [OutputType([System.Object])]

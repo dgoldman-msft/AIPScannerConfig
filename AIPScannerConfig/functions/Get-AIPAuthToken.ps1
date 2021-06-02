@@ -1,4 +1,4 @@
-function Get-AIPAuthToken {
+﻿function Get-AIPAuthToken {
     <#
         .SYNOPSIS
             Obtain an authentication token
@@ -37,7 +37,6 @@ function Get-AIPAuthToken {
             None
     #>
     [CmdletBinding()]
-    [OutputType([System.Object])]
     param (
         [string]
         $AppId,
@@ -74,7 +73,7 @@ function Get-AIPAuthToken {
         }
         catch {
             Stop-PSFFunction -String 'Get-AIPAuthToken.Message3' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
-            return 
+            return
         }
 
         try {
@@ -94,7 +93,7 @@ function Get-AIPAuthToken {
                     else {
                         Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message6'
                         $creds = Get-Credential "AIPScannerCloud@$domain" -Message "Please enter credentials for your AIPScannerCloud account"
-                        Set-AIPAuthentication -AppId (Get-PSFConfigValue -FullName AIPScannerConfig.AppId) -AppSecret (Get-PSFConfigValue -FullName AIPScannerConfig.AppSecret) -DelegatedUser "AIPScannerCloud@$domain" -TenantId (Get-PSFConfigValue -FullName AIPScannerConfig.TenanID) -OnBehalfOf $creds    
+                        Set-AIPAuthentication -AppId (Get-PSFConfigValue -FullName AIPScannerConfig.AppId) -AppSecret (Get-PSFConfigValue -FullName AIPScannerConfig.AppSecret) -DelegatedUser "AIPScannerCloud@$domain" -TenantId (Get-PSFConfigValue -FullName AIPScannerConfig.TenanID) -OnBehalfOf $creds
                     }
                 }
             }
@@ -103,7 +102,7 @@ function Get-AIPAuthToken {
                 Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message7'
                 Set-AIPAuthentication
             }
-        }       
+        }
         catch {
             Stop-PSFFunction -String 'Get-AIPAuthToken.Message8' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
