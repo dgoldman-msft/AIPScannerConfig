@@ -103,7 +103,7 @@
                 Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message7'
                 Set-AIPAuthentication
             }
-        } 
+        }
         catch {
             Stop-PSFFunction -String 'Get-AIPAuthToken.Message8' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
