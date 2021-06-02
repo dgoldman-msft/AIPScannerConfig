@@ -259,7 +259,7 @@
 - Chg: Start-PrerequisiteCheck.ps1 changed continue to SilentlyContinue
 - Chg: Updated manifest version to 1.2.16
 
-## 1.2.25 (2021-7-1)
+## 1.2.26 (2021-7-1)
 
 - Fix: Fixed empty try / catch in New-AzureTenantAccountAndApplication
 - New: New file Get-AIPAuthToken.ps1
@@ -271,3 +271,9 @@
 - Chg: Updated manifest version to 1.2.19
 - Chg: New-AIPSystemAccount - Changed output type from bool to string
 - Chg: Updated manifest version
+
+## 1.2.29 (2021-7-1)
+
+- Fix: Version number
+- Upd: Updated 3 strings in the strings.psd1
+- Upd: Version number in manifest
