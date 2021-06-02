@@ -32,7 +32,7 @@
     #>
 
     [CmdletBinding(SupportsShouldProcess)]
-    [OutputType([System.Boolean])]
+    [OutputType([System.String])]
     param (
         [string]
         $AccountName = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName),

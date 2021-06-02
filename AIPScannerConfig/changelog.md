@@ -256,12 +256,18 @@
 
 ## 1.2.16 (2021-5-5)
 
-- Change: Start-PrerequisiteCheck.ps1 changed continue to SilentlyContinue
-- Chg: Updated manifest version
+- Chg: Start-PrerequisiteCheck.ps1 changed continue to SilentlyContinue
+- Chg: Updated manifest version to 1.2.16
 
-## 1.2.19 (2021-7-1)
+## 1.2.25 (2021-7-1)
 
+- Fix: Fixed empty try / catch in New-AzureTenantAccountAndApplication
+- New: New file Get-AIPAuthToken.ps1
+- New: 7 New strings for Get-AIPAuthToken.ps1
+- New: Two new configuration values for TenantID, AppID and SecretKey
+- New: Added Get-AIPAuthToken in ExportedFunctions in manifest file
 - Chg: Added switch for SkipNetworkTest for lab testing
 - Chg: Added configuration string to remove hardcoded computer name for Test-NetConnetion
-- Fixed empty try / catch in New-AzureTenantAccountAndApplication
 - Chg: Updated manifest version to 1.2.19
+- Chg: New-AIPSystemAccount - Changed output type from bool to string
+- Chg: Updated manifest version

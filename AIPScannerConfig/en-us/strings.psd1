@@ -142,5 +142,14 @@
 	'Add-AccountToSQLRole.Message5'      = "Failure" #
 	'Add-AccountToSQLRole.Message6'      = "SQL role modification completed." #
 
-
+	# AIP Authentication
+	'Get-AIPAuthToken.Message1'          = "Starting token authentication process" #
+	'Get-AIPAuthToken.Message2'          = "Connected to Azure tenant: {0}" #
+	'Get-AIPAuthToken.Message3'          = "Connect-AzureAD Failure" #
+	'Get-AIPAuthToken.Message4'          = "Generating authentication token with user supplied information" #
+	'Get-AIPAuthToken.Message5'          = "No user supplied or configuration information found. No authentication token generated" #
+	'Get-AIPAuthToken.Message6'          = "Generating authentication token with configuration supplied information" #
+	'Get-AIPAuthToken.Message7'          = "Generating local authentication token" #
+	'Get-AIPAuthToken.Message8'          = "Failure" #
+	'Get-AIPAuthToken.Message9'          = 'Finishing token authentication process' #
 }
