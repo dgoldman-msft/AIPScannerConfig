@@ -25,7 +25,7 @@ The prerequisite checks for the following:
 > 2. Checks to see if IE Enhanced Security Configuration is enabled or disabled
 > 3. Checks operating system level
 > 4. Check for Windows Feature NFS-Client
-> 5. Checks system memory
+> 5. Checks system memory meets minimumal requirement
 > 6. Checks for an active network connection
 > 7. Checks for a local SQL instance (default) or a remote SQL instance
 > 8. Check to see if the AIPScanner account exists
@@ -36,6 +36,10 @@ The prerequisite checks for the following:
 For more information on the logging subsystem please refer to: 'https://psframework.org/documentation/documents/psframework/logging/loggingto/debuglog.html'
 
 > To get verbose output logging information run: `Get-PSFMessage`
+
+## Saving persistent configuration changes
+
+> For more information please reference: 'https://psframework.org/documentation/commands/PSFramework/Register-PSFConfig.html'
 
 ## Support Help
 

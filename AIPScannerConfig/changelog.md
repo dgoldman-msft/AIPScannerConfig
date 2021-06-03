@@ -283,3 +283,9 @@
 - Chg: Removed [OutputType([System.Object])]
 - Chg: Reduced Get-Credential from two lines to 1 line
 - Chg: Changed authentication account from cloud account to local machine account as this is the delegated account that will be used OnBehalfOf
+  
+## 1.2.38 (2021-7-2)
+
+- Fix: Fixed unknown Azure issue when using Get-AIPAuthToken to genreate a delegated azure token
+- Upd: Updated help.md with configuration saving options
+- Upd: Updated manifest version
