@@ -62,6 +62,7 @@
 
     process {
         try {
+            Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message2'
             if ( $adminAccount -eq "admin@yourtenant.onmicrosoft.com" ) {
                 $tenantInfo = Connect-AzureAD -ErrorAction Stop
             }
@@ -70,46 +71,46 @@
             }
 
             $domain = $tenantInfo.TenantDomain
-            Write-PSFMessage -Level Verbose -String 'Get-AIPAuthToken.Message2' -StringValues $domain
+            Write-PSFMessage -Level Verbose -String 'Get-AIPAuthToken.Message3' -StringValues $domain
         }
         catch {
-            Stop-PSFFunction -String 'Get-AIPAuthToken.Message3' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'Get-AIPAuthToken.Message4' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return
         }
 
         try {
             if ($UnifiedLabelingClient) {
-                $creds = Get-Credential "AIPScannerCloud@$domain" -Message "Please enter credentials for your AIPScannerCloud account"
+                $creds = Get-Credential "$env:ComputerName\AIPScanner" -Message "Please enter credentials for your AIPScannerCloud account"
                 # Check to see if we passed in an AppId and Secret key
                 if ($AppId -and $AppSecret -and $TenantId) {
-                    Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message4'
-                    Set-AIPAuthentication -AppId $AppId -AppSecret $AppSecret -DelegatedUser "$env:ComputerName\AIPScanner" -TenantId $TenantId -OnBehalfOf $creds
+                    Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message5'
+                    Set-AIPAuthentication -AppId $AppId -AppSecret $AppSecret -DelegatedUser "AIPScannerCloud@$domain" -TenantId $TenantId -OnBehalfOf $creds
                 }
                 else {
                     # We did not pass in tenant info, check the local module configuration file
                     if (((Get-PSFConfigValue -FullName AIPScannerConfig.AppId) -eq 'Empty') -and ((Get-PSFConfigValue -FullName AIPScannerConfig.AppSecret) -eq 'Empty') -and ((Get-PSFConfigValue -FullName AIPScannerConfig.TenantID) -eq 'Empty')) {
-                        Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message5'
+                        Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message6'
                         return
                     }
                     else {
-                        Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message6'
-                        Set-AIPAuthentication -AppId (Get-PSFConfigValue -FullName AIPScannerConfig.AppId) -AppSecret (Get-PSFConfigValue -FullName AIPScannerConfig.AppSecret) -DelegatedUser "$env:ComputerName\AIPScanner" -TenantId (Get-PSFConfigValue -FullName AIPScannerConfig.TenantID) -OnBehalfOf $creds
+                        Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message7'
+                        Set-AIPAuthentication -AppId (Get-PSFConfigValue -FullName AIPScannerConfig.AppId) -AppSecret (Get-PSFConfigValue -FullName AIPScannerConfig.AppSecret) -DelegatedUser "AIPScannerCloud@$domain" -TenantId (Get-PSFConfigValue -FullName AIPScannerConfig.TenantID) -OnBehalfOf $creds
                     }
                 }
             }
             else {
                 # Nothing was passed in from the command line or found in the configuration file so we will just grab a local interactive token
-                Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message7'
+                Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message8'
                 Set-AIPAuthentication
             }
         }
         catch {
-            Stop-PSFFunction -String 'Get-AIPAuthToken.Message8' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'Get-AIPAuthToken.Message9' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
     }
     
     end {
-        Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message9'
+        Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message10'
     }
 }

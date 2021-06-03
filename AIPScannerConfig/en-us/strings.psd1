@@ -144,12 +144,13 @@
 
 	# AIP Authentication
 	'Get-AIPAuthToken.Message1'          = "Starting token authentication process" #
-	'Get-AIPAuthToken.Message2'          = "Connected to Azure tenant: {0}" #
-	'Get-AIPAuthToken.Message3'          = "Connect-AzureAD Failure" #
-	'Get-AIPAuthToken.Message4'          = "Generating authentication token with user supplied information. Access token is valid for time specified on the registered app in Azure AD." #
-	'Get-AIPAuthToken.Message5'          = "No user supplied or configuration information found. No authentication token generated" #
-	'Get-AIPAuthToken.Message6'          = "Generating authentication token with configuration supplied information. Access token is valid for time specified on the registered app in Azure AD."  #
-	'Get-AIPAuthToken.Message7'          = "Generating local authentication token. Acquired access token is valid for 90 days or until your password expires." #
-	'Get-AIPAuthToken.Message8'          = "Failure" #
-	'Get-AIPAuthToken.Message9'          = 'Finishing token authentication process' #
+	'Get-AIPAuthToken.Message2'          = "Log in to your tenant with an admin account" #
+	'Get-AIPAuthToken.Message3'          = "Connected to Azure tenant: {0}" #
+	'Get-AIPAuthToken.Message4'          = "Connect-AzureAD Failure" #
+	'Get-AIPAuthToken.Message5'          = "Generating authentication token with user supplied information. Access token is valid for time specified on the registered app in Azure AD." #
+	'Get-AIPAuthToken.Message6'          = "No user supplied or configuration information found. No authentication token generated" #
+	'Get-AIPAuthToken.Message7'          = "Generating authentication token with configuration supplied information. Access token is valid for time specified on the registered app in Azure AD."  #
+	'Get-AIPAuthToken.Message8'          = "Generating local authentication token. Acquired access token is valid for 90 days or until your password expires." #
+	'Get-AIPAuthToken.Message9'          = "Failure" #
+	'Get-AIPAuthToken.Message10'         = 'Finishing token authentication process' #
 }
