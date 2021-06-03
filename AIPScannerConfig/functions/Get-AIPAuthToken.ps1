@@ -80,7 +80,7 @@
 
         try {
             if ($UnifiedLabelingClient) {
-                $creds = Get-Credential "$env:ComputerName\AIPScanner" -Message "Please enter credentials for your AIPScannerCloud account"
+                $creds = Get-Credential "$env:ComputerName\AIPScanner" -Message "Please enter credentials for your AIPScanner account"
                 # Check to see if we passed in an AppId and Secret key
                 if ($AppId -and $AppSecret -and $TenantId) {
                     Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message5'
