@@ -28,7 +28,7 @@
         None
     #>
 
-    [CmdletBinding(PSUseShouldProcessForStateChangingFunctions = $true)]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     param (
         [string]
         $UserDefinedSqlInstance,
