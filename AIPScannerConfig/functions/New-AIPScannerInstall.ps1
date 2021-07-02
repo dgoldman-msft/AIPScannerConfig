@@ -89,6 +89,8 @@
 
             try {
                 Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message10'
+                # Get-localsql instance
+                
                 if (Set-AIPScanner -SqlServerInstance "$env:COMPUTERNAME\SQLEXPRESS" -Cluster $Cluster -ErrorAction Stop) {
                     Write-PSFMessage -Level Verbose -String 'New-AIPScannerInstall.Message11'
                 }

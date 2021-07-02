@@ -45,9 +45,11 @@
 		'Add-AccountToSQLRole'
 		'Get-AIPAuthToken'
 		'New-AIPRepository'
-		'New-AIPFileShare'
+		'New-LocalAIPFileShare'
+		'New-RemoteAIPFileShare'
 		'New-AIPScannerInstall'
-		'New-AIPSystemAccount'
+		'New-LocalAIPSystemAccount'
+		'New-DomainAIPSystemAccount'
 		'New-AzureTenantAccountAndApplication'
 		'Start-PrerequisiteCheck'
 	)

@@ -16,10 +16,13 @@ Set-PSFConfig -Module 'AIPScannerConfig' -Name 'Import.IndividualFiles' -Value $
 
 # AIP Scanner items
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'AIPShare' -Value "AIPScannerShare" -Initialize -Validation 'string' -Description "AIP Scanner share name."
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'AIPScannerSharedFolderName' -Value "AIPScannerShareFolder" -Initialize -Validation 'string' -Description "Shared folder for AIP Scanner: NOTE: Must be differnt than ShareName"
+
+# AIP Account items
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ScannerAccountName' -Value "AIPScanner" -Initialize -Validation 'string' -Description "AIP Scanner account name."
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ScannerClientAccountName' -Value "AIPClient" -Initialize -Validation 'string' -Description "AIP Scanner client account name."
 
-# AIP Folder locations
+# AIP Folder items
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'ComputerName' -Value "$env:COMPUTERNAME" -Initialize -Validation 'string' -Description "Local system name."
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'TempFolder' -Value "$env:TEMP" -Initialize -Validation 'string' -Description "Temp Folder path."
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'RootFolder' -Value "c:\" -Initialize -Validation 'string' -Description "C:\"
@@ -30,6 +33,11 @@ Set-PSFConfig -Module 'AIPScannerConfig' -Name 'CloudAdminAccount' -Value "admin
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'AppId' -Value "Empty" -Initialize -Validation 'string' -Description "Azure AIP Application Id"
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'AppSecret' -Value "Empty" -Initialize -Validation 'string' -Description "Azure AIP Application Secret key"
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'TenantID' -Value "Empty" -Initialize -Validation 'string' -Description "Azure AD Tenant Id"
+
+# Servers
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'DomainController' -Value "DC1" -Initialize -Validation 'string' -Description "Domain controller"
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'SQLServer' -Value "SCCM" -Initialize -Validation 'string' -Description "SQL Server"
+Set-PSFConfig -Module 'AIPScannerConfig' -Name 'FileServer' -Value "AIPScanner" -Initialize -Validation 'string' -Description "File server to be scanned"
 
 # Network tests
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'NetConnection' -Value "outlook.office365.com" -Initialize -Validation 'string' -Description "Address to use for network test"
