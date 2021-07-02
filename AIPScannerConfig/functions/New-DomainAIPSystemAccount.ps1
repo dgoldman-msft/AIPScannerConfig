@@ -1,4 +1,4 @@
-function New-DomainAIPSystemAccount {
+﻿function New-DomainAIPSystemAccount {
     <#
     .SYNOPSIS
         Create local AIP Scanner Accounts
@@ -49,7 +49,6 @@ function New-DomainAIPSystemAccount {
 
     begin {
         Write-PSFMessage -Level Host -String 'New-DomainAIPSystemAccount.Message1'
-        
     }
 
     process {
@@ -58,7 +57,7 @@ function New-DomainAIPSystemAccount {
             Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message2'
             $securePw = (New-Password -AsSecureString)
            
-            Invoke-Command -Session $dcSession -ScriptBlock { param ( $AccountName, $securePw )
+            Invoke-Command -Session $dcSession -ScriptBlock { param ( $using:AccountName, $using:securePw )
                 if (New-ADUser -Name $AccountName -AccountPassword $securePw -DisplayName "AIP Scanner Account" -Description "System account for the AIP Scanner."`
                         -PasswordNeverExpires $false -PassThru ) {
                     Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message3'
@@ -74,7 +73,7 @@ function New-DomainAIPSystemAccount {
         try {
             Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message5'
 
-            $groupMember = Invoke-Command -Session $dcSession -ScriptBlock { param( $AccountName )
+            $groupMember = Invoke-Command -Session $dcSession -ScriptBlock { param( $using:AccountName )
                 Add-ADGroupMember -Identity Administrators -Members $AccountName -PassThru 
             } -ArgumentList $AccountName -ErrorAction SilentlyContinue 
 

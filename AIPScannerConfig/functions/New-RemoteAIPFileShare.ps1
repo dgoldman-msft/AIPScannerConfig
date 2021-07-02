@@ -6,11 +6,17 @@
     .DESCRIPTION
         Create a file share for the AIP scanner
 
-    .PARAMETER FolderName
-        Folder name of the AIP file share
+     .PARAMETER AccountName
+        Account name that will be added to the AIP file share and folder
 
-    .PARAMETER ShareName
-        Name of the shared folder
+    .PARAMETER FileServer
+        Server to create the AIP file share
+
+    .PARAMETER RootFolder
+        Drive letter to create folder on (Example: C:\)
+
+    .PARAMETER AIPScannerSharedFolderName
+        Shared folder name
 
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
@@ -63,7 +69,7 @@
     process {
         try {
             Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message2' -StringValues $FileServer
-            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($RootFolder, $ShareName, $AIPScannerSharedFolderName, $AccountName)
+            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($using:RootFolder, $using:ShareName, $using:AIPScannerSharedFolderName, $using:AccountName)
                 if ( New-Item -Path ([string]::Format("{0}{1}", $RootFolder, $ShareName)) -ItemType Directory -ErrorAction SilentlyContinue -ErrorVariable Failed ) {
                     Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message3' -StringValues $ShareName, $FileServer
                 

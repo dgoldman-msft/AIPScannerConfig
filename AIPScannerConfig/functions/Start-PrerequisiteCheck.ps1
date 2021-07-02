@@ -202,7 +202,7 @@
     
                 New-AIPFileShare -AllInOneInstall
                 if (New-AzureTenantAccountAndApplication) {
-                    New-AIPScannerInstall 
+                    New-AIPScannerInstall
                 }
                 else {
                     return
