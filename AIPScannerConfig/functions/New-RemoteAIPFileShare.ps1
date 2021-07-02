@@ -16,7 +16,10 @@
         Drive letter to create folder on (Example: C:\)
 
     .PARAMETER AIPScannerSharedFolderName
-        Shared folder name
+        Name for the SMB shared folder
+
+    .PARAMETER SharedName
+        Name of shared folder
 
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
@@ -69,11 +72,11 @@
     process {
         try {
             Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message2' -StringValues $FileServer
-            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($using:RootFolder, $using:ShareName, $using:AIPScannerSharedFolderName, $using:AccountName)
-                if ( New-Item -Path ([string]::Format("{0}{1}", $RootFolder, $ShareName)) -ItemType Directory -ErrorAction SilentlyContinue -ErrorVariable Failed ) {
-                    Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message3' -StringValues $ShareName, $FileServer
+            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($RootFolder, $ShareName, $AIPScannerSharedFolderName, $AccountName)
+                if ( New-Item -Path ([string]::Format("{0}{1}", $using:RootFolder, $using:ShareName)) -ItemType Directory -ErrorAction SilentlyContinue -ErrorVariable Failed ) {
+                    Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message3' -StringValues $using:ShareName, $using:FileServer
                 
-                    Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message4' -StringValues $ShareName, $FileServer
+                    Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message4' -StringValues $using:ShareName, $using:FileServer
                     $NewAcl = Get-Acl -Path ([string]::Format("{0}{1}", $RootFolder, $ShareName))
                     
                     # Set properties
@@ -108,7 +111,7 @@
     }
 
     end {
-        Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message18' -StringValues $pathCheck
+        Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message11' -StringValues $pathCheck
     }
 }
 

@@ -80,8 +80,8 @@
             Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message7'
         }
         catch {
-            Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message8' -StringValues $Failed 
-        } 
+            Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message8' -StringValues $Failed
+        }
     }
         
     end {

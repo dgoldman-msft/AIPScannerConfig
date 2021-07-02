@@ -120,7 +120,7 @@ SeInteractiveLogonRight = $($currentSetting)
                     Write-PSFMessage -Level Verbose -String 'New-LocalAIPSystemAccount.Message14' -StringValues $AccountName
                 }
                 catch {
-                    Stop-PSFFunction -String 'New-AIPSystemAccount.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+                    Stop-PSFFunction -String 'New-LocalAIPSystemAccount.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                 }
             }
             else {

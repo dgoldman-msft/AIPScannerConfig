@@ -5,34 +5,35 @@ online version:
 schema: 2.0.0
 ---
 
-# New-AIPSystemAccount
+# New-RemoteAIPFileShare
 
 ## SYNOPSIS
-Create local AIP Scanner Accounts
+Create a file share
 
 ## SYNTAX
 
 ```
-New-AIPSystemAccount [[-AccountName] <String>] [-EnableException] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-RemoteAIPFileShare [[-AccountName] <String>] [[-FileServer] <String>] [[-RootFolder] <String>]
+ [[-ShareName] <String>] [[-AIPScannerSharedFolderName] <String>] [-EnableException] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This method will create the necessary AIP scanner accounts.
+Create a file share for the AIP scanner
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-\ New-AIPSystemAccount -AccountName AIPScanner
+New-AIPFileShare -ComputerName Server01 -FolderName c:\temp -ShareName YourShareName
 ```
 
-Executes the creation of the AIPSystem account
+Will create a new file folder and file share called YourShareName at c:\temp on Server01
 
 ## PARAMETERS
 
 ### -AccountName
-This is the account name for the AIP Scanner account.
-The default is "AIPScanner"
+Account name that will be added to the AIP file share and folder
 
 ```yaml
 Type: String
@@ -42,6 +43,66 @@ Aliases:
 Required: False
 Position: 1
 Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FileServer
+Server to create the AIP file share
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.FileServer)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RootFolder
+Drive letter to create folder on (Example: C:\\)
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.RootFolder)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShareName
+{{ Fill ShareName Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.AIPShare)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AIPScannerSharedFolderName
+Name for the SMB shared folder
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.AIPScannerSharedFolderName)
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -106,12 +167,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Boolean
 ## NOTES
-1.
-Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).
-2.
-Service account requires Read permissions to each repository for discovery and Read/Write permissions for classification/protection.
-3.
-The default password is a secure 16 character password.
-You will need to change the password if you need to logon to this account
+Create has two rules:
+    1.
+You must be an administrator on the machine.
+    2.
+You must Run as administrator the Windows PowerShell console.
 
 ## RELATED LINKS

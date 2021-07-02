@@ -31,7 +31,7 @@
 	'New-LocalAIPFileShare.Message17'     = "Set-Acl failure!" #
 	'New-LocalAIPFileShare.Message18'     = "AIP scanner file share creation completed" #
 
-	'New-RemoteAIPFileShare.Message1'     = 'New-RemoteAIPFileShare.Message1' # 
+	'New-RemoteAIPFileShare.Message1'     = 'Creating default AIP scanner folder and file share' # 
 	'New-RemoteAIPFileShare.Message2'     = "Attempting to create remote SMB folder on {0}" # 
 	'New-RemoteAIPFileShare.Message3'     = "SMB folder {0} created on {1}. Attempting to create SMB share" # 
 	'New-RemoteAIPFileShare.Message4'     = "Attempting to apply folder permisisons" # 
@@ -41,7 +41,8 @@
 	'New-RemoteAIPFileShare.Message8'     = "SMB Share {0} created on {1}" # 
 	'New-RemoteAIPFileShare.Message9'     = "{0}" # 
 	'New-RemoteAIPFileShare.Message10'    = "Granting permissions on file share" # 
-	
+	'New-RemoteAIPFileShare.Message11'     = "AIP scanner file share creation completed" #
+
 	# LocalAIPSystemAccount
 	'New-LocalAIPSystemAccount.Message1'  = "Creating default AIP scanner system account" #
 	'New-LocalAIPSystemAccount.Message2'  = "Generating random strong password" #

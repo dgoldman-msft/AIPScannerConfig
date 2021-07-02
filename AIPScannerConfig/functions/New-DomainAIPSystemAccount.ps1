@@ -53,12 +53,12 @@
 
     process {
         try {
-            $dcSession = New-PSSession -Name ADAccountCreation -ComputerName $DomainController -Credential (Get-Credential) 
+            $dcSession = New-PSSession -Name ADAccountCreation -ComputerName $DomainController -Credential (Get-Credential)
             Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message2'
             $securePw = (New-Password -AsSecureString)
            
             Invoke-Command -Session $dcSession -ScriptBlock { param ( $using:AccountName, $using:securePw )
-                if (New-ADUser -Name $AccountName -AccountPassword $securePw -DisplayName "AIP Scanner Account" -Description "System account for the AIP Scanner."`
+                if (New-ADUser -Name $using:AccountName -AccountPassword $using:securePw -DisplayName "AIP Scanner Account" -Description "System account for the AIP Scanner."`
                         -PasswordNeverExpires $false -PassThru ) {
                     Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message3'
                 } 
@@ -74,10 +74,10 @@
             Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message5'
 
             $groupMember = Invoke-Command -Session $dcSession -ScriptBlock { param( $using:AccountName )
-                Add-ADGroupMember -Identity Administrators -Members $AccountName -PassThru 
-            } -ArgumentList $AccountName -ErrorAction SilentlyContinue 
+                Add-ADGroupMember -Identity Administrators -Members $using:AccountName -PassThru
+            } -ArgumentList $AccountName -ErrorAction SilentlyContinue
 
-            if ($groupMember) {  
+            if ($groupMember) {
                 Write-PSFMessage -Level Host -String 'New-DomainAIPSystemAccount.Message6'
             }
         }

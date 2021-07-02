@@ -5,7 +5,7 @@ SHORT DESCRIPTION
 	Configures the AIP Scanner
 
 LONG DESCRIPTION
-	This will automate the AIP scanner installation on a local system
+	This will automate the AIP scanner installation on a local system or remote system
 
 PARAMETER ComputerName
     Computer name we are running against
