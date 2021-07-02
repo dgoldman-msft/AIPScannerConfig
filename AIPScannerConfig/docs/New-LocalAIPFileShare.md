@@ -5,34 +5,34 @@ online version:
 schema: 2.0.0
 ---
 
-# New-AIPSystemAccount
+# New-LocalAIPFileShare
 
 ## SYNOPSIS
-Create local AIP Scanner Accounts
+Create a file share
 
 ## SYNTAX
 
 ```
-New-AIPSystemAccount [[-AccountName] <String>] [-EnableException] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-LocalAIPFileShare [[-folderName] <String>] [[-ShareName] <String>] [-EnableException] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This method will create the necessary AIP scanner accounts.
+Create a file share for the AIP scanner
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-\ New-AIPSystemAccount -AccountName AIPScanner
+New-LocalAIPFileShare -ComputerName Server01 -FolderName c:\temp -ShareName YourShareName
 ```
 
-Executes the creation of the AIPSystem account
+Will create a new file folder and file share called YourShareName at c:\temp on Server01
 
 ## PARAMETERS
 
-### -AccountName
-This is the account name for the AIP Scanner account.
-The default is "AIPScanner"
+### -folderName
+Folder name of the AIP file share
 
 ```yaml
 Type: String
@@ -41,7 +41,22 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName)
+Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.RootFolder)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShareName
+Name of the shared folder
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: (Get-PSFConfigValue -Fullname AIPScannerConfig.AIPShare)
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -106,12 +121,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Boolean
 ## NOTES
-1.
-Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).
-2.
-Service account requires Read permissions to each repository for discovery and Read/Write permissions for classification/protection.
-3.
-The default password is a secure 16 character password.
-You will need to change the password if you need to logon to this account
+https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/create-method-in-class-win32-share?redirectedfrom=MSDN
+
+Create has two rules:
+    1.
+You must be an administrator on the machine.
+    2.
+You must Run as administrator the Windows PowerShell console.
 
 ## RELATED LINKS

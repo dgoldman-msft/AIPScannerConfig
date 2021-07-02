@@ -259,7 +259,7 @@
 - Chg: Start-PrerequisiteCheck.ps1 changed continue to SilentlyContinue
 - Chg: Updated manifest version to 1.2.16
 
-## 1.2.26 (2021-7-1)
+## 1.2.26 (2021-6-1)
 
 - Fix: Fixed empty try / catch in New-AzureTenantAccountAndApplication
 - New: New file Get-AIPAuthToken.ps1
@@ -272,7 +272,7 @@
 - Chg: New-AIPSystemAccount - Changed output type from bool to string
 - Chg: Updated manifest version
 
-## 1.2.35 (2021-7-2)
+## 1.2.35 (2021-6-2)
 
 - Fix: Removed trailing spaces in Get-AIPAuthToken.ps1 on @(77, 97, 106)
 - Fix: Version number in changelog.md
@@ -284,9 +284,28 @@
 - Chg: Reduced Get-Credential from two lines to 1 line
 - Chg: Changed authentication account from cloud account to local machine account as this is the delegated account that will be used OnBehalfOf
   
-## 1.2.39 (2021-7-2)
+## 1.2.39 (2021-6-2)
 
 - Fix: Fixed unknown Azure issue when using Get-AIPAuthToken to genreate a delegated azure token
 - Upd: Updated help.md with configuration saving options
 - Upd: Added output for logging in to the tenant in Get-AIPAuthToken
 - Upd: Updated manifest version
+
+## 1.2.71 (2021-7-2)
+
+- New: New-LocalAIPFileShare.ps1
+- New: New-LocalAIPSystemAccount.ps1
+- New: New-RemoteAIPFileShare.ps1
+- New: New-DomainAIPSystemAccount.ps1
+- Chg: Added new code for dbcreator and systadmin SQL roles to be added
+- Chg: Added new switch to Start-PrerequisitesCheck.ps1 for all in one install or remote install
+- Fix: Documentation changes in all files
+- Upd: Updated help.md with configuration saving options
+- Upd: Added new functions to ExportedFunctions in module manifest
+- Upd: Updated about_AIPScannerConfig.help.txt
+- Upd: Updated manifest version
+- Upd: Added PSUseUsingScopeModifierInNewRunspaces to fix pester false positive
+- Fix: Updated output type for New-DomainAIPSystemAccount.ps1
+- Fix: Renamed all 8 strings from Add-AIPRerpository to Add-AIPRepository
+- Fix: Renamed all 8 strings in Add-AIPRepository.ps1
+- Fix: Fixed line 110. Changed AIP scanner file share creation completed to string New-RemoteAIPFileShare.Message9

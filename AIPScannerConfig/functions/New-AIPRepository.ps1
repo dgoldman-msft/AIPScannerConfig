@@ -62,7 +62,7 @@
     )
 
     begin {
-        Write-PSFMessage -Level Host -String 'Add-AIPRerpository.Message1'
+        Write-PSFMessage -Level Host -String 'Add-AIPRepository.Message1'
     }
 
     process {
@@ -70,38 +70,38 @@
             Get-AIPScannerRepository
         }
         else {
-            Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message2'
+            Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message2'
         }
 
         if ($CreateShareOnSharePoint) {
             try {
                 Connect-MsolService
                 \$spLocation = (Get-MsolDomain | Where-Object { $_.isInitial }).Name
-                Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message3' -StringValues "http://\$spLocation/documents/"
+                Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message3' -StringValues "http://\$spLocation/documents/"
                 Add-AIPScannerRepository -Path "http://\$spLocation/documents/"
             }
             catch {
-                Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message4'
+                Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message4'
                 return
             }
         }
         elseif ($Path -and $FileShare) {
             try {
-                Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message5' -StringValues "\\$Path\$FileShare"
+                Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message5' -StringValues "\\$Path\$FileShare"
                 Add-AIPScannerRepository -Path "\\$Path\$FileShare"
             }
             catch {
-                Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message6'
+                Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message6'
                 return
             }
         }
         else {
-            Write-PSFMessage -Level Verbose -String 'Add-AIPRerpository.Message7'
+            Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message7'
             return
         }
     }
 
     end {
-        Write-PSFMessage -Level Host -String 'Add-AIPRerpository.Message8'
+        Write-PSFMessage -Level Host -String 'Add-AIPRepository.Message8'
     }
 }

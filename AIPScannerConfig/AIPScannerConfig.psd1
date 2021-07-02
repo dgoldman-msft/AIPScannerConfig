@@ -3,7 +3,7 @@
 	RootModule        = 'AIPScannerConfig.psm1'
 
 	# Version number of this module.
-	ModuleVersion     = '1.2.39'
+	ModuleVersion     = '1.2.52'
 
 	# ID used to uniquely identify this module
 	GUID              = '3ddb8805-2f0c-4fe5-81ea-db8dc77e0452'
@@ -45,10 +45,12 @@
 		'Add-AccountToSQLRole'
 		'Get-AIPAuthToken'
 		'New-AIPRepository'
-		'New-AIPFileShare'
 		'New-AIPScannerInstall'
-		'New-AIPSystemAccount'
 		'New-AzureTenantAccountAndApplication'
+		'New-DomainAIPSystemAccount'
+		'New-LocalAIPFileShare'
+		'New-LocalAIPSystemAccount'
+		'New-RemoteAIPFileShare'
 		'Start-PrerequisiteCheck'
 	)
 

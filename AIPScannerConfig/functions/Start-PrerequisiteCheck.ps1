@@ -15,6 +15,9 @@
     .PARAMETER UserDefinedSqlInstance
         User specified SQL Instance
 
+    .PARAMETER AllInOneInstall
+        Switch used to indicate we are working on an non-domain joined machine
+
     .PARAMETER SkipNetworktest
         Skips the network test - used for lab testing
 
@@ -74,6 +77,9 @@
 
         [switch]
         $SqlRemote,
+
+        [switch]
+        $AllInOneInstall,
 
         [string]
         $UserDefinedSqlInstance,
@@ -164,7 +170,7 @@
                 }
             }
             else {
-                # Check local user defined instance
+                # Check if a user defined instance is provided
                 if ($UserDefinedSqlInstance) {
                     if (Get-SqlInstance -ServerInstance $UserDefinedSqlInstance -ErrorAction SilentlyContinue) {
                         Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message17' -StringValues $UserDefinedSqlInstance
@@ -184,21 +190,23 @@
                 }
             }
 
-            if (Get-LocalUser -Name (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName) -ErrorAction SilentlyContinue) {
-                Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message19'
-            }
-            else {
-                Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message20'
-                New-AIPSystemAccount
-                Add-AccountToSQLRole
-            }
-
-            New-AIPFileShare
-            if (New-AzureTenantAccountAndApplication) {
-                New-AIPScannerInstall
-            }
-            else {
-                return
+            if ($AllInOneInstall) {
+                if (Get-LocalUser -Name (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName) -ErrorAction SilentlyContinue) {
+                    Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message19'
+                }
+                else {
+                    Write-PSFMessage -Level Verbose -String 'Start-PrerequisiteCheck.Message20'
+                    New-LocalAIPSystemAccount
+                    Add-AccountToSQLRole -AllInOneInstall
+                }
+    
+                New-AIPFileShare -AllInOneInstall
+                if (New-AzureTenantAccountAndApplication) {
+                    New-AIPScannerInstall
+                }
+                else {
+                    return
+                }
             }
         }
         catch {

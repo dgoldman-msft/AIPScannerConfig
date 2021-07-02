@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# New-AIPSystemAccount
+# New-LocalAIPSystemAccount
 
 ## SYNOPSIS
 Create local AIP Scanner Accounts
@@ -13,7 +13,8 @@ Create local AIP Scanner Accounts
 ## SYNTAX
 
 ```
-New-AIPSystemAccount [[-AccountName] <String>] [-EnableException] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-LocalAIPSystemAccount [[-AccountName] <String>] [-EnableException] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,7 +105,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Boolean
+### System.String
 ## NOTES
 1.
 Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).

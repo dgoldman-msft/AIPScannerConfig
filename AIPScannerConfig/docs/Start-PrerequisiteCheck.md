@@ -13,8 +13,9 @@ Check system prerequisites
 ## SYNTAX
 
 ```
-Start-PrerequisiteCheck [[-ComputerName] <Object>] [-SqlRemote] [[-UserDefinedSqlInstance] <String>]
- [-SkipNetworkTest] [-EnableException] [-WhatIf] [-Confirm] [<CommonParameters>]
+Start-PrerequisiteCheck [[-ComputerName] <Object>] [-SqlRemote] [-AllInOneInstall]
+ [[-UserDefinedSqlInstance] <String>] [-SkipNetworkTest] [-EnableException] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,6 +63,21 @@ Accept wildcard characters: False
 
 ### -SqlRemote
 Switch to check for remote SQL instnaces
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AllInOneInstall
+Switch used to indicate we are working on an non-domain joined machine
 
 ```yaml
 Type: SwitchParameter
@@ -167,18 +183,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 The prerequisites below are still required for successful AIP scanner installation.
 
 1. A Windows Server 2012 R2 or 2016 Server to run the service with a minimum 4 CPU and 4GB RAM physical or virtual
-NOTE:  The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel.
-Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM.
-However, if you have one big 1GB file it can take 3GB of RAM just for that file.
 
-## NOTES
-----------------------------------------------------------------
-NOTE: A SQL Server 2012+ local or remote instance (Any version from Express or better is supported)
-Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)
+2. The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel. Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM. However, if you have one big 1GB file it can take 3GB of RAM just for that file.
 
-NOTE: If using SQL Server Express, the SQL Instance name is ServerName\SQLExpress.
+3. A SQL Server 2012+ local or remote instance (Any version from Express or better is supported) Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)
 
-NOTE: At this time, a different SQL instance is needed for each AIP Scanner node.
+4. If using SQL Server Express, the SQL Instance name is ServerName\SQLExpress.
+
+5. At this time, a different SQL instance is needed for each AIP Scanner node.
 
 Service account created in On Premises AD (I will call this account AIPScanner in this document).
 Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).
