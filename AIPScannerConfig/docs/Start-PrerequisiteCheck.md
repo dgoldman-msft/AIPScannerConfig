@@ -180,21 +180,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-
 The prerequisites below are still required for successful AIP scanner installation.
 
 1. A Windows Server 2012 R2 or 2016 Server to run the service with a minimum 4 CPU and 4GB RAM physical or virtual
 
->NOTE:  The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel. Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM. However, if you have one big 1GB file it can take 3GB of RAM just for that file.
+2. The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel. Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM. However, if you have one big 1GB file it can take 3GB of RAM just for that file.
 
-Connectivity
+3. A SQL Server 2012+ local or remote instance (Any version from Express or better is supported) Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)
 
-NOTE: A SQL Server 2012+ local or remote instance (Any version from Express or better is supported)
-Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)
+4. If using SQL Server Express, the SQL Instance name is ServerName\SQLExpress.
 
-NOTE: If using SQL Server Express, the SQL Instance name is ServerName\SQLExpress.
-
-NOTE: At this time, a different SQL instance is needed for each AIP Scanner node.
+5. At this time, a different SQL instance is needed for each AIP Scanner node.
 
 Service account created in On Premises AD (I will call this account AIPScanner in this document).
 Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install).

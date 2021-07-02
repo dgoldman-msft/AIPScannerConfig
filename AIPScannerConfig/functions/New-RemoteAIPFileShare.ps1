@@ -15,11 +15,11 @@
     .PARAMETER RootFolder
         Drive letter to create folder on (Example: C:\)
 
+    .PARAMETER ShareName
+        Name of shared folder
+
     .PARAMETER AIPScannerSharedFolderName
         Name for the SMB shared folder
-
-    .PARAMETER SharedName
-        Name of shared folder
 
     .PARAMETER Confirm
         Parameter used to prompt for user confirmation
@@ -43,8 +43,9 @@
             2. You must Run as administrator the Windows PowerShell console.
     #>
 
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseUsingScopeModifierInNewRunspaces', '', Justification = 'Using ArgumentList')]
     [CmdletBinding(SupportsShouldProcess)]
-    [OutputType([System.Boolean])]
+    [OutputType([System.String])]
     param (
         [string]
         $AccountName = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName),
@@ -72,7 +73,7 @@
     process {
         try {
             Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message2' -StringValues $FileServer
-            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($RootFolder, $ShareName, $AIPScannerSharedFolderName, $AccountName)
+            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($using:RootFolder, $using:ShareName, $using:AIPScannerSharedFolderName, $using:AccountName)
                 if ( New-Item -Path ([string]::Format("{0}{1}", $using:RootFolder, $using:ShareName)) -ItemType Directory -ErrorAction SilentlyContinue -ErrorVariable Failed ) {
                     Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message3' -StringValues $using:ShareName, $using:FileServer
                 

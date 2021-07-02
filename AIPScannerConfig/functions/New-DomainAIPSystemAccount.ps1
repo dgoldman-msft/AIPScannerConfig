@@ -34,6 +34,8 @@
         3. The default password is a secure 16 character password. You will need to change the password if you need to logon to this account
     #>
 
+    
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseUsingScopeModifierInNewRunspaces', '', Justification = 'Using ArgumentList')]
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType([System.String])]
     param (
@@ -57,11 +59,11 @@
             Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message2'
             $securePw = (New-Password -AsSecureString)
            
-            Invoke-Command -Session $dcSession -ScriptBlock { param ( $using:AccountName, $using:securePw )
+            Invoke-Command -Session $dcSession -ScriptBlock { param ( $AccountName, $securePw )
                 if (New-ADUser -Name $using:AccountName -AccountPassword $using:securePw -DisplayName "AIP Scanner Account" -Description "System account for the AIP Scanner."`
                         -PasswordNeverExpires $false -PassThru ) {
                     Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message3'
-                } 
+                }
             } -ArgumentList $AccountName, $securePw -ErrorAction SilentlyContinue -ErrorVariable UserFailed
                 
             if ($userFailed) { $UserFailed.Exception.Message }
@@ -73,7 +75,7 @@
         try {
             Write-PSFMessage -Level Verbose -String 'New-DomainAIPSystemAccount.Message5'
 
-            $groupMember = Invoke-Command -Session $dcSession -ScriptBlock { param( $using:AccountName )
+            $groupMember = Invoke-Command -Session $dcSession -ScriptBlock { param( $AccountName )
                 Add-ADGroupMember -Identity Administrators -Members $using:AccountName -PassThru
             } -ArgumentList $AccountName -ErrorAction SilentlyContinue
 

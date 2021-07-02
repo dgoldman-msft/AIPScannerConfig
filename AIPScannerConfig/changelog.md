@@ -291,7 +291,7 @@
 - Upd: Added output for logging in to the tenant in Get-AIPAuthToken
 - Upd: Updated manifest version
 
-## 1.2.50 (2021-7-2)
+## 1.2.52 (2021-7-2)
 
 - New: New-LocalAIPFileShare.ps1
 - New: New-LocalAIPSystemAccount.ps1
@@ -304,3 +304,5 @@
 - Upd: Added new functions to ExportedFunctions in module manifest
 - Upd: Updated about_AIPScannerConfig.help.txt
 - Upd: Updated manifest version
+- Upd: Added PSUseUsingScopeModifierInNewRunspaces to fix pester false positive
+- Fix: Updated output type for New-DomainAIPSystemAccount.ps1
