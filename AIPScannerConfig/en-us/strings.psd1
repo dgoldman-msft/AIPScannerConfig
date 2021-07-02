@@ -2,14 +2,14 @@
 # Write-PSFMessage, Stop-PSFFunction or the PSFramework validation scriptblocks
 @{
 	# AIPRerpository
-	'Add-AIPRerpository.Message1'         = "Creating AIP scanner repository" #
-	'Add-AIPRerpository.Message2'         = "You need to have the AIP Scanner installed before you can run this function." #
-	'Add-AIPRerpository.Message3'         = "Creating repository in SharePoint in the following location: {0}" #
-	'Add-AIPRerpository.Message4'         = "No local SQL server instance found. Exiting" #
-	'Add-AIPRerpository.Message5'         = "Creating repository in the following location: {0}" #
-	'Add-AIPRerpository.Message6'         = "No local SQL server instance found. Exiting" #
-	'Add-AIPRerpository.Message7'         = "Error: Path or file share not provided" #
-	'Add-AIPRerpository.Message8'         = "Creating AIP scanner repository. Completed" #
+	'Add-AIPRepository.Message1'         = "Creating AIP scanner repository" #
+	'Add-AIPRepository.Message2'         = "You need to have the AIP Scanner installed before you can run this function." #
+	'Add-AIPRepository.Message3'         = "Creating repository in SharePoint in the following location: {0}" #
+	'Add-AIPRepository.Message4'         = "No local SQL server instance found. Exiting" #
+	'Add-AIPRepository.Message5'         = "Creating repository in the following location: {0}" #
+	'Add-AIPRepository.Message6'         = "No local SQL server instance found. Exiting" #
+	'Add-AIPRepository.Message7'         = "Error: Path or file share not provided" #
+	'Add-AIPRepository.Message8'         = "Creating AIP scanner repository. Completed" #
 
 	# AIPFileshare
 	'New-LocalAIPFileShare.Message1'      = "Creating default AIP scanner folder and file share" #

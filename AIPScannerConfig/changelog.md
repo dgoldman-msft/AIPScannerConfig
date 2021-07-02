@@ -291,7 +291,7 @@
 - Upd: Added output for logging in to the tenant in Get-AIPAuthToken
 - Upd: Updated manifest version
 
-## 1.2.52 (2021-7-2)
+## 1.2.71 (2021-7-2)
 
 - New: New-LocalAIPFileShare.ps1
 - New: New-LocalAIPSystemAccount.ps1
@@ -306,3 +306,6 @@
 - Upd: Updated manifest version
 - Upd: Added PSUseUsingScopeModifierInNewRunspaces to fix pester false positive
 - Fix: Updated output type for New-DomainAIPSystemAccount.ps1
+- Fix: Renamed all 8 strings from Add-AIPRerpository to Add-AIPRepository
+- Fix: Renamed all 8 strings in Add-AIPRepository.ps1
+- Fix: Fixed line 110. Changed AIP scanner file share creation completed to string New-RemoteAIPFileShare.Message9

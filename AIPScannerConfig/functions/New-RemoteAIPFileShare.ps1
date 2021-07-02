@@ -73,7 +73,7 @@
     process {
         try {
             Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message2' -StringValues $FileServer
-            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($using:RootFolder, $using:ShareName, $using:AIPScannerSharedFolderName, $using:AccountName)
+            Invoke-Command -ComputerName $FileServer -ScriptBlock { param ($RootFolder, $ShareName, $AIPScannerSharedFolderName, $AccountName)
                 if ( New-Item -Path ([string]::Format("{0}{1}", $using:RootFolder, $using:ShareName)) -ItemType Directory -ErrorAction SilentlyContinue -ErrorVariable Failed ) {
                     Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message3' -StringValues $using:ShareName, $using:FileServer
                 
@@ -92,7 +92,7 @@
                     # Apply new rule
                     $NewAcl.SetAccessRule($fileSystemAccessRule)
                     Set-Acl -Path ([string]::Format("{0}{1}", $RootFolder, $ShareName)) -AclObject $NewAcl
-                    Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message5' -StringValues $ShareName, $FileServer
+                    Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message5' -StringValues $using:ShareName, $FileServer
                 }
                 else { if ($Failed) { Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message6' -StringValues $Failed } }
                 
@@ -107,7 +107,7 @@
             } -ArgumentList $RootFolder, $ShareName, $AIPScannerSharedFolderName, $AccountName
         }
         catch {
-            Stop-PSFFunction -String 'AIP scanner file share creation completed' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+            Stop-PSFFunction -String 'New-RemoteAIPFileShare.Message9' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }
 

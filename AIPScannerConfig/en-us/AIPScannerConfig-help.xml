@@ -1929,11 +1929,10 @@
       <maml:alert>
         <maml:para>The prerequisites below are still required for successful AIP scanner installation.</maml:para>
         <maml:para>1. A Windows Server 2012 R2 or 2016 Server to run the service with a minimum 4 CPU and 4GB RAM physical or virtual</maml:para>
-        <maml:para>&gt;NOTE:  The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel. Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM. However, if you have one big 1GB file it can take 3GB of RAM just for that file.</maml:para>
-        <maml:para>Connectivity</maml:para>
-        <maml:para>NOTE: A SQL Server 2012+ local or remote instance (Any version from Express or better is supported) Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)</maml:para>
-        <maml:para>NOTE: If using SQL Server Express, the SQL Instance name is ServerName\SQLExpress.</maml:para>
-        <maml:para>NOTE: At this time, a different SQL instance is needed for each AIP Scanner node.</maml:para>
+        <maml:para>2. The scanner will allocate RAM 2.5-3 times of size of all files being scanned in parallel. Thus, if you scan 40 files that are 20MB each at the same time, it should take about 202.540=2GB RAM. However, if you have one big 1GB file it can take 3GB of RAM just for that file.</maml:para>
+        <maml:para>3. A SQL Server 2012+ local or remote instance (Any version from Express or better is supported) Sysadmin role needed to install scanner service (user running Install-AIPScanner, not the service account)</maml:para>
+        <maml:para>4. If using SQL Server Express, the SQL Instance name is ServerName\SQLExpress.</maml:para>
+        <maml:para>5. At this time, a different SQL instance is needed for each AIP Scanner node.</maml:para>
         <maml:para>Service account created in On Premises AD (I will call this account AIPScanner in this document). Service requires Log on locally right and Log on as a service right (the second will be given during scanner service install). Service account requires Read permissions to each repository for discovery and Read/Write permissions for classification/protection. AzInfoProtection.exe available on the Microsoft Download Center (The scanner bits are included with the AIP Client)</maml:para>
         <maml:para>For more information on the logging system and PSFramework: https://psframework.org/documentation/documents/psframework/logging/loggingto/debuglog.html</maml:para>
       </maml:alert>
