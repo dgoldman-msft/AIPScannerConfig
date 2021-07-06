@@ -278,11 +278,11 @@
 - Fix: Version number in changelog.md
 - Fix: Should have UTF8 encoding with Byte Order Mark
 - Fix: Fixed Typo from (Get-PSFConfigValue -FullName AIPScannerConfig.TenanID) to (Get-PSFConfigValue -FullName AIPScannerConfig.TenantID)
-- Upd: Updated 3 strings in the strings.psd1
-- Upd: Version number in manifest
 - Chg: Removed [OutputType([System.Object])]
 - Chg: Reduced Get-Credential from two lines to 1 line
 - Chg: Changed authentication account from cloud account to local machine account as this is the delegated account that will be used OnBehalfOf
+- Upd: Updated 3 strings in the strings.psd1
+- Upd: Version number in manifest
   
 ## 1.2.39 (2021-6-2)
 
@@ -293,19 +293,28 @@
 
 ## 1.2.71 (2021-7-2)
 
+- Fix: Updated output type for New-DomainAIPSystemAccount.ps1
+- Fix: Renamed all 8 strings from Add-AIPRerpository to Add-AIPRepository
+- Fix: Renamed all 8 strings in Add-AIPRepository.ps1
+- Fix: Fixed line 110. Changed AIP scanner file share creation completed to string New-RemoteAIPFileShare.Message9
+- Fix: Documentation changes in all files
 - New: New-LocalAIPFileShare.ps1
 - New: New-LocalAIPSystemAccount.ps1
 - New: New-RemoteAIPFileShare.ps1
 - New: New-DomainAIPSystemAccount.ps1
 - Chg: Added new code for dbcreator and systadmin SQL roles to be added
 - Chg: Added new switch to Start-PrerequisitesCheck.ps1 for all in one install or remote install
-- Fix: Documentation changes in all files
 - Upd: Updated help.md with configuration saving options
 - Upd: Added new functions to ExportedFunctions in module manifest
 - Upd: Updated about_AIPScannerConfig.help.txt
 - Upd: Updated manifest version
 - Upd: Added PSUseUsingScopeModifierInNewRunspaces to fix pester false positive
-- Fix: Updated output type for New-DomainAIPSystemAccount.ps1
-- Fix: Renamed all 8 strings from Add-AIPRerpository to Add-AIPRepository
-- Fix: Renamed all 8 strings in Add-AIPRepository.ps1
-- Fix: Fixed line 110. Changed AIP scanner file share creation completed to string New-RemoteAIPFileShare.Message9
+
+## 1.2.79 (2021-7-6)
+
+- Fix: Fixed catch block to include errors for no module found and credential cancel
+- New: 'Add-AccountToSQLRole.Message9' = "Error {0}" #
+- New: Added EnableException to Add-AccountToSQLRole
+- Chg: Changed Add-AccountToSQLRole messages 8, 9, and 10
+- Upd: Updated manifest version
+- Upd: Updated help file

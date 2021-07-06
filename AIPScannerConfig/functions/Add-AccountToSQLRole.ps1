@@ -15,6 +15,11 @@
     .PARAMETER AllInOneInstall
         Switch used to indicate we are working on an non-domain joined machine
     
+    .PARAMETER EnableException
+        Depending on whether $EnableException is true or false it will do the following:
+            1. ($True) - Throw a bloody terminating error. Game over.
+            2. ($False) - Write a nice warning about how Foo failed bar, then terminate the function. The return on the next line will then end the calling function.
+
     .EXAMPLE
         PS C:\> Add-AccountToSQLRole -UserDefinedSqlInstance "Server01\DatabaseName"
 
@@ -39,7 +44,10 @@
         $AccountName = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName),
 
         [switch]
-        $AllInOneInstall
+        $AllInOneInstall,
+
+        [switch]
+        $EnableException
     )
 
     begin {
@@ -63,7 +71,14 @@
             }
         }
         catch {
-            Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message5' -StringValues $Failed
+            if ($Failed) {
+                Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message5' -StringValues $Failed
+                return
+            }
+            else {
+                Stop-PSFFunction -String 'Add-AccountToSQLRole.Message8' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+                return
+            }
         }
 
         Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message4'
@@ -80,11 +95,11 @@
             Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message7'
         }
         catch {
-            Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message8' -StringValues $Failed
+            Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message9' -StringValues $Failed
         }
     }
         
     end {
-        Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message9'
+        Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message10'
     }
 }
