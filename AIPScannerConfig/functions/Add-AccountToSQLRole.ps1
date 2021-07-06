@@ -76,7 +76,7 @@
                 return
             }
             else {
-                Stop-PSFFunction -String 'Get-AIPAuthToken.Message8' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+                Stop-PSFFunction -String 'Add-AccountToSQLRole.Message8' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                 return
             }
         }
