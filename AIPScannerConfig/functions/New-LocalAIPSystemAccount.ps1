@@ -43,6 +43,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'New-LocalAIPSystemAccount.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "New-LocalAIPSystemAccount started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -55,6 +56,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPSystemAccount exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-LocalAIPSystemAccount.Message4' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
 
@@ -63,6 +65,7 @@
             Write-PSFMessage -Level Verbose -String 'New-LocalAIPSystemAccount.Message5'
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPSystemAccount exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-LocalAIPSystemAccount.Message6' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
 
@@ -71,6 +74,7 @@
             Write-PSFMessage -Level Verbose -String 'New-LocalAIPSystemAccount.Message7' -StringValues $AccountName
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPSystemAccount exception: $_" -ModuleName AIPScannerConfig -Verbose
             Write-PSFMessage -Level Verbose -String 'New-LocalAIPSystemAccount.Message8' -StringValues $AccountName
         }
 
@@ -120,6 +124,7 @@ SeInteractiveLogonRight = $($currentSetting)
                     Write-PSFMessage -Level Verbose -String 'New-LocalAIPSystemAccount.Message14' -StringValues $AccountName
                 }
                 catch {
+                    Send-THEvent -EventName FunctionException -Message "New-LocalAIPSystemAccount exception: $_" -ModuleName AIPScannerConfig -Verbose
                     Stop-PSFFunction -String 'New-LocalAIPSystemAccount.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                 }
             }
@@ -128,6 +133,7 @@ SeInteractiveLogonRight = $($currentSetting)
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPSystemAccount exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-LocalAIPSystemAccount.Message17' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }

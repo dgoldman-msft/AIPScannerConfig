@@ -63,6 +63,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'Add-AIPRepository.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "Add-AIPRepository started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -81,6 +82,7 @@
                 Add-AIPScannerRepository -Path "http://\$spLocation/documents/"
             }
             catch {
+                Send-THEvent -EventName FunctionException -Message "Add-AIPRepository exception: $_" -ModuleName AIPScannerConfig -Verbose
                 Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message4'
                 return
             }
@@ -91,6 +93,7 @@
                 Add-AIPScannerRepository -Path "\\$Path\$FileShare"
             }
             catch {
+                Send-THEvent -EventName FunctionException -Message "Add-AIPRepository exception: $_" -ModuleName AIPScannerConfig -Verbose
                 Write-PSFMessage -Level Verbose -String 'Add-AIPRepository.Message6'
                 return
             }

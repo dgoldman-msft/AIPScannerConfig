@@ -1,4 +1,4 @@
-﻿$Moduledependencies = @("PSFramework", "SqlServer", "AzureADPreview")
+﻿$Moduledependencies = @("PSFramework", "SqlServer", "AzureADPreview", "TelemetryHelper")
 
 foreach ($Module in $Moduledependencies) {
 	if (Get-Module -ListAvailable -Name $module) {

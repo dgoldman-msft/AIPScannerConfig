@@ -57,6 +57,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'Get-AIPAuthToken.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "Get-AIPAuthToken started" -ModuleName AIPScannerConfig -Verbose
         $adminAccount = (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount)
     }
 
@@ -74,6 +75,7 @@
             Write-PSFMessage -Level Verbose -String 'Get-AIPAuthToken.Message3' -StringValues $domain
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "Get-AIPAuthToken exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'Get-AIPAuthToken.Message4' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return
         }
@@ -105,6 +107,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "Get-AIPAuthToken exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'Get-AIPAuthToken.Message9' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }

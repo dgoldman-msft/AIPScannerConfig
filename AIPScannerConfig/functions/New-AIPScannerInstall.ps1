@@ -41,6 +41,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'New-AIPScannerInstall.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "New-AIPScannerInstall started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -84,6 +85,7 @@
                 }
             }
             catch {
+                Send-THEvent -EventName FunctionException -Message "New-AIPScannerInstall exception: $_" -ModuleName AIPScannerConfig -Verbose
                 Stop-PSFFunction -String 'New-AIPScannerInstall.Message9' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             }
 
@@ -99,6 +101,7 @@
                 }
             }
             catch {
+                Send-THEvent -EventName FunctionException -Message "New-AIPScannerInstall exception: $_" -ModuleName AIPScannerConfig -Verbose
                 Stop-PSFFunction -String 'New-AIPScannerInstall.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             }
 
@@ -114,6 +117,7 @@
                 }
             }
             catch {
+                Send-THEvent -EventName FunctionException -Message "New-AIPScannerInstall exception: $_" -ModuleName AIPScannerConfig -Verbose
                 Stop-PSFFunction -String 'New-AIPScannerInstall.Message17' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             }
 

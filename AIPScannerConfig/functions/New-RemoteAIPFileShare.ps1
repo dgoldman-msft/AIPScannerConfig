@@ -68,6 +68,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'New-RemoteAIPFileShare.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "New-RemoteAIPFileShare started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -107,6 +108,7 @@
             } -ArgumentList $RootFolder, $ShareName, $AIPScannerSharedFolderName, $AccountName
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-RemoteAIPFileShare exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-RemoteAIPFileShare.Message9' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }

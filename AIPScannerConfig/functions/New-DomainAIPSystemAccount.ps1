@@ -51,6 +51,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'New-DomainAIPSystemAccount.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "New-DomainAIPSystemAccount started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -69,6 +70,7 @@
             if ($userFailed) { $UserFailed.Exception.Message }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-DomainAIPSystemAccount exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-DomainAIPSystemAccount.Message4' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
 
@@ -84,6 +86,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-DomainAIPSystemAccount exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-DomainAIPSystemAccount.Message7' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
 

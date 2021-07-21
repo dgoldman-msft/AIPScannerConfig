@@ -52,6 +52,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "Add-AccountToSQLRole started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -72,10 +73,12 @@
         }
         catch {
             if ($Failed) {
+                Send-THEvent -EventName FunctionException -Message "Add-AccountToSQLRole exception: $Failed" -ModuleName AIPScannerConfig -Verbose
                 Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message5' -StringValues $Failed
                 return
             }
             else {
+                Send-THEvent -EventName FunctionException -Message "Add-AccountToSQLRole exception: $_" -ModuleName AIPScannerConfig -Verbose
                 Stop-PSFFunction -String 'Add-AccountToSQLRole.Message8' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                 return
             }
@@ -95,6 +98,7 @@
             Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message7'
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "Add-AccountToSQLRole exception: $_" -ModuleName AIPScannerConfig -Verbose
             Write-PSFMessage -Level Host -String 'Add-AccountToSQLRole.Message9' -StringValues $Failed
         }
     }

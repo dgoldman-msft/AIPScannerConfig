@@ -318,3 +318,9 @@
 - Chg: Changed Add-AccountToSQLRole messages 8, 9, and 10
 - Upd: Updated manifest version
 - Upd: Updated help file
+
+## 1.2.90 (2021-7-21)
+
+- New: Added telemetry for function run and exceptions in all 9 functions
+- New: Adde configuration strings to configuration.ps1
+- New: Updated module version

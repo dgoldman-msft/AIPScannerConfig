@@ -18,7 +18,7 @@ $importIndividualFiles = Get-PSFConfigValue -FullName AIPScannerConfig.Import.In
 if ($AIPScannerConfig_importIndividualFiles) { $importIndividualFiles = $true }
 if (Test-Path (Resolve-PSFPath -Path "$($script:ModuleRoot)\..\.git" -SingleItem -NewChild)) { $importIndividualFiles = $true }
 if ("<was not compiled>" -eq '<was not compiled>') { $importIndividualFiles = $true }
-	
+
 function Import-ModuleFile {
 	<#
 		.SYNOPSIS

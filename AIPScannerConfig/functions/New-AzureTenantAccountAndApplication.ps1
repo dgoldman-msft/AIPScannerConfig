@@ -39,6 +39,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'New-AzureTenantItems.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "New-AzureTenantItems started" -ModuleName AIPScannerConfig -Verbose
         $aipClient = (Get-PSFConfigValue -Fullname AIPScannerConfig.ScannerAccountName)
         $adminAccount = (Get-PSFConfigValue -FullName AIPScannerConfig.CloudAdminAccount)
     }
@@ -55,6 +56,7 @@
             Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message2' -StringValues $domain
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-AzureTenantItems.Message3' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
@@ -75,6 +77,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-AzureTenantItems.Message7' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
@@ -91,6 +94,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-AzureTenantItems.Message10' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
@@ -114,6 +118,7 @@
                     $access.ResourceAccess = $scope
                 }
                 catch {
+                    Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
                     Stop-PSFFunction -String 'New-AzureTenantItems.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                     return $false
                 }
@@ -123,6 +128,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-AzureTenantItems.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }
@@ -138,6 +144,7 @@
                     Write-PSFMessage -Level Verbose -String 'New-AzureTenantItems.Message18' -StringValues $aipClient
                 }
                 catch {
+                    Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
                     Stop-PSFFunction -String 'New-AzureTenantItems.Message19' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                     return $false
                 }
@@ -146,6 +153,7 @@
                     New-AzureADServicePrincipal -AppId $nativeApp.AppId
                 }
                 catch {
+                    Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
                     Stop-PSFFunction -String 'New-AzureTenantItems.Message15' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
                     return $false
                 }
@@ -155,6 +163,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-AzureTenantItems exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-AzureTenantItems.Message20' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
             return $false
         }

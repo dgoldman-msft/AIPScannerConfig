@@ -93,6 +93,8 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'Start-PrerequisiteCheck.Message1'
+        # Sending the first metric will create an instance of a TelemetryClient and subsequent calls will simply reuse the client
+        Send-THEvent -EventName FunctionExecution -Message "Start-PrerequisiteCheck started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -210,7 +212,9 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "Start-PrerequisiteCheck exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'Start-PrerequisiteCheck.Message21' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
+
         }
     }
 

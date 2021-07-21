@@ -51,6 +51,7 @@
 
     begin {
         Write-PSFMessage -Level Host -String 'New-LocalAIPFileShare.Message1'
+        Send-THEvent -EventName FunctionExecution -Message "New-LocalAIPSystemAccount started" -ModuleName AIPScannerConfig -Verbose
     }
 
     process {
@@ -59,6 +60,7 @@
             Write-PSFMessage -Level Verbose -String 'New-LocalAIPFileShare.Message2' -StringValues $pathCheck
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPFileShare exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-LocalAIPFileShare.Message3' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
 
@@ -73,6 +75,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPFileShare exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-LocalAIPFileShare.Message6' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
 
@@ -101,6 +104,7 @@
             }
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPFileShare exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-LocalAIPFileShare.Message13' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
 
@@ -113,6 +117,7 @@
 
         }
         catch {
+            Send-THEvent -EventName FunctionException -Message "New-LocalAIPFileShare exception: $_" -ModuleName AIPScannerConfig -Verbose
             Stop-PSFFunction -String 'New-LocalAIPFileShare.Message17' -EnableException $EnableException -Cmdlet $PSCmdlet -ErrorRecord $_
         }
     }

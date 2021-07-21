@@ -42,3 +42,7 @@ Set-PSFConfig -Module 'AIPScannerConfig' -Name 'FileServer' -Value "AIPScanner" 
 # Network tests
 Set-PSFConfig -Module 'AIPScannerConfig' -Name 'NetConnection' -Value "outlook.office365.com" -Initialize -Validation 'string' -Description "Address to use for network test"
 
+# Setup TelemetryHelper
+Set-PSFConfig -Module 'TelemetryHelper' -Name 'AIPScannerConfig.OptInVariable' -Value 'TelemetryOptIn' -Initialize -Hidden
+Set-PSFConfig -Module 'TelemetryHelper' -Name 'AIPScannerConfig.ApplicationInsights.InstrumentationKey' -Value '46zzez4j3a7kaj5v4jwybt8pwslghqqwpkpx4xr8' -Initialize -Hidden
+Set-PSFConfig -Module 'TelemetryHelper' -Name AIPScannerConfig.RemovePII -Value $true
